@@ -5196,7 +5196,7 @@ function estadopago(str) {
                               '<div class="form-group">'+
                                   '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Banco</label>'+
                                   '<div class="col-sm-10 col-md-10 col-xs-12">'+
-                                    '<select name="banco_pago" class="form-control" >'+
+                                    '<select name="banco_pago" class="form-control">'+
                                        '<option value="">Seleccione</option>'+
                                        '<option value="Costa Rica">Costa Rica</option>'+
                                        '<option value="Nacional">Nacional</option>'+
@@ -5214,6 +5214,69 @@ function estadopago(str) {
         return;
     } else { 
     	document.getElementById("respuesta_pago").innerHTML = '<div class="form-group" > '+
+                                  '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Inicio</label>'+
+                                  '<div class="col-sm-10 col-md-10 col-xs-12">'+
+                                    '<input type="date" class="form-control" disabled > '+
+                                 '</div> '+
+                                   '</div>'+
+                              '<div class="form-group">'+
+                                  '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Banco</label>'+
+                                  '<div class="col-sm-10 col-md-10 col-xs-12">'+
+                                    '<select  class="form-control" disabled >'+
+                                       '<option value="">Seleccione</option>'+
+                                       '<option value="Costa Rica">Costa Rica</option>'+
+                                       '<option value="Nacional">Nacional</option>'+
+                                       '<option value="BAC SAN JOS&Eacute;">BAC SAN JOS&Eacute;</option>'+                                     
+                                    '</select>'+
+                                  '</div>'+
+                              '</div>'+
+
+                              '<div class="form-group">'+
+                                  '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Deposito</label>'+
+                                  '<div class="col-sm-10 col-md-10 col-xs-12">'+
+                                    '<input type="text" class="form-control" disabled placeholder=" Ej:1548796795">'+
+                                  '</div>'+
+                              '</div>';
+        return;
+        
+    }
+  
+}
+
+
+function estadopago_edit(str) {
+  	var fecha_inicio_edit= document.getElementById('fecha_inicio_edit').value;
+  	var deposito_edit= document.getElementById('deposito_edit').value;
+  	var banco_pago_edit= document.getElementById('banco_pago_edit').value;
+
+    if (str == "Pagado") {
+        document.getElementById("respuesta_pago_edit").innerHTML = '<div class="form-group" > '+
+                                  '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Inicio</label>'+
+                                  '<div class="col-sm-10 col-md-10 col-xs-12">'+
+                                    `<input type="date" name="fecha_inicio" class="form-control" value="${fecha_inicio_edit}"> `+
+                                 '</div> '+
+                                   '</div>'+
+                              '<div class="form-group">'+
+                                  '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Banco</label>'+
+                                  '<div class="col-sm-10 col-md-10 col-xs-12">'+
+                                    '<select name="banco_pago" class="form-control" >'+
+                                             `<option value="${banco_pago_edit}" selected>${banco_pago_edit}</option>`+                                    	
+                                    		 '<option value="Nacional">Nacional</option>'+
+                                             '<option value="BAC SAN JOS&Eacute;">BAC SAN JOS&Eacute;</option>'+
+                                             '<option value="Costa Rica">Costa Rica</option>'+                      
+                                    '</select>'+
+                                  '</div>'+
+                              '</div>'+
+
+                              '<div class="form-group">'+
+                                  '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Deposito</label>'+
+                                  '<div class="col-sm-10 col-md-10 col-xs-12">'+
+                                    `<input  value="${deposito_edit}" type="text" maxlength="10" required name="deposito" class="form-control" onKeyPress="return soloNumeros(event)" onKeyUp="pierdeFoco(this)" placeholder=" Ej:1548796795" >`+
+                                  '</div>'+
+                              '</div>';
+        return;
+    } else { 
+    	document.getElementById("respuesta_pago_edit").innerHTML = '<div class="form-group" > '+
                                   '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Inicio</label>'+
                                   '<div class="col-sm-10 col-md-10 col-xs-12">'+
                                     '<input type="date" class="form-control" disabled > '+

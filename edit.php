@@ -1,4 +1,5 @@
 <?php 
+date_default_timezone_set('America/Costa_Rica');
 session_start();
 ?>
 <!DOCTYPE html>
@@ -168,29 +169,78 @@ $datos=mysqli_fetch_array($user);
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-						<!--SCRIPT-->
-					 <?php
+                        <!--SCRIPT-->
+                     <?php
       if(isset($_POST['add'])){
-        $Id= mysqli_real_escape_string($con,(strip_tags($_POST["id_ced"],ENT_QUOTES)));//Escanpando caracteres 
-        $Id_unico= mysqli_real_escape_string($con,(strip_tags($_POST["id"],ENT_QUOTES)));//Escanpando caracteres 
-        $Numero_Cliente        = mysqli_real_escape_string($con, (strip_tags($_POST["Numero_Cliente"], ENT_QUOTES)));//Escanpando caracteres
-        $Cedula= mysqli_real_escape_string($con,(strip_tags($_POST["Cedula"],ENT_QUOTES)));//Escanpando caracteres 
-        $Nombre= mysqli_real_escape_string($con,(strip_tags($_POST["Nombre"],ENT_QUOTES)));//Escanpando caracteres 
-        $Telefono= mysqli_real_escape_string($con,(strip_tags($_POST["Telefono"],ENT_QUOTES)));//Escanpando caracteres 
-        $Email= mysqli_real_escape_string($con,(strip_tags($_POST["Email"],ENT_QUOTES)));//Escanpando caracteres 
-        $Provincia= mysqli_real_escape_string($con,(strip_tags($_POST["Provincia"],ENT_QUOTES)));//Escanpando caracteres 
-         $Canton= mysqli_real_escape_string($con,(strip_tags($_POST["Canton"],ENT_QUOTES)));//Escanpando caracteres 
-        $Tiempo= mysqli_real_escape_string($con,(strip_tags($_POST["Tiempo"],ENT_QUOTES)));//Escanpando caracteres 
-        $Bloque= mysqli_real_escape_string($con,(strip_tags($_POST["Bloque"],ENT_QUOTES)));//Escanpando caracteres 
-                        $Plan= mysqli_real_escape_string($con,(strip_tags($_POST["Plan"],ENT_QUOTES)));//Escanpando caracteres 
-        $ClaveATV= mysqli_real_escape_string($con,(strip_tags($_POST["ClaveATV"],ENT_QUOTES)));//Escanpando caracteres 
+        $Id               =    mysqli_real_escape_string($con,(strip_tags($_POST["id_ced"],ENT_QUOTES)));//Escanpando caracteres 
+        $Id_unico         =    mysqli_real_escape_string($con,(strip_tags($_POST["id"],ENT_QUOTES)));//Escanpando caracteres 
+        $Numero_Cliente   =    mysqli_real_escape_string($con, (strip_tags($_POST["Numero_Cliente"], ENT_QUOTES)));//Escanpando caracteres
+        $Cedula           =    mysqli_real_escape_string($con,(strip_tags($_POST["Cedula"],ENT_QUOTES)));//Escanpando caracteres 
+        $Nombre           =    mysqli_real_escape_string($con,(strip_tags($_POST["Nombre"],ENT_QUOTES)));//Escanpando caracteres 
+        $Telefono         =    mysqli_real_escape_string($con,(strip_tags($_POST["Telefono"],ENT_QUOTES)));//Escanpando caracteres 
+        $Email            =    mysqli_real_escape_string($con,(strip_tags($_POST["Email"],ENT_QUOTES)));//Escanpando caracteres 
+        $Provincia        =    mysqli_real_escape_string($con,(strip_tags($_POST["Provincia"],ENT_QUOTES)));//Escanpando caracteres 
+        $Canton           =    mysqli_real_escape_string($con,(strip_tags($_POST["Canton"],ENT_QUOTES)));//Escanpando caracteres 
+        $Tiempo           =    mysqli_real_escape_string($con,(strip_tags($_POST["Tiempo"],ENT_QUOTES)));//Escanpando caracteres 
+        $Bloque           =    mysqli_real_escape_string($con,(strip_tags($_POST["Bloque"],ENT_QUOTES)));//Escanpando caracteres 
+        $Plan             =    mysqli_real_escape_string($con,(strip_tags($_POST["Plan"],ENT_QUOTES)));//Escanpando caracteres 
+        $ClaveATV         =    mysqli_real_escape_string($con,(strip_tags($_POST["ClaveATV"],ENT_QUOTES)));//Escanpando caracteres 
+
+        $estado_pago      =    mysqli_real_escape_string($con,(strip_tags($_POST["estado_pago"],ENT_QUOTES)));//Escanpando caracteres
+        $fecha_pago_edit  =    mysqli_real_escape_string($con,(strip_tags($_POST["fecha_pago_edit"],ENT_QUOTES)));//Escanpando caracteres
+
+        
+
+/*VERIFICANDO QUE EXISTAN LAS VARIABLES*/
+        if(empty($fecha_pago_edit) AND $estado_pago=='Pagado'){
+                $fecha_pago_edit   =    date("Y-m-d H:i:s");
+                
+
+            
+        }elseif($estado_pago=='Pendiente'){
+            $fecha_pago_edit   = 'No Pagado';
+
+
+        }elseif($fecha_pago_edit=='No Pagado' AND $estado_pago=='Pagado'){
+            $fecha_pago_edit   =    date("Y-m-d H:i:s");
+
+        }elseif(!empty($fecha_inicio_edit)){
+            $fecha_pago_edit  =    mysqli_real_escape_string($con,(strip_tags($_POST["fecha_pago_edit"],ENT_QUOTES)));//Escanpando caracteres
+        }
+
+
+
+
+
+
+        if (empty(mysqli_real_escape_string($con,(strip_tags($_POST["fecha_inicio"],ENT_QUOTES))))) {
+            $fecha_inicio= "";
+        }else{
+        $fecha_inicio     =    mysqli_real_escape_string($con,(strip_tags($_POST["fecha_inicio"],ENT_QUOTES)));//Escanpando caracteres
+        }
+         if (empty( mysqli_real_escape_string($con,(strip_tags($_POST["banco_pago"],ENT_QUOTES))))) {
+            $banco_pago= "";
+        }else{
+
+        $banco_pago       =    mysqli_real_escape_string($con,(strip_tags($_POST["banco_pago"],ENT_QUOTES)));//Escanpando caracteres
+        }
+
+
+        if (empty( mysqli_real_escape_string($con,(strip_tags($_POST["deposito"],ENT_QUOTES))))) {
+            $deposito= "";
+        }else{
+        $deposito         =    mysqli_real_escape_string($con,(strip_tags($_POST["deposito"],ENT_QUOTES)));//Escanpando caracteres
+        }
+/*VERIFICANDO QUE EXISTAN LAS VARIABLES*/
+
+
         
 //imagen destacada//
  $imagen=$_FILES['img_emple']['name'];
-         $cek = mysqli_query($con, "SELECT * FROM empleados WHERE Cedula='$Cedula' AND Cedula!='$Id' ");
-
-                  $cekt = mysqli_query($con, "SELECT * FROM empleados WHERE Cedula='$Cedula' AND Cedula!='$Id' ");
-        if(mysqli_num_rows($cek) == 0){
+         $cek         = mysqli_query($con, "SELECT * FROM empleados WHERE Cedula='$Cedula' AND id!='$Id_unico' ");
+         $numero_pago = mysqli_query($con, "SELECT * FROM empleados WHERE deposito='$deposito' AND id!='$Id_unico'");
+         $cekt        = mysqli_query($con, "SELECT * FROM empleados WHERE Cedula='$Cedula' AND Cedula!='$Id' ");
+        if(mysqli_num_rows($cek) == 0 AND mysqli_num_rows($numero_pago)==0){
 
  if ($imagen!='') {
  $tipo=$_FILES['img_emple']['type'];
@@ -219,168 +269,170 @@ exit();
                   }*/
 
 
-				$insert = mysqli_query($con, "UPDATE empleados SET Cedula='$Cedula',numero_cliente='$Numero_Cliente', Nombre='$Nombre', Telefono='$Telefono',Email='$Email',Provincia='$Provincia',Canton='$Canton',Tiempo='$Tiempo',Bloque='$Bloque',Plan='$Plan',ClaveATV='$ClaveATV',img_emple='$image' WHERE id='$Id_unico'
-				") or die(mysqli_error());
-				}
-				else{
-				         $insert = mysqli_query($con, "UPDATE empleados SET Cedula='$Cedula',numero_cliente='$Numero_Cliente', Nombre='$Nombre', Telefono='$Telefono',Email='$Email',Provincia='$Provincia',Canton='$Canton',Tiempo='$Tiempo',Bloque='$Bloque',Plan='$Plan',ClaveATV='$ClaveATV' WHERE id='$Id_unico'
-				") or die(mysqli_error());         
-				}
-				            if($insert){
-				              echo '<script language="javascript">alert("MODIFICADO CON EXITO");
-				 window.location.href="home.php";</script>';
-				            }else{
-				              echo '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Error. No se pudo guardar los datos !</div>';
-				            }
-				           
-				        }else{
-				          echo '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Error. Cedula exite!</div>';
-				        }
-				      }
-				      ?>
-	
-						<!--SCRIPT CIERRE-->
+                $insert = mysqli_query($con, "UPDATE empleados SET Cedula='$Cedula',numero_cliente='$Numero_Cliente', Nombre='$Nombre', Telefono='$Telefono',Email='$Email',Provincia='$Provincia',Canton='$Canton',Tiempo='$Tiempo',Bloque='$Bloque',Plan='$Plan',ClaveATV='$ClaveATV',img_emple='$image',estado_pago='$estado_pago',fecha_inicio='$fecha_inicio',banco_pago='$banco_pago',deposito='$deposito',fecha_pago='$fecha_pago_edit' WHERE id='$Id_unico'
+                ") or die(mysqli_error());
+                }
+                else{
+                         $insert = mysqli_query($con, "UPDATE empleados SET Cedula='$Cedula',numero_cliente='$Numero_Cliente', Nombre='$Nombre', Telefono='$Telefono',Email='$Email',Provincia='$Provincia',Canton='$Canton',Tiempo='$Tiempo',Bloque='$Bloque',Plan='$Plan',ClaveATV='$ClaveATV',estado_pago='$estado_pago',fecha_inicio='$fecha_inicio',banco_pago='$banco_pago',deposito='$deposito',fecha_pago='$fecha_pago_edit' WHERE id='$Id_unico'
+                ") or die(mysqli_error());         
+                }
+                            if($insert){
+                              echo '<script language="javascript">alert("MODIFICADO CON EXITO");
+                 window.location.href="home.php";</script>';
+                            }else{
+                              echo '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Error. No se pudo guardar los datos !</div>';
+                            }
+                           
+                         }elseif(mysqli_num_rows($cek)>0){
+          echo '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Error. C&eacute;dula existe!</div>';
+        }elseif(mysqli_num_rows($numero_pago)>0){
+            echo '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Error. N&uacute;mero de Deposito ya Existe!!!!</div>';
+        }
+                      }
+                      ?>
+    
+                        <!--SCRIPT CIERRE-->
 
-					<form class="form-horizontal" enctype="multipart/form-data" class="form-horizontal" action="" method="post">
+                    <form class="form-horizontal" enctype="multipart/form-data" class="form-horizontal" action="" method="post">
 
  <div class="row"><!--ROW PRIMERO-->         
 
         <div class="col-md-6 col-sm-6 col-xs-12"><!--PRIMER COL-MD-6-->
                           <center><h4>Informaci&oacute;n Personal</h4></center>
 
-        						<input type="hidden" value="<?php  echo  $datos['Cedula'];?>" name="id_ced" id="id_ced" class="form-control" placeholder="Cedula" required>
+                                <input type="hidden" value="<?php  echo  $datos['Cedula'];?>" name="id_ced" id="id_ced" class="form-control" placeholder="Cedula" required>
                                 <input type="hidden" value="<?php  echo  $datos['id'];?>" name="id" id="id" class="form-control" placeholder="Cedula" required>
 
 
-        						<div class="form-group">
-        						    <label for="inputEmail1" class="col-sm-2 col-md-2 col-xs-12 control-label">N&uacute;mero de Cliente</label>
-            							<div class="col-sm-10 col-md-10 col-xs-12">
-             								 <input type="text" class="form-control" id="inputEmail1" value="<?php  echo  $datos['numero_cliente'];?>" name="Numero_Cliente" placeholder="Numero de Cliente">
-        							   </div>
-        						</div>		
+                                <div class="form-group">
+                                    <label for="inputEmail1" class="col-sm-2 col-md-2 col-xs-12 control-label">N&uacute;mero de Cliente</label>
+                                        <div class="col-sm-10 col-md-10 col-xs-12">
+                                             <input type="text" class="form-control" id="inputEmail1" value="<?php  echo  $datos['numero_cliente'];?>" name="Numero_Cliente" placeholder="Numero de Cliente">
+                                       </div>
+                                </div>      
 
 
-        					  <div class="form-group">
-        						    <label for="inputEmail2" class="col-sm-2 col-md-2 col-xs-12 control-label">C&eacute;dula</label>
-            							<div class="col-sm-10 col-md-10 col-xs-12">
-             								 <input type="text" class="form-control" id="inputEmail2" value="<?php  echo  $datos['Cedula'];?>" name="Cedula" placeholder="C&eacute;dula">
-        							   </div>
-        						</div>	
+                              <div class="form-group">
+                                    <label for="inputEmail2" class="col-sm-2 col-md-2 col-xs-12 control-label">C&eacute;dula</label>
+                                        <div class="col-sm-10 col-md-10 col-xs-12">
+                                             <input type="text" class="form-control" id="inputEmail2" value="<?php  echo  $datos['Cedula'];?>" name="Cedula" placeholder="C&eacute;dula">
+                                       </div>
+                                </div>  
 
 
-        						<div class="form-group">
-        						    <label for="inputEmail3" class="col-sm-2 col-md-2 col-xs-12 control-label">Nombre Completo</label>
-            							<div class="col-sm-10 col-md-10 col-xs-12">
-             								 <input name="Nombre" value="<?php  echo $datos['Nombre'];?>" type="text" class="form-control" id="inputEmail3" placeholder="Nombre Completo">
-        							   </div>
-        						</div>	
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 col-md-2 col-xs-12 control-label">Nombre Completo</label>
+                                        <div class="col-sm-10 col-md-10 col-xs-12">
+                                             <input name="Nombre" value="<?php  echo $datos['Nombre'];?>" type="text" class="form-control" id="inputEmail3" placeholder="Nombre Completo">
+                                       </div>
+                                </div>  
 
 
-        						<div class="form-group">
-        						    <label for="inputEmail4" class="col-sm-2 col-md-2 col-xs-12 control-label">T&eacute;lefono</label>
-            							<div class="col-sm-10 col-md-10 col-xs-12">
-             								 <input name="Telefono" value="<?php  echo  $datos['Telefono'];?>" type="emtextail" class="form-control" id="inputEmail4" placeholder="Telefono">
-        							   </div>
-        						</div>	
+                                <div class="form-group">
+                                    <label for="inputEmail4" class="col-sm-2 col-md-2 col-xs-12 control-label">T&eacute;lefono</label>
+                                        <div class="col-sm-10 col-md-10 col-xs-12">
+                                             <input name="Telefono" value="<?php  echo  $datos['Telefono'];?>" type="emtextail" class="form-control" id="inputEmail4" placeholder="Telefono">
+                                       </div>
+                                </div>  
 
 
-        						<div class="form-group">
-        						    <label for="inputEmail5" class="col-sm-2 col-md-2 col-xs-12 control-label">Email</label>
-            							<div class="col-sm-10 col-md-10 col-xs-12">
-             								 <input name="Email" value="<?php  echo  $datos['Email'];?>" type="text" class="form-control" id="inputEmail5" placeholder="Email">
-        							   </div>
-        						</div>
+                                <div class="form-group">
+                                    <label for="inputEmail5" class="col-sm-2 col-md-2 col-xs-12 control-label">Email</label>
+                                        <div class="col-sm-10 col-md-10 col-xs-12">
+                                             <input name="Email" value="<?php  echo  $datos['Email'];?>" type="text" class="form-control" id="inputEmail5" placeholder="Email">
+                                       </div>
+                                </div>
 
 
-        						<div class="form-group">
-        						    <label for="proviv" class="col-sm-2 col-md-2 col-xs-12 control-label">Provincia</label>
-            							<div class="col-sm-10 col-md-10 col-xs-12">
-        							            <select name="Provincia" class="form-control" id="proviv" onchange="provi(this.value)" required>
-        							            <option value="<?php  echo  $datos['Provincia'];?>"><?php  echo  $datos['Provincia'];?></option>
-        							             <?php
-        							        while($datos1=mysqli_fetch_array($provi)){ ?>
-        							              <option value="<?php  echo  $datos1['nom_provi'];?>"><?php  echo $datos1['nom_provi'];?></option>
-        							              <?php } ?>
-        							            </select>
-        							   </div>
-        						</div>
+                                <div class="form-group">
+                                    <label for="proviv" class="col-sm-2 col-md-2 col-xs-12 control-label">Provincia</label>
+                                        <div class="col-sm-10 col-md-10 col-xs-12">
+                                                <select name="Provincia" class="form-control" id="proviv" onchange="provi(this.value)" required>
+                                                <option value="<?php  echo  $datos['Provincia'];?>"><?php  echo  $datos['Provincia'];?></option>
+                                                 <?php
+                                            while($datos1=mysqli_fetch_array($provi)){ ?>
+                                                  <option value="<?php  echo  $datos1['nom_provi'];?>"><?php  echo $datos1['nom_provi'];?></option>
+                                                  <?php } ?>
+                                                </select>
+                                       </div>
+                                </div>
 
 
-        						<div class="form-group">
-        						    <label for="inputEmail7" class="col-sm-2 col-md-2 col-xs-12 control-label">Cant&oacute;n</label>
-            							<div class="col-sm-10 col-md-10 col-xs-12" id="provi">
+                                <div class="form-group">
+                                    <label for="inputEmail7" class="col-sm-2 col-md-2 col-xs-12 control-label">Cant&oacute;n</label>
+                                        <div class="col-sm-10 col-md-10 col-xs-12" id="provi">
 
 
-            							  </div>
-        						</div>
+                                          </div>
+                                </div>
 
 
-        						 <div class="form-group">
-                 					 <label class="col-sm-2 col-md-2 col-xs-12 control-label">Tiempo</label>
-        						          <div class="col-sm-10 col-md-10 col-xs-12">
-        						            <select name="Tiempo" class="form-control" required>									          
-        						              <option value="<?php  echo  $datos['Tiempo'];?>"><?php  echo  $datos['Tiempo'];?></option>
-        						            <option value="Mensual">Mensual</option>
-        						              <option value="Anual">Anual</option>
-        						            </select>
-        						          </div>  
-               					 </div>
+                                 <div class="form-group">
+                                     <label class="col-sm-2 col-md-2 col-xs-12 control-label">Tiempo</label>
+                                          <div class="col-sm-10 col-md-10 col-xs-12">
+                                            <select name="Tiempo" class="form-control" required>                                              
+                                              <option value="<?php  echo  $datos['Tiempo'];?>"><?php  echo  $datos['Tiempo'];?></option>
+                                            <option value="Mensual">Mensual</option>
+                                              <option value="Anual">Anual</option>
+                                            </select>
+                                          </div>  
+                                 </div>
 
 
-        						<div class="form-group">
-        				          <label class="col-sm-2 col-md-2 col-xs-12 control-label">Bloque</label>
-        				          <div class="col-sm-10 col-md-10 col-xs-12">
-        				            <select name="Bloque" class="form-control" required>
-        				            	<?php 
-        				            		if ($datos['Bloque']==5) {
-        				            			$bloque='Pendiente';				            		
-        				            	 ?>
-        									<option value="<?php  echo  $datos['Bloque'];?>"><?php  echo  $bloque;?></option>		
-        				            	 <?php 
-        				            	 	}elseif($datos['Bloque']==6){
-        				            	 		$bloque='Cancelado';
-        				            	  ?>
-        					               <option value="<?php  echo  $datos['Bloque'];?>"><?php  echo  $bloque;?></option>
-        				            	  <?php 
-        				            	  	}else{
+                                <div class="form-group">
+                                  <label class="col-sm-2 col-md-2 col-xs-12 control-label">Bloque</label>
+                                  <div class="col-sm-10 col-md-10 col-xs-12">
+                                    <select name="Bloque" class="form-control" required>
+                                        <?php 
+                                            if ($datos['Bloque']==5) {
+                                                $bloque='Pendiente';                                    
+                                         ?>
+                                            <option value="<?php  echo  $datos['Bloque'];?>"><?php  echo  $bloque;?></option>       
+                                         <?php 
+                                            }elseif($datos['Bloque']==6){
+                                                $bloque='Cancelado';
+                                          ?>
+                                           <option value="<?php  echo  $datos['Bloque'];?>"><?php  echo  $bloque;?></option>
+                                          <?php 
+                                            }else{
 
-        				            	   ?>
-        					               <option value="<?php  echo  $datos['Bloque'];?>"><?php  echo  $datos['Bloque'];?></option>
+                                           ?>
+                                           <option value="<?php  echo  $datos['Bloque'];?>"><?php  echo  $datos['Bloque'];?></option>
 
-        				            	   <?php 
-        				            	   	}
-        				            	    ?>						                          
-        				               <option value="1">Bloque1</option>
-        				               <option value="2">Bloque2</option>
-        				               <option value="3">Bloque3</option>
-        				               <option value="4">Bloque4</option>
-        				               <option value="Pendiente">Pendiente</option>
-        				               <option value="Cancelado">Cancelado</option>
-        				               </select>
-        				          </div>
+                                           <?php 
+                                            }
+                                            ?>                                                
+                                       <option value="1">Bloque1</option>
+                                       <option value="2">Bloque2</option>
+                                       <option value="3">Bloque3</option>
+                                       <option value="4">Bloque4</option>
+                                       <option value="Pendiente">Pendiente</option>
+                                       <option value="Cancelado">Cancelado</option>
+                                       </select>
+                                  </div>
                              </div>
 
 
-        						<div class="form-group">
-        			                <label class="col-sm-2 col-md-2 col-xs-12 control-label">Plan</label>
-        				           <div class="col-sm-10 col-md-10 col-xs-12">
-        					            <select name="Plan" class="form-control" id="proviv" required>
-        					            <option value="<?php  echo  $datos['Plan'];?>"><?php  echo  $datos['Plan'];?></option>
-        					             <?php
-        					              while($datos2=mysqli_fetch_array($plane)){ ?>
-        					              <option value="<?php  echo  $datos2['nom_plan'];?>"><?php  echo $datos2['nom_plan'];?></option>
-        					              <?php } ?>
-        					            </select>
-        			         	 </div>
-                    			</div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 col-md-2 col-xs-12 control-label">Plan</label>
+                                   <div class="col-sm-10 col-md-10 col-xs-12">
+                                        <select name="Plan" class="form-control" id="proviv" required>
+                                        <option value="<?php  echo  $datos['Plan'];?>"><?php  echo  $datos['Plan'];?></option>
+                                         <?php
+                                          while($datos2=mysqli_fetch_array($plane)){ ?>
+                                          <option value="<?php  echo  $datos2['nom_plan'];?>"><?php  echo $datos2['nom_plan'];?></option>
+                                          <?php } ?>
+                                        </select>
+                                 </div>
+                                </div>
 
 
-        						 <div class="form-group">
-        				          		<label class="col-sm-2 col-md-2 col-xs-12 control-label">CLAVE ATV</label>
-        					          <div class="col-sm-10 col-md-10 col-xs-12">
-        					            <input type="text" name="ClaveATV" value="<?php  echo  $datos['ClaveATV'];?>" class="form-control" placeholder="ClaveATV" required>
-        					          </div>
-               					 </div>
+                                 <div class="form-group">
+                                        <label class="col-sm-2 col-md-2 col-xs-12 control-label">CLAVE ATV</label>
+                                      <div class="col-sm-10 col-md-10 col-xs-12">
+                                        <input type="text" name="ClaveATV" value="<?php  echo  $datos['ClaveATV'];?>" class="form-control" placeholder="ClaveATV" required>
+                                      </div>
+                                 </div>
 
                         <div class="form-group">
                              <label class="col-sm-2 col-md-2 col-xs-12 control-label">Credenciales</label>
@@ -398,11 +450,132 @@ exit();
             <div class="col-md-6 col-sm-6 col-xs-12"><!--SEGUNDO COL-MD-6-->
                         <center><h4>Control de Pagos</h4></center>
 
-               </div> <!--SEGUNDO COL-MD-6-->  
+              <div class="form-group">
+                                <label class="col-sm-2 col-md-2 col-xs-12 control-label">Pago</label>
+                                  <div  class="col-sm-10 col-md-10 col-xs-12">
+                                       <input type="hidden" id="fecha_inicio_edit" value="<?php  echo  $datos['fecha_inicio'];?>">
+                                       <input type="hidden" id="banco_pago_edit" value="<?php  echo  $datos['banco_pago'];?>">
+                                       <input type="hidden" id="deposito_edit" value="<?php  echo  $datos['deposito'];?>">
+                                       <input type="hidden" name="fecha_pago_edit" value="<?php  echo  $datos['fecha_pago'];?>">
+                                    <select name="estado_pago" id="estado_pago" class="form-control" onchange="estadopago_edit(this.value)" required>
+                                      
+                                       <?php 
+                                            if ($datos['estado_pago']=='Pagado') {                                                
+                                        ?>
+                                            <option value="<?php  echo  $datos['estado_pago'];?>" selected><?php  echo  $datos['estado_pago'];?></option>
+                                            <option value="Pendiente">Pendiente</option>   
+                                        <?php 
+                                            }elseif($datos['estado_pago']=='Pendiente'){
+                                         ?> 
+                                           <option value="<?php  echo  $datos['estado_pago'];?>" selected><?php  echo  $datos['estado_pago'];?></option>
+                                           <option value="Pagado">Pagado</option>
+                                          <?php 
+                                            }elseif(empty($datos['estado_pago'])){
+                                           ?> 
+                                                <option value="" selected>Seleccione</option>
+                                                <option value="Pendiente">Pendiente</option> 
+                                                <option value="Pagado">Pagado</option> 
+
+
+                                           <?php 
+                                            }
+                                            ?>                              
+                                    </select>
+                                   </div> 
+                            </div>
+
+
+                            <div id="respuesta_pago_edit"><!--CAMPOS A LLENAR-->     
+
+                                <?php 
+                                    if($datos['estado_pago']=='Pagado'){
+                                 ?>
+                                        <div class="form-group" >
+                                  <label class="col-sm-2 col-md-2 col-xs-12 control-label">Inicio</label>
+                                  <div class="col-sm-10 col-md-10 col-xs-12" >
+                                    <input type="date" class="form-control" name="fecha_inicio" value="<?php  echo  $datos['fecha_inicio'];?>">
+                                  </div>
+                              </div>
+
+                              <div class="form-group">
+                                  <label class="col-sm-2 col-md-2 col-xs-12 control-label">Banco</label>
+                                  <div class="col-sm-10 col-md-10 col-xs-12">
+                                    <select  class="form-control" name="banco_pago">
+                                      <option value="<?php  echo  $datos['banco_pago'];?>" selected><?php  echo  $datos['banco_pago'];?></option>
+                                      <?php 
+                                        if ($datos['banco_pago']=='Costa Rica') {   
+                                       ?>
+                                             <option value="Nacional">Nacional</option>
+                                             <option value="BAC SAN JOS&Eacute;">BAC SAN JOS&Eacute;</option>  
+                                            
+                                       <?php 
+                                         }elseif($datos['banco_pago']=='Nacional'){
+
+                                        ?>
+                                            <option value="Costa Rica">Costa Rica</option>
+                                            <option value="BAC SAN JOS&Eacute;">BAC SAN JOS&Eacute;</option>  
+
+                                        <?php 
+                                            }elseif ($datos['banco_pago']=='BAC SAN JOSÉ'){
+                                         ?>
+                                             <option value="Nacional">Nacional</option>
+                                             <option value="Costa Rica">Costa Rica</option>
+                                         <?php 
+                                            }
+                                          ?>
+                                    </select>
+                                  </div>
+                              </div>
+
+                              <div class="form-group">
+                                  <label class="col-sm-2 col-md-2 col-xs-12 control-label">Deposito</label>
+                                  <div class="col-sm-10 col-md-10 col-xs-12">
+                                    <input maxlength="10" required name="deposito" class="form-control" onKeyPress="return soloNumeros(event)" onKeyUp="pierdeFoco(this)" placeholder=" Ej:1548796795" value="<?php  echo  $datos['deposito'];?>">
+                                  </div>
+                              </div>
+
+                                 <?php
+                                    }elseif($datos['estado_pago']=='Pendiente'){
+                                   ?>
+                                <div class="form-group" >
+                                  <label class="col-sm-2 col-md-2 col-xs-12 control-label">Inicio</label>
+                                  <div class="col-sm-10 col-md-10 col-xs-12" >
+                                    <input type="date" class="form-control" disabled>
+                                  </div>
+                              </div>
+
+                              <div class="form-group">
+                                  <label class="col-sm-2 col-md-2 col-xs-12 control-label">Banco</label>
+                                  <div class="col-sm-10 col-md-10 col-xs-12">
+                                    <select  class="form-control" disabled>
+                                       <option value="">Seleccione</option>
+                                       <option value="Costa Rica">Costa Rica</option>
+                                       <option value="Nacional">Nacional</option>
+                                       <option value="BAC SAN JOS&Eacute;">BAC SAN JOS&Eacute;</option>                                     
+                                    </select>
+                                  </div>
+                              </div>
+
+                              <div class="form-group">
+                                  <label class="col-sm-2 col-md-2 col-xs-12 control-label">Deposito</label>
+                                  <div class="col-sm-10 col-md-10 col-xs-12">
+                                    <input type="text" class="form-control" disabled placeholder=" Ej:1548796795">
+                                  </div>
+                              </div>
+                                    <?php 
+                                        }
+                                     ?>
+
+                              
+
+
+                            </div>  <!--CAMPOS A LLENAR-->          
+
+            </div> <!--SEGUNDO COL-MD-6-->  
                
 </div><!--ROW PRIMERO-->       
 
-		       		
+                    
 
 
 
@@ -412,27 +585,27 @@ exit();
 
 
             <div class="row"><!--ROW SEGUNDO-->
-        			  <div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 2em;">
+                      <div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 2em;">
                       <center>
-				           <a href="img-credenciales/<?php echo $datos['img_emple']; ?>"><img id="" src="img-credenciales/<?php echo $datos['img_emple']; ?>" alt="Credenciales " style="width: 70%;" height="300"></a>
+                           <a href="img-credenciales/<?php echo $datos['img_emple']; ?>"><img id="" src="img-credenciales/<?php echo $datos['img_emple']; ?>" alt="Credenciales " style="width: 70%;" height="300"></a>
                       </center>
-				        </div>
+                        </div>
            </div><!--ROW SEGUNDO--> 
      
-		       
+               
           <div class="row"><!--ROW TERCERO--> 
 
-    		          <div class="col-md-12  col-sm-12  col-xs-12">
+                      <div class="col-md-12  col-sm-12  col-xs-12">
                         <center>
-    			            <input type="submit" name="add" class="btn btn-sm btn-primary" value="Guardar datos">
-    			            <a href="home.php" class="btn btn-sm btn-danger">Cancelar</a>
+                            <input type="submit" name="add" class="btn btn-sm btn-primary" value="Guardar datos">
+                            <a href="home.php" class="btn btn-sm btn-danger">Cancelar</a>
                         </center>
-            		</div>
+                    </div>
            </div><!--ROW TERCERO--> 
 
 
-		</form>
-					
+        </form>
+                    
 
 
 
@@ -475,7 +648,7 @@ exit();
    
 
     <!-- Custom Theme Scripts -->
-    <script src="build/js/custom.min.js"></script>
+    <script src="build/js/custom.js"></script>
    
 
   </body>

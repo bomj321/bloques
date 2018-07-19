@@ -108,6 +108,13 @@ include('conexion.php');
 				          	<center><button class="btn btn-lg btn-primary" data-toggle="modal" data-target="#imprimir" > Imprimir</button></center>
          				 </div>
 
+                 <div class="row div_botones">
+                    <center><h3>Imprimir Listado de Pagos</h3></center>
+                    <center>
+                      <a href="reportes/rpt_pagos.php" class="btn btn-lg btn-primary" type="button" target="_blank">Imprimir</a>
+                    </center>
+                 </div>
+
 
 				          <div class="row div_botones">
 				          	<center><h3>Para exportar en Formato Excel todos los Clientes</h3></center>

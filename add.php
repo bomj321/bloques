@@ -1,5 +1,5 @@
 <?php 
-date_default_timezone_set('America/Caracas');
+date_default_timezone_set('America/Costa_Rica');
 session_start();
 ?>
 <!DOCTYPE html>
@@ -156,9 +156,26 @@ $provi =mysqli_query($con,$sql1);
         $ClaveATV         =    mysqli_real_escape_string($con,(strip_tags($_POST["ClaveATV"],ENT_QUOTES)));//Escanpando caracteres
 
         $estado_pago      =    mysqli_real_escape_string($con,(strip_tags($_POST["estado_pago"],ENT_QUOTES)));//Escanpando caracteres
+        if (empty($fecha_inicio)) {
+            $fecha_inicio= "";
+        }else{
         $fecha_inicio     =    mysqli_real_escape_string($con,(strip_tags($_POST["fecha_inicio"],ENT_QUOTES)));//Escanpando caracteres
+        }
+         if (empty($banco_pago)) {
+            $banco_pago= "";
+        }else{
+
         $banco_pago       =    mysqli_real_escape_string($con,(strip_tags($_POST["banco_pago"],ENT_QUOTES)));//Escanpando caracteres
+        }
+
+
+        if (empty($deposito)) {
+            $deposito= "";
+        }else{
         $deposito         =    mysqli_real_escape_string($con,(strip_tags($_POST["deposito"],ENT_QUOTES)));//Escanpando caracteres
+        }
+
+        
         if ($estado_pago=='Pagado') {
             $fecha_pago   =    date("Y-m-d H:i:s");
         }else{
