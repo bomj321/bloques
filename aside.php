@@ -31,8 +31,11 @@
                       <li><a href="add.php">Agregar Clientes</a></li>
                     </ul>
                   </li>
-                  <li><a href="estadistica.php"><i class="fa fa-bar-chart-o"></i>Estad&iacute;sticas</a>
-                    
+                  <li><a ><i class="fa fa-bar-chart-o"></i>Estad&iacute;sticas<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="estadistica.php">Por Bloques</a></li>
+                      <li><a href="estadistica_pagos.php">Por Pagos</a></li>
+                    </ul>
                   </li>
                   <li><a href="reportes_clientes.php"><i class="fa fa-edit"></i>Reportes</a>
                     
@@ -43,6 +46,9 @@
                       <li><a href="add_notas.php">Agregar Notas</a></li>
                     </ul>
                   </li>
+
+                   <li><a target="_blank" href="https://es-la.facebook.com/"><i class="fa fa-address-book" aria-hidden="true"></i>N1</a></li>
+                   <li><a target="_blank" href="https://www.google.co.ve"><i class="fa fa-address-card " ></i>N2</a></li> 
                 </ul>
               </div>              
             </div>

@@ -15,7 +15,7 @@ session_start();
     <!-- Bootstrap -->
     <link href="vendors/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="vendors/font-awesome/css/font-awesome.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
@@ -113,6 +113,9 @@ $user =mysqli_query($con,$sql);
                   <th>Nombre</th>
                   <th>Cédula</th>                  
                   <th>Email</th>
+                  <th>Pago</th>
+                  <th>Banco</th>
+                  <th>#N Deposito</th>
                   <th>ClaveATV</th>
                   <th>Bloque</th>
                   <th>Acciones</th>
@@ -129,6 +132,9 @@ $user =mysqli_query($con,$sql);
                   <td ><?php  echo  $datos['Nombre'];?></td>
                   <td ><?php  echo  $datos['Cedula'];?></td>                  
                   <td ><?php  echo  $datos['Email'];?></td>
+                  <td ><?php  echo  $datos['estado_pago'];?></td>
+                  <td ><?php  echo  $datos['banco_pago'];?></td>
+                  <td ><?php  echo  $datos['deposito'];?></td>
                   <td ><?php  echo  $datos['ClaveATV'];?></td>
                   <td ><?php if($datos['Bloque'] == '1'){
                 echo '<span class="label label-success">Bloque1</span>';

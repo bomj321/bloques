@@ -1,4 +1,5 @@
 <?php 
+date_default_timezone_set('America/Caracas');
 session_start();
 ?>
 <!DOCTYPE html>
@@ -15,7 +16,7 @@ session_start();
     <!-- Bootstrap -->
     <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="vendors/font-awesome/css/font-awesome.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
@@ -129,7 +130,7 @@ $provi =mysqli_query($con,$sql1);
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Añadir Nuevo CLiente y Control de Pagos</h2>
+                    <h2>Añadir Nuevo Cliente y Control de Pagos</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>                      
@@ -152,9 +153,21 @@ $provi =mysqli_query($con,$sql1);
         $Tiempo           =    mysqli_real_escape_string($con,(strip_tags($_POST["Tiempo"],ENT_QUOTES)));//Escanpando caracteres 
         $Bloque           =    mysqli_real_escape_string($con,(strip_tags($_POST["Bloque"],ENT_QUOTES)));//Escanpando caracteres 
         $Plan             =    mysqli_real_escape_string($con,(strip_tags($_POST["Plan"],ENT_QUOTES)));//Escanpando caracteres 
-        $ClaveATV         =    mysqli_real_escape_string($con,(strip_tags($_POST["ClaveATV"],ENT_QUOTES)));//Escanpando caracteres 
+        $ClaveATV         =    mysqli_real_escape_string($con,(strip_tags($_POST["ClaveATV"],ENT_QUOTES)));//Escanpando caracteres
+
+        $estado_pago      =    mysqli_real_escape_string($con,(strip_tags($_POST["estado_pago"],ENT_QUOTES)));//Escanpando caracteres
+        $fecha_inicio     =    mysqli_real_escape_string($con,(strip_tags($_POST["fecha_inicio"],ENT_QUOTES)));//Escanpando caracteres
+        $banco_pago       =    mysqli_real_escape_string($con,(strip_tags($_POST["banco_pago"],ENT_QUOTES)));//Escanpando caracteres
+        $deposito         =    mysqli_real_escape_string($con,(strip_tags($_POST["deposito"],ENT_QUOTES)));//Escanpando caracteres
+        if ($estado_pago=='Pagado') {
+            $fecha_pago   =    date("Y-m-d H:i:s");
+        }else{
+             $fecha_pago  = 'No Pagado'  ;
+        }
+       
         
 ///imagen destacada//
+if (!empty($_FILES['img_emple']['name'])) {
  $imagen=$_FILES['img_emple']['name'];
  $tipo=$_FILES['img_emple']['type'];
  $tmp=$_FILES['img_emple']['tmp_name'];
@@ -163,10 +176,10 @@ $img = explode("/", $tipo);
 $n=$img[1];
 if ($n=='png' || $n=='jpg' || $n=='jpeg') {
   # code...
-$image=$Cedula.'.'.$n;  
-move_uploaded_file($tmp, $carpeta.'/'.$Cedula.'.'.$n);
+$image=$imagen;  
+move_uploaded_file($tmp, $carpeta.'/'.$imagen);
 
-$archivos1= file_get_contents($carpeta.'/'.$Cedula.'.'.$n);
+$archivos1= file_get_contents($carpeta.'/'.$imagen);
 }else{
   echo '<script language="javascript">alert("La imagen principal no cumple con los formatos");
  window.location.href="add.php";</script>'; 
@@ -175,18 +188,26 @@ exit();
 
 }
 
+}else{
+    $image="";
+}
+
         $cek = mysqli_query($con, "SELECT * FROM empleados WHERE Cedula='$Cedula'");
-        if(mysqli_num_rows($cek) == 0){
-            $insert = mysqli_query($con, "INSERT INTO empleados(Cedula,numero_cliente, Nombre, Telefono, Email, Provincia, Canton, Tiempo, Bloque,Plan, ClaveATV,img_emple)
-               VALUES('$Cedula','$Numero_Cliente', '$Nombre', '$Telefono', '$Email', '$Provincia', '$Canton', '$Tiempo', '$Bloque','$Plan' ,'$ClaveATV','$image')") or die(mysqli_error());
+        $numero_pago = mysqli_query($con, "SELECT * FROM empleados WHERE deposito='$deposito'");
+
+        if(mysqli_num_rows($cek) == 0 AND mysqli_num_rows($numero_pago)==0 ){
+            $insert = mysqli_query($con, "INSERT INTO empleados(Cedula,numero_cliente, Nombre, Telefono, Email, Provincia, Canton, Tiempo, Bloque,Plan, ClaveATV,img_emple,estado_pago,fecha_inicio,banco_pago,deposito,fecha_pago)
+               VALUES('$Cedula','$Numero_Cliente', '$Nombre', '$Telefono', '$Email', '$Provincia', '$Canton', '$Tiempo', '$Bloque','$Plan' ,'$ClaveATV','$image','$estado_pago','$fecha_inicio','$banco_pago','$deposito','$fecha_pago')") or die(mysqli_error());
             if($insert){
               echo '<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Bien hecho! Los datos han sido guardados con &Eacute;xito.</div>';
             }else{
-                echo '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Error. No se pudo guardar los datos !</div>';
+                echo '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Error. No se pudo guardar los datos !!!!</div>';
             }
            
-        }else{
+        }elseif(mysqli_num_rows($cek)>0){
           echo '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Error. C&eacute;dula existe!</div>';
+        }elseif(mysqli_num_rows($numero_pago)>0){
+            echo '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Error. N&uacute;mero de Deposito ya Existe!!!!</div>';
         }
 
       }
@@ -258,7 +279,7 @@ exit();
     						    <label for="inputEmail7" class="col-sm-2 col-md-2 col-xs-12 control-label">Cant&oacute;n</label>
         							<div class="col-sm-10 col-md-10 col-xs-12" id="provi">
 
-                          <input type="text" class="form-control" disabled >
+                                            <input type="text" class="form-control" disabled >
         							  </div>
     						</div>
 
@@ -333,7 +354,7 @@ exit();
                           <div class="form-group">
                                 <label class="col-sm-2 col-md-2 col-xs-12 control-label">Pago</label>
                                   <div  class="col-sm-10 col-md-10 col-xs-12">
-                                    <select name="estado_pago" id="estado_pago" class="form-control" onchange="estado_pago(this.value)" required>
+                                    <select name="estado_pago" id="estado_pago" class="form-control" onchange="estadopago(this.value)" required>
                                        <option value="">Seleccione</option>
                                        <option value="Pagado">Pagado</option>
                                        <option value="Pendiente">Pendiente</option>                                     
@@ -342,22 +363,22 @@ exit();
                             </div>
 
 
-                            <div><!--CAMPOS A LLENAR-->                                
-                              <div class="form-group">
+                            <div id="respuesta_pago"><!--CAMPOS A LLENAR-->                                
+                              <div class="form-group" >
                                   <label class="col-sm-2 col-md-2 col-xs-12 control-label">Inicio</label>
-                                  <div class="col-sm-10 col-md-10 col-xs-12">
-                                    <input type="date" name="fecha_inicio" class="form-control" disabled>
+                                  <div class="col-sm-10 col-md-10 col-xs-12" >
+                                    <input type="date" class="form-control" disabled>
                                   </div>
                               </div>
 
                               <div class="form-group">
                                   <label class="col-sm-2 col-md-2 col-xs-12 control-label">Banco</label>
                                   <div class="col-sm-10 col-md-10 col-xs-12">
-                                    <select name="banco_pago" class="form-control" disabled maxlength="10">
+                                    <select  class="form-control" disabled>
                                        <option value="">Seleccione</option>
-                                       <option value="Pagado">Costa Rica</option>
-                                       <option value="Pendiente">Nacional</option>
-                                       <option value="Pendiente">BAC SAN JOS&Eacute;</option>                                     
+                                       <option value="Costa Rica">Costa Rica</option>
+                                       <option value="Nacional">Nacional</option>
+                                       <option value="BAC SAN JOS&Eacute;">BAC SAN JOS&Eacute;</option>                                     
                                     </select>
                                   </div>
                               </div>
@@ -365,7 +386,7 @@ exit();
                               <div class="form-group">
                                   <label class="col-sm-2 col-md-2 col-xs-12 control-label">Deposito</label>
                                   <div class="col-sm-10 col-md-10 col-xs-12">
-                                    <input type="text" name="deposito" class="form-control" disabled>
+                                    <input type="text" class="form-control" disabled placeholder=" Ej:1548796795">
                                   </div>
                               </div>
 

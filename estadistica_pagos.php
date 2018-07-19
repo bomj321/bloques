@@ -102,32 +102,35 @@ include('conexion.php');
 
                     <!--CONSULTAS SQL-->
                                   <?php 
-                       $bloque1 = mysqli_query($con, "SELECT * FROM empleados WHERE Bloque='1'");
-                              $bloque1_row= mysqli_num_rows($bloque1);
+                       $pendiente = mysqli_query($con, "SELECT * FROM empleados WHERE estado_pago='Pendiente'");
+                              $pendiente_row= mysqli_num_rows($pendiente);
 
-                        $bloque2 = mysqli_query($con, "SELECT * FROM empleados WHERE Bloque='2'");
-                              $bloque2_row= mysqli_num_rows($bloque2);
+                        $pagado = mysqli_query($con, "SELECT * FROM empleados WHERE estado_pago='Pagado'");
+                              $pagado_row= mysqli_num_rows($pagado);
 
-                        $bloque3 = mysqli_query($con, "SELECT * FROM empleados WHERE Bloque='3'");
-                              $bloque3_row= mysqli_num_rows($bloque3);
+                        $costa_rica = mysqli_query($con, "SELECT * FROM empleados WHERE banco_pago='Costa Rica'");
+                              $costa_rica_row= mysqli_num_rows($costa_rica);
 
-                        $bloque4 = mysqli_query($con, "SELECT * FROM empleados WHERE Bloque='4'");
-                              $bloque4_row= mysqli_num_rows($bloque4);
+                        $nacional = mysqli_query($con, "SELECT * FROM empleados WHERE banco_pago='Nacional'");
+                              $nacional_row= mysqli_num_rows($nacional);
 
-                        $bloque5 = mysqli_query($con, "SELECT * FROM empleados WHERE Bloque='Pendiente'");
-                              $bloque5_row= mysqli_num_rows($bloque5);
+                        $san_jose = mysqli_query($con, "SELECT * FROM empleados WHERE banco_pago='BAC San José'");
+                              $san_jose_row= mysqli_num_rows($san_jose);
 
-                        $bloque6= mysqli_query($con, "SELECT * FROM empleados WHERE Bloque='Cancelado'");
-                              $bloque6_row= mysqli_num_rows($bloque6);
+                              /*MES ACTUAL*/
+								$mesactual = date("m");
+								$clientes_mes= ("SELECT * FROM empleados WHERE MONTH(fecha_inicio)='$mesactual'");
+								$clientes_mes = mysqli_query($con,$clientes_mes);
+								$clientes_mes_row = mysqli_num_rows($clientes_mes);
+
+							/*MES ACTUAL*/
+							$total_clientes= $costa_rica_row+$nacional_row+$san_jose_row;
+                            $porcentaje_costa_rica =($costa_rica_row/$total_clientes)*100;
+                            $porcentaje_nacional =($nacional_row/$total_clientes)*100;
+                            $porcentaje_san_jose =($san_jose_row/$total_clientes)*100;
                        
-                      $total=  $bloque1_row+ $bloque2_row+ $bloque3_row+ $bloque4_row+ $bloque5_row+ $bloque6_row; 
-
-
-                      if($total ==0){
-
-
-                        $total = 1;
-                      }       
+                      /*$total=  $bloque1_row+ $bloque2_row+ $bloque3_row+ $bloque4_row+ $bloque5_row+ $bloque6_row; */
+                    
                                    
                       ?>
                           <!--CONSULTAS SQL-->
@@ -135,45 +138,43 @@ include('conexion.php');
                       <!-- top tiles -->
           <div class="row tile_count">
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user" style="margin-right: 2px;"></i>Bloque 1</span>
-              <div class="count"><?php echo $bloque1_row; ?></div>
+              <span class="count_top"><i class="fa fa-money" style="margin-right: 2px;"></i>Pendiente</span>
+              <div style="color:red;" class="count"><?php echo $pendiente_row; ?></div>
               <span class="count_top">Clientes</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user" style="margin-right: 2px;"></i>Bloque 2</span>
-              <div class="count"><?php echo $bloque2_row; ?></div>
+              <span  class="count_top"><i class="fa fa-money" style="margin-right: 2px;"></i>Pagado</span>
+              <div style="color:blue;" class="count"><?php echo $pagado_row; ?></div>
               <span class="count_top">Clientes</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user" style="margin-right: 2px;"></i>Bloque 3</span>
-              <div class="count"><?php echo $bloque3_row; ?></div>
+              <span class="count_top"><i class="fa fa-handshake-o" style="margin-right: 2px;"></i>Costa Rica</span>
+              <div class="count"><?php echo $costa_rica_row; ?></div>
               <span class="count_top">Clientes</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user" style="margin-right: 2px;"></i>Bloque 4</span>
-              <div class="count"><?php echo $bloque4_row; ?></div>
+              <span class="count_top"><i class="fa fa-handshake-o" style="margin-right: 2px;"></i>Nacional</span>
+              <div class="count"><?php echo $nacional_row; ?></div>
               <span class="count_top">Clientes</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user" style="margin-right: 2px;"></i>Pendiente</span>
-              <div class="count"><?php echo $bloque5_row; ?></div>
+              <span class="count_top"><i class="fa fa-handshake-o" style="margin-right: 2px;"></i>BAC San Jos&eacute;</span>
+              <div class="count"><?php echo $san_jose_row; ?></div>
               <span class="count_top">Clientes</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user" style="margin-right: 2px;"></i>Cancelado</span>
-              <div class="count"><?php echo $bloque6_row; ?></div>
+              <span class="count_top"><i class="fa fa-user" style="margin-right: 2px;"></i>Clientes del Mes</span>
+              <div class="count"><?php echo $clientes_mes_row; ?></div>
               <span class="count_top">Clientes</span>
             </div>
           </div>
           <!-- /top tiles -->
 
           <!--INPUT OCULTOS-->
-                            <input type="hidden" value=" <?php echo $bloque1_row; ?>" id="bloque_1"> 
-                            <input type="hidden" value="<?php echo $bloque2_row; ?>" id="bloque_2"> 
-                            <input type="hidden" value="<?php echo $bloque3_row; ?>" id="bloque_3">
-                            <input type="hidden" value="<?php echo $bloque4_row; ?>" id="bloque_4">
-                            <input type="hidden" value="<?php echo $bloque5_row; ?>" id="bloque_5">
-                            <input type="hidden" value="<?php echo $bloque6_row; ?>" id="bloque_6"> 
+                            <input type="hidden" value=" <?php echo $costa_rica_row; ?>" id="costa_rica"> 
+                            <input type="hidden" value="<?php echo $nacional_row; ?>" id="nacional"> 
+                            <input type="hidden" value="<?php echo $san_jose_row; ?>" id="san_jose">
+                            
 
           <!--INPUT OCULTOS CIERRO -->
 
@@ -207,46 +208,29 @@ include('conexion.php');
                     </tr>
                     <tr>
                       <td>
-                        <canvas class="canvasDoughnut" height="154" width="154" style="margin: 15px 10px 10px 0"></canvas>
+                        <canvas class="canvasDoughnut_pago" height="154" width="154" style="margin: 15px 10px 10px 0"></canvas>
                       </td>
                       <td>
                         <table class="tile_info">
                           <tr>
                             <td>
-                              <p><i class="fa fa-square aero"></i>Bloque 1</p>
+                              <p><i class="fa fa-square aero"></i>Costa Rica</p>
                             </td>
-                            <td><?php echo round(($bloque1_row/$total)*100); ?>%</td>
+                            <td><?php echo round($porcentaje_costa_rica); ?>%</td>
                           </tr>
                           <tr>
                             <td>
-                              <p><i class="fa fa-square purple"></i>Bloque 2</p>
+                              <p><i class="fa fa-square purple"></i>Nacional</p>
                             </td>
-                            <td><?php echo round(($bloque2_row/$total)*100); ?>%</td>
+                            <td><?php echo round($porcentaje_nacional); ?>%</td>
                           </tr>
                           <tr>
                             <td>
-                              <p><i class="fa fa-square red"></i>Bloque 3</p>
+                              <p><i class="fa fa-square red"></i>San Jos&eacute;</p>
                             </td>
-                            <td><?php echo round(($bloque3_row/$total)*100); ?>%</td>
+                            <td><?php echo round($porcentaje_san_jose); ?>%</td>
                           </tr>
-                          <tr>
-                            <td>
-                              <p><i class="fa fa-square green"></i>Bloque 4</p>
-                            </td>
-                            <td><?php echo round(($bloque4_row/$total)*100); ?>%</td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <p><i class="fa fa-square blue"></i>Pendiente</p>
-                            </td>
-                            <td><?php echo round(($bloque5_row/$total)*100); ?>%</td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <p><i class="fa fa-square black"></i>Cancelado</p>
-                            </td>
-                            <td><?php echo round(($bloque6_row/$total)*100); ?>%</td>
-                          </tr>
+                         
                         </table>
                       </td>
                     </tr>

@@ -741,7 +741,52 @@ if (typeof NProgress != 'undefined') {
 				
 			});			
 		
-		}  
+		}
+
+		if ($('.canvasDoughnut_pago').length){
+		var costa_rica =  document.getElementById("costa_rica").value;
+		var nacional =  document.getElementById("nacional").value;
+		var san_jose =  document.getElementById("san_jose").value;		
+		var chart_doughnut_settings = {
+
+				type: 'doughnut',
+				tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+				data: {
+					labels: [
+						"Costa Rica",
+						"Nacional",
+						"San José",
+						
+					],
+					datasets: [{
+						data: [costa_rica, nacional, san_jose],
+						backgroundColor: [
+							"#BDC3C7",
+							"#9B59B6",
+							"#E74C3C",
+							
+						],
+						hoverBackgroundColor: [
+							"#BDC3C7",
+							"#9B59B6",
+							"#E74C3C",							
+						]
+					}]
+				},
+				options: { 
+					legend: false, 
+					responsive: false 
+				}
+			}
+		
+			$('.canvasDoughnut_pago').each(function(){
+				
+				var chart_element = $(this);
+				var chart_doughnut = new Chart( chart_element, chart_doughnut_settings);
+				
+			});			
+		
+		}    
 	   
 	}
 	   
@@ -5135,3 +5180,80 @@ function exportar(){
 
 
 /************************************************FORMULARIO******************************************/
+
+/************************************************CONTROL DE PAGOS************************************/
+
+function estadopago(str) {
+    
+
+    if (str == "Pagado") {
+        document.getElementById("respuesta_pago").innerHTML = '<div class="form-group" > '+
+                                  '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Inicio</label>'+
+                                  '<div class="col-sm-10 col-md-10 col-xs-12">'+
+                                    '<input type="date" name="fecha_inicio" class="form-control" > '+
+                                 '</div> '+
+                                   '</div>'+
+                              '<div class="form-group">'+
+                                  '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Banco</label>'+
+                                  '<div class="col-sm-10 col-md-10 col-xs-12">'+
+                                    '<select name="banco_pago" class="form-control" >'+
+                                       '<option value="">Seleccione</option>'+
+                                       '<option value="Costa Rica">Costa Rica</option>'+
+                                       '<option value="Nacional">Nacional</option>'+
+                                       '<option value="BAC SAN JOS&Eacute;">BAC SAN JOS&Eacute;</option>'+                                     
+                                    '</select>'+
+                                  '</div>'+
+                              '</div>'+
+
+                              '<div class="form-group">'+
+                                  '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Deposito</label>'+
+                                  '<div class="col-sm-10 col-md-10 col-xs-12">'+
+                                    '<input type="text" maxlength="10" required name="deposito" class="form-control" onKeyPress="return soloNumeros(event)" onKeyUp="pierdeFoco(this)" placeholder=" Ej:1548796795" >'+
+                                  '</div>'+
+                              '</div>';
+        return;
+    } else { 
+    	document.getElementById("respuesta_pago").innerHTML = '<div class="form-group" > '+
+                                  '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Inicio</label>'+
+                                  '<div class="col-sm-10 col-md-10 col-xs-12">'+
+                                    '<input type="date" class="form-control" disabled > '+
+                                 '</div> '+
+                                   '</div>'+
+                              '<div class="form-group">'+
+                                  '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Banco</label>'+
+                                  '<div class="col-sm-10 col-md-10 col-xs-12">'+
+                                    '<select  class="form-control" disabled >'+
+                                       '<option value="">Seleccione</option>'+
+                                       '<option value="Costa Rica">Costa Rica</option>'+
+                                       '<option value="Nacional">Nacional</option>'+
+                                       '<option value="BAC SAN JOS&Eacute;">BAC SAN JOS&Eacute;</option>'+                                     
+                                    '</select>'+
+                                  '</div>'+
+                              '</div>'+
+
+                              '<div class="form-group">'+
+                                  '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Deposito</label>'+
+                                  '<div class="col-sm-10 col-md-10 col-xs-12">'+
+                                    '<input type="text" class="form-control" disabled placeholder=" Ej:1548796795">'+
+                                  '</div>'+
+                              '</div>';
+        return;
+        
+    }
+  
+}
+
+/*VALIDAR NUMERO*/
+function soloNumeros(e) {
+   var key = window.Event ? e.which : e.keyCode;
+   return ((key >= 48 && key <= 57) ||(key==8))
+ }
+ 
+ function pierdeFoco(e){
+    var valor = e.value.replace(/^0*/, '');
+    e.value = valor;
+ }
+
+ /*VALIDAR NUMERO*/
+
+/************************************************CONTROL DE PAGOS************************************/

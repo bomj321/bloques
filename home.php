@@ -130,8 +130,11 @@ $url = explode(".", $ce);
                 <tr>
                   <th>C#</th>
                   <th>Nombre</th>
-                  <th>Cédula</th>                 
+                  <th>Cédula</th>                  
                   <th>Email</th>
+                  <th>Pago</th>
+                  <th>Banco</th>
+                  <th>#N Deposito</th>
                   <th>ClaveATV</th>
                   <th>Bloque</th>
                   <th>Acciones</th>
@@ -148,6 +151,9 @@ $url = explode(".", $ce);
                   <td ><?php  echo  $datos['Nombre'];?></td>
                   <td ><?php  echo  $datos['Cedula'];?></td>                  
                   <td ><?php  echo  $datos['Email'];?></td>
+                  <td ><?php  echo  $datos['estado_pago'];?></td>
+                  <td ><?php  echo  $datos['banco_pago'];?></td>
+                  <td ><?php  echo  $datos['deposito'];?></td>
                   <td ><?php  echo  $datos['ClaveATV'];?></td>
                   <td ><?php if($datos['Bloque'] == '1'){
                 echo '<span class="label label-success">Bloque1</span>';
@@ -196,8 +202,8 @@ echo
               </div>
 
               <div class="col-md-4 col-md-offset-2 col-sm-4 col-sm-offset-2 col-xs-12">
-                  <a href="https://es-la.facebook.com/" target="_blank" type="button" class="btn btn-primary"><i class="fa fa-address-book" aria-hidden="true"></i></a>
-                   <a href="https://www.google.co.ve" target="_blank" type="button" class="btn btn-primary"><i class="fa fa-address-card" ></i></a>
+                  <a href="https://es-la.facebook.com/" target="_blank" type="button" class="btn btn-primary"><i class="fa fa-address-book pull-right" aria-hidden="true"></i>N1</a>
+                   <a href="https://www.google.co.ve" target="_blank" type="button" class="btn btn-primary"><i class="fa fa-address-card pull-right" ></i>N2</a>
               </div>
             </div>
 		      	

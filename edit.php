@@ -15,7 +15,7 @@ session_start();
     <!-- Bootstrap -->
     <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="vendors/font-awesome/css/font-awesome.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
@@ -200,10 +200,10 @@ $img = explode("/", $tipo);
 $n=$img[1];
 if ($n=='png' || $n=='jpg' || $n=='jpeg') {
   # code...
-$image=$Cedula.'.'.$n;  
-move_uploaded_file($tmp, $carpeta.'/'.$Cedula.'.'.$n);
+$image=$imagen;  
+move_uploaded_file($tmp, $carpeta.'/'.$imagen);
 
-$archivos1= file_get_contents($carpeta.'/'.$Cedula.'.'.$n);
+$archivos1= file_get_contents($carpeta.'/'.$imagen);
 }else{
   echo '<script language="javascript">alert("La imagen principal no cumple con los formatos");
  window.location.href="home.php";</script>'; 
@@ -243,166 +243,194 @@ exit();
 
 					<form class="form-horizontal" enctype="multipart/form-data" class="form-horizontal" action="" method="post">
 
-						<input type="hidden" value="<?php  echo  $datos['Cedula'];?>" name="id_ced" id="id_ced" class="form-control" placeholder="Cedula" required>
-            <input type="hidden" value="<?php  echo  $datos['id'];?>" name="id" id="id" class="form-control" placeholder="Cedula" required>
+ <div class="row"><!--ROW PRIMERO-->         
+
+        <div class="col-md-6 col-sm-6 col-xs-12"><!--PRIMER COL-MD-6-->
+                          <center><h4>Informaci&oacute;n Personal</h4></center>
+
+        						<input type="hidden" value="<?php  echo  $datos['Cedula'];?>" name="id_ced" id="id_ced" class="form-control" placeholder="Cedula" required>
+                                <input type="hidden" value="<?php  echo  $datos['id'];?>" name="id" id="id" class="form-control" placeholder="Cedula" required>
 
 
-						<div class="form-group">
-						    <label for="inputEmail1" class="col-sm-2 col-md-2 col-xs-2 control-label">N&uacute;mero de Cliente</label>
-    							<div class="col-sm-7 col-md-7 col-xs-7">
-     								 <input type="text" class="form-control" id="inputEmail1" value="<?php  echo  $datos['numero_cliente'];?>" name="Numero_Cliente" placeholder="Numero de Cliente">
-							   </div>
-						</div>		
+        						<div class="form-group">
+        						    <label for="inputEmail1" class="col-sm-2 col-md-2 col-xs-12 control-label">N&uacute;mero de Cliente</label>
+            							<div class="col-sm-10 col-md-10 col-xs-12">
+             								 <input type="text" class="form-control" id="inputEmail1" value="<?php  echo  $datos['numero_cliente'];?>" name="Numero_Cliente" placeholder="Numero de Cliente">
+        							   </div>
+        						</div>		
 
 
-					  <div class="form-group">
-						    <label for="inputEmail2" class="col-sm-2 col-md-2 col-xs-2 control-label">C&eacute;dula</label>
-    							<div class="col-sm-7 col-md-7 col-xs-7">
-     								 <input type="text" class="form-control" id="inputEmail2" value="<?php  echo  $datos['Cedula'];?>" name="Cedula" placeholder="C&eacute;dula">
-							   </div>
-						</div>	
+        					  <div class="form-group">
+        						    <label for="inputEmail2" class="col-sm-2 col-md-2 col-xs-12 control-label">C&eacute;dula</label>
+            							<div class="col-sm-10 col-md-10 col-xs-12">
+             								 <input type="text" class="form-control" id="inputEmail2" value="<?php  echo  $datos['Cedula'];?>" name="Cedula" placeholder="C&eacute;dula">
+        							   </div>
+        						</div>	
 
 
-						<div class="form-group">
-						    <label for="inputEmail3" class="col-sm-2 col-md-2 col-xs-2 control-label">Nombre Completo</label>
-    							<div class="col-sm-7 col-md-7 col-xs-7">
-     								 <input name="Nombre" value="<?php  echo $datos['Nombre'];?>" type="text" class="form-control" id="inputEmail3" placeholder="Nombre Completo">
-							   </div>
-						</div>	
+        						<div class="form-group">
+        						    <label for="inputEmail3" class="col-sm-2 col-md-2 col-xs-12 control-label">Nombre Completo</label>
+            							<div class="col-sm-10 col-md-10 col-xs-12">
+             								 <input name="Nombre" value="<?php  echo $datos['Nombre'];?>" type="text" class="form-control" id="inputEmail3" placeholder="Nombre Completo">
+        							   </div>
+        						</div>	
 
 
-						<div class="form-group">
-						    <label for="inputEmail4" class="col-sm-2 col-md-2 col-xs-2 control-label">T&eacute;lefono</label>
-    							<div class="col-sm-7 col-md-7 col-xs-7">
-     								 <input name="Telefono" value="<?php  echo  $datos['Telefono'];?>" type="emtextail" class="form-control" id="inputEmail4" placeholder="Telefono">
-							   </div>
-						</div>	
+        						<div class="form-group">
+        						    <label for="inputEmail4" class="col-sm-2 col-md-2 col-xs-12 control-label">T&eacute;lefono</label>
+            							<div class="col-sm-10 col-md-10 col-xs-12">
+             								 <input name="Telefono" value="<?php  echo  $datos['Telefono'];?>" type="emtextail" class="form-control" id="inputEmail4" placeholder="Telefono">
+        							   </div>
+        						</div>	
 
 
-						<div class="form-group">
-						    <label for="inputEmail5" class="col-sm-2 col-md-2 col-xs-2 control-label">Email</label>
-    							<div class="col-sm-7 col-md-7 col-xs-7">
-     								 <input name="Email" value="<?php  echo  $datos['Email'];?>" type="text" class="form-control" id="inputEmail5" placeholder="Email">
-							   </div>
-						</div>
+        						<div class="form-group">
+        						    <label for="inputEmail5" class="col-sm-2 col-md-2 col-xs-12 control-label">Email</label>
+            							<div class="col-sm-10 col-md-10 col-xs-12">
+             								 <input name="Email" value="<?php  echo  $datos['Email'];?>" type="text" class="form-control" id="inputEmail5" placeholder="Email">
+        							   </div>
+        						</div>
 
 
-						<div class="form-group">
-						    <label for="proviv" class="col-sm-2 col-md-2 col-xs-2 control-label">Provincia</label>
-    							<div class="col-sm-7 col-md-7 col-xs-7">
-							            <select name="Provincia" class="form-control" id="proviv" onchange="provi(this.value)" required>
-							            <option value="<?php  echo  $datos['Provincia'];?>"><?php  echo  $datos['Provincia'];?></option>
-							             <?php
-							        while($datos1=mysqli_fetch_array($provi)){ ?>
-							              <option value="<?php  echo  $datos1['nom_provi'];?>"><?php  echo $datos1['nom_provi'];?></option>
-							              <?php } ?>
-							            </select>
-							   </div>
-						</div>
+        						<div class="form-group">
+        						    <label for="proviv" class="col-sm-2 col-md-2 col-xs-12 control-label">Provincia</label>
+            							<div class="col-sm-10 col-md-10 col-xs-12">
+        							            <select name="Provincia" class="form-control" id="proviv" onchange="provi(this.value)" required>
+        							            <option value="<?php  echo  $datos['Provincia'];?>"><?php  echo  $datos['Provincia'];?></option>
+        							             <?php
+        							        while($datos1=mysqli_fetch_array($provi)){ ?>
+        							              <option value="<?php  echo  $datos1['nom_provi'];?>"><?php  echo $datos1['nom_provi'];?></option>
+        							              <?php } ?>
+        							            </select>
+        							   </div>
+        						</div>
 
 
-						<div class="form-group">
-						    <label for="inputEmail7" class="col-sm-2 col-md-2 col-xs-2 control-label">Cant&oacute;n</label>
-    							<div class="col-sm-7 col-md-7 col-xs-7" id="provi">
+        						<div class="form-group">
+        						    <label for="inputEmail7" class="col-sm-2 col-md-2 col-xs-12 control-label">Cant&oacute;n</label>
+            							<div class="col-sm-10 col-md-10 col-xs-12" id="provi">
 
 
-    							  </div>
-						</div>
+            							  </div>
+        						</div>
 
 
-						 <div class="form-group">
-         					 <label class="col-sm-2 col-md-2 col-xs-2 control-label">Tiempo</label>
-						          <div class="col-sm-7 col-md-7 col-xs-7">
-						            <select name="Tiempo" class="form-control" required>									          
-						              <option value="<?php  echo  $datos['Tiempo'];?>"><?php  echo  $datos['Tiempo'];?></option>
-						            <option value="Mensual">Mensual</option>
-						              <option value="Anual">Anual</option>
-						            </select>
-						          </div>  
-       					 </div>
+        						 <div class="form-group">
+                 					 <label class="col-sm-2 col-md-2 col-xs-12 control-label">Tiempo</label>
+        						          <div class="col-sm-10 col-md-10 col-xs-12">
+        						            <select name="Tiempo" class="form-control" required>									          
+        						              <option value="<?php  echo  $datos['Tiempo'];?>"><?php  echo  $datos['Tiempo'];?></option>
+        						            <option value="Mensual">Mensual</option>
+        						              <option value="Anual">Anual</option>
+        						            </select>
+        						          </div>  
+               					 </div>
 
 
-						<div class="form-group">
-				          <label class="col-sm-2 col-md-2 col-xs-2 control-label">Bloque</label>
-				          <div class="col-sm-7 col-md-7 col-xs-7">
-				            <select name="Bloque" class="form-control" required>
-				            	<?php 
-				            		if ($datos['Bloque']==5) {
-				            			$bloque='Pendiente';				            		
-				            	 ?>
-									<option value="<?php  echo  $datos['Bloque'];?>"><?php  echo  $bloque;?></option>		
-				            	 <?php 
-				            	 	}elseif($datos['Bloque']==6){
-				            	 		$bloque='Cancelado';
-				            	  ?>
-					               <option value="<?php  echo  $datos['Bloque'];?>"><?php  echo  $bloque;?></option>
-				            	  <?php 
-				            	  	}else{
+        						<div class="form-group">
+        				          <label class="col-sm-2 col-md-2 col-xs-12 control-label">Bloque</label>
+        				          <div class="col-sm-10 col-md-10 col-xs-12">
+        				            <select name="Bloque" class="form-control" required>
+        				            	<?php 
+        				            		if ($datos['Bloque']==5) {
+        				            			$bloque='Pendiente';				            		
+        				            	 ?>
+        									<option value="<?php  echo  $datos['Bloque'];?>"><?php  echo  $bloque;?></option>		
+        				            	 <?php 
+        				            	 	}elseif($datos['Bloque']==6){
+        				            	 		$bloque='Cancelado';
+        				            	  ?>
+        					               <option value="<?php  echo  $datos['Bloque'];?>"><?php  echo  $bloque;?></option>
+        				            	  <?php 
+        				            	  	}else{
 
-				            	   ?>
-					               <option value="<?php  echo  $datos['Bloque'];?>"><?php  echo  $datos['Bloque'];?></option>
+        				            	   ?>
+        					               <option value="<?php  echo  $datos['Bloque'];?>"><?php  echo  $datos['Bloque'];?></option>
 
-				            	   <?php 
-				            	   	}
-				            	    ?>						                          
-				               <option value="1">Bloque1</option>
-				               <option value="2">Bloque2</option>
-				               <option value="3">Bloque3</option>
-				               <option value="4">Bloque4</option>
-				               <option value="Pendiente">Pendiente</option>
-				               <option value="Cancelado">Cancelado</option>
-				               </select>
-				          </div>
-                     </div>
-
-
-						<div class="form-group">
-			                <label class="col-sm-2 col-md-2 col-xs-2 control-label">Plan</label>
-				           <div class="col-sm-7 col-md-7 col-xs-7">
-					            <select name="Plan" class="form-control" id="proviv" required>
-					            <option value="<?php  echo  $datos['Plan'];?>"><?php  echo  $datos['Plan'];?></option>
-					             <?php
-					              while($datos2=mysqli_fetch_array($plane)){ ?>
-					              <option value="<?php  echo  $datos2['nom_plan'];?>"><?php  echo $datos2['nom_plan'];?></option>
-					              <?php } ?>
-					            </select>
-			         	 </div>
-            			</div>
+        				            	   <?php 
+        				            	   	}
+        				            	    ?>						                          
+        				               <option value="1">Bloque1</option>
+        				               <option value="2">Bloque2</option>
+        				               <option value="3">Bloque3</option>
+        				               <option value="4">Bloque4</option>
+        				               <option value="Pendiente">Pendiente</option>
+        				               <option value="Cancelado">Cancelado</option>
+        				               </select>
+        				          </div>
+                             </div>
 
 
-						 <div class="form-group">
-				          		<label class="col-sm-2 col-md-2 col-xs-2 control-label">CLAVE ATV</label>
-					          <div class="col-sm-7 col-md-7 col-xs-7">
-					            <input type="text" name="ClaveATV" value="<?php  echo  $datos['ClaveATV'];?>" class="form-control" placeholder="ClaveATV" required>
-					          </div>
-       					 </div>
+        						<div class="form-group">
+        			                <label class="col-sm-2 col-md-2 col-xs-12 control-label">Plan</label>
+        				           <div class="col-sm-10 col-md-10 col-xs-12">
+        					            <select name="Plan" class="form-control" id="proviv" required>
+        					            <option value="<?php  echo  $datos['Plan'];?>"><?php  echo  $datos['Plan'];?></option>
+        					             <?php
+        					              while($datos2=mysqli_fetch_array($plane)){ ?>
+        					              <option value="<?php  echo  $datos2['nom_plan'];?>"><?php  echo $datos2['nom_plan'];?></option>
+        					              <?php } ?>
+        					            </select>
+        			         	 </div>
+                    			</div>
 
 
-		       			<div class="form-group">
-				             <label class="col-sm-2 col-md-2 col-xs-2 control-label">Credenciales</label>
-				     	     <p style="margin-left: 0.8em;" class="btn btn-sm btn-danger col-xs-5 col-md-2 col-sm-2" id="b-credi" onclick="mostrar()">Editar Credenciales</p>
-				       		 <label class="btn btn-sm btn-danger" style="display: none;" id="btcredi" onclick="mostrart()">X</label>
-					         <div class="col-sm-7 col-md-7 col-xs-12" style="display: none;" id="credi">
-					            <input type="file" name="img_emple" class="form-control" >
-					         </div>
-        			  </div>
+        						 <div class="form-group">
+        				          		<label class="col-sm-2 col-md-2 col-xs-12 control-label">CLAVE ATV</label>
+        					          <div class="col-sm-10 col-md-10 col-xs-12">
+        					            <input type="text" name="ClaveATV" value="<?php  echo  $datos['ClaveATV'];?>" class="form-control" placeholder="ClaveATV" required>
+        					          </div>
+               					 </div>
 
-        			  <div class="col-md-10 col-sm-10 col-xs-10" style="margin-bottom: 2em;">
+                        <div class="form-group">
+                             <label class="col-sm-2 col-md-2 col-xs-12 control-label">Credenciales</label>
+                           <p style="margin-left: 0.8em;" class="btn btn-sm btn-danger col-xs-12 col-md-5 col-sm-5" id="b-credi" onclick="mostrar()">Editar Credenciales</p>
+                           <label class="btn btn-sm btn-danger" style="display: none;" id="btcredi" onclick="mostrart()">X</label>
+                           <div class="col-sm-9 col-md-9 col-xs-10" style="display: none;" id="credi">
+                              <input type="file" name="img_emple" class="form-control" >
+                           </div>
+                        </div>   
+
+
+
+            </div><!--PRIMER COL-MD-6-->
+            
+            <div class="col-md-6 col-sm-6 col-xs-12"><!--SEGUNDO COL-MD-6-->
+                        <center><h4>Control de Pagos</h4></center>
+
+               </div> <!--SEGUNDO COL-MD-6-->  
+               
+</div><!--ROW PRIMERO-->       
+
+		       		
+
+
+
+
+
+
+
+
+            <div class="row"><!--ROW SEGUNDO-->
+        			  <div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 2em;">
                       <center>
 				           <a href="img-credenciales/<?php echo $datos['img_emple']; ?>"><img id="" src="img-credenciales/<?php echo $datos['img_emple']; ?>" alt="Credenciales " style="width: 70%;" height="300"></a>
                       </center>
 				        </div>
-
-        
+           </div><!--ROW SEGUNDO--> 
+     
 		       
+          <div class="row"><!--ROW TERCERO--> 
 
-		          <div class="form-group">
-			          <label class="col-sm-4 col-xs-3 control-label col-lg-4 col-md-4">&nbsp;</label>
-			          <div class="col-sm-6">
-			            <input type="submit" name="add" class="btn btn-sm btn-primary" value="Guardar datos">
-			            <a href="home.php" class="btn btn-sm btn-danger">Cancelar</a>
-			          </div>
-        		</div>
+    		          <div class="col-md-12  col-sm-12  col-xs-12">
+                        <center>
+    			            <input type="submit" name="add" class="btn btn-sm btn-primary" value="Guardar datos">
+    			            <a href="home.php" class="btn btn-sm btn-danger">Cancelar</a>
+                        </center>
+            		</div>
+           </div><!--ROW TERCERO--> 
+
+
 		</form>
 					
 
