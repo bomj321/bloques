@@ -10,7 +10,7 @@ error_reporting(7); //esto debe ir en la primera linea
 include('class.ezpdf.php');
 
 
-  $sql=("SELECT * FROM empleados WHERE estado_pago='pagado' ORDER BY numero_cliente ASC");
+  $sql=("SELECT * FROM empleados ORDER BY numero_cliente ASC");
  
 
 $pagos =mysqli_query($con,$sql);
@@ -26,8 +26,6 @@ $titulo[5]='Banco';
 $titulo[6]=utf8_decode('Número de Depósito');
 
 
-                 
-
 
 //valores de la tabla
 while($row=mysqli_fetch_array($pagos)){
@@ -35,9 +33,7 @@ while($row=mysqli_fetch_array($pagos)){
   $registro[$titulo[1]]= utf8_decode($row['Cedula']);
   $registro[$titulo[2]]= utf8_decode($row['Nombre']);
   $registro[$titulo[3]]= utf8_decode($row['fecha_inicio']);
-  $time = strtotime($row['fecha_pago']);
-  $myFormatForView = date("Y-m-d g:i A", $time);
-  $registro[$titulo[4]]= $myFormatForView;
+  $registro[$titulo[4]]= utf8_decode($row['fecha_pago']);
   $registro[$titulo[5]]= utf8_decode($row['banco_pago']);
   $registro[$titulo[6]]= utf8_decode($row['deposito']);
 
@@ -77,13 +73,13 @@ $la=array('showHeadings'=>1, // Mostrar encabezados
 'height'=>700,
 'maxHeight'=>900, // Ancho Máximo de la tabla
 'xOrientation'=>center, // Orientación de la tabla
-'cols'=>array('Id del Cliente'=>array('justification'=>'center','width'=>42),
+'cols'=>'Id del Cliente'=>array('justification'=>'center','width'=>42),
          utf8_decode('Cédula')=>array('justification'=>'center','width'=>70),
          'Nombre del Cliente'=>array('justification'=>'center','width'=>70),
-         'Fecha de Inicio'=>array('justification'=>'center','width'=>70),
-         'Fecha del Pago'=>array('justification'=>'center','width'=>95),
-         'Banco'=>array('justification'=>'center','width'=>60),
-          utf8_decode('Número de Depósito')=>array('justification'=>'center','width'=>70)
+         'Fecha de Inicio'=>array('justification'=>'center','width'=>50),
+         'Fecha del Pago'=>array('justification'=>'center','width'=>50),
+      'Banco'=>array('justification'=>'center','width'=>60),
+       utf8_decode('Número de Depósito')=>array('justification'=>'center','width'=>50)
 
       )
       );

@@ -13,7 +13,7 @@ include('class.ezpdf.php');
 
 $Bloque=$_POST['Bloque'];
 
-  $sql=("SELECT *FROM empleados WHERE Bloque='$Bloque' ORDER BY Nombre ASC 
+  $sql=("SELECT * FROM empleados WHERE Bloque='$Bloque' ORDER BY Nombre ASC 
 ");
 
 $user =mysqli_query($con,$sql);
