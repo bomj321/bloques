@@ -1,4 +1,5 @@
-<?php 
+<?php
+error_reporting(E_ALL ^ E_NOTICE); 
 date_default_timezone_set('America/Costa_Rica');
 session_start();
 ?>
@@ -156,30 +157,33 @@ $provi =mysqli_query($con,$sql1);
         $ClaveATV         =    mysqli_real_escape_string($con,(strip_tags($_POST["ClaveATV"],ENT_QUOTES)));//Escanpando caracteres
 
         $estado_pago      =    mysqli_real_escape_string($con,(strip_tags($_POST["estado_pago"],ENT_QUOTES)));//Escanpando caracteres
-        if (empty($fecha_inicio)) {
-            $fecha_inicio= "";
-        }else{
-        $fecha_inicio     =    mysqli_real_escape_string($con,(strip_tags($_POST["fecha_inicio"],ENT_QUOTES)));//Escanpando caracteres
-        }
-         if (empty($banco_pago)) {
-            $banco_pago= "";
+       /*$fecha_pago       =    mysqli_real_escape_string($con,(strip_tags($_POST["fecha_pago"],ENT_QUOTES)));//Escanpando caracteres*/
+        /*$banco_pago       =    mysqli_real_escape_string($con,(strip_tags($_POST["banco_pago"],ENT_QUOTES)));//Escanpando caracteres*/
+        /*$deposito         =    mysqli_real_escape_string($con,(strip_tags($_POST["deposito"],ENT_QUOTES)));//Escanpando caracteres*/
+
+        
+        $fecha_inicio   =    date("Y-m-d H:i:s");
+
+
+         if (empty( mysqli_real_escape_string($con,(strip_tags($_POST["banco_pago"],ENT_QUOTES))))) {
+            $banco_pago= "No Pagado";
         }else{
 
         $banco_pago       =    mysqli_real_escape_string($con,(strip_tags($_POST["banco_pago"],ENT_QUOTES)));//Escanpando caracteres
         }
 
 
-        if (empty($deposito)) {
-            $deposito= "";
+        if (empty(mysqli_real_escape_string($con,(strip_tags($_POST["deposito"],ENT_QUOTES))))) {
+            $deposito= "No Pagado";
         }else{
         $deposito         =    mysqli_real_escape_string($con,(strip_tags($_POST["deposito"],ENT_QUOTES)));//Escanpando caracteres
         }
 
         
-        if ($estado_pago=='Pagado') {
-            $fecha_pago   =    date("Y-m-d H:i:s");
+        if (empty(mysqli_real_escape_string($con,(strip_tags($_POST["fecha_pago"],ENT_QUOTES))))) {//Escanpando caracteres)) {
+            $fecha_pago  = 'No Pagado'  ;
         }else{
-             $fecha_pago  = 'No Pagado'  ;
+            $fecha_pago  =    mysqli_real_escape_string($con,(strip_tags($_POST["fecha_pago"],ENT_QUOTES)));//Escanpando caracteres
         }
        
         
@@ -210,7 +214,7 @@ exit();
 }
 
         $cek = mysqli_query($con, "SELECT * FROM empleados WHERE Cedula='$Cedula'");
-        $numero_pago = mysqli_query($con, "SELECT * FROM empleados WHERE deposito='$deposito'");
+        $numero_pago = mysqli_query($con, "SELECT * FROM empleados WHERE deposito='$deposito' AND deposito!='' AND deposito!='No Pagado'");
 
         if(mysqli_num_rows($cek) == 0 AND mysqli_num_rows($numero_pago)==0 ){
             $insert = mysqli_query($con, "INSERT INTO empleados(Cedula,numero_cliente, Nombre, Telefono, Email, Provincia, Canton, Tiempo, Bloque,Plan, ClaveATV,img_emple,estado_pago,fecha_inicio,banco_pago,deposito,fecha_pago)
@@ -372,9 +376,8 @@ exit();
                                 <label class="col-sm-2 col-md-2 col-xs-12 control-label">Pago</label>
                                   <div  class="col-sm-10 col-md-10 col-xs-12">
                                     <select name="estado_pago" id="estado_pago" class="form-control" onchange="estadopago(this.value)" required>
-                                       <option value="">Seleccione</option>
-                                       <option value="Pagado">Pagado</option>
-                                       <option value="Pendiente">Pendiente</option>                                     
+                                      <option value="Pendiente">Pendiente</option>    
+                                       <option value="Pagado">Pagado</option>                                                                        
                                     </select>
                                    </div> 
                             </div>
@@ -382,7 +385,7 @@ exit();
 
                             <div id="respuesta_pago"><!--CAMPOS A LLENAR-->                                
                               <div class="form-group" >
-                                  <label class="col-sm-2 col-md-2 col-xs-12 control-label">Inicio</label>
+                                  <label class="col-sm-2 col-md-2 col-xs-12 control-label">Fecha de Pago</label>
                                   <div class="col-sm-10 col-md-10 col-xs-12" >
                                     <input type="date" class="form-control" disabled>
                                   </div>

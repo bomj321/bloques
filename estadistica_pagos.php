@@ -108,14 +108,23 @@ include('conexion.php');
                         $pagado = mysqli_query($con, "SELECT * FROM empleados WHERE estado_pago='Pagado'");
                               $pagado_row= mysqli_num_rows($pagado);
 
-                        $costa_rica = mysqli_query($con, "SELECT * FROM empleados WHERE banco_pago='Costa Rica'");
+                        $costa_rica = mysqli_query($con, "SELECT * FROM empleados WHERE banco_pago='Costa Rica' AND estado_pago='Pagado'");
                               $costa_rica_row= mysqli_num_rows($costa_rica);
 
-                        $nacional = mysqli_query($con, "SELECT * FROM empleados WHERE banco_pago='Nacional'");
+                        /*$costa_rica_nopago = mysqli_query($con, "SELECT * FROM empleados WHERE banco_pago='Costa Rica' AND estado_pago='Pendiente'");
+                              $costa_rica_nopago_row= mysqli_num_rows($costa_rica_nopago);   */   
+
+                       $nacional = mysqli_query($con, "SELECT * FROM empleados WHERE banco_pago='Nacional' AND estado_pago='Pagado'");
                               $nacional_row= mysqli_num_rows($nacional);
 
-                        $san_jose = mysqli_query($con, "SELECT * FROM empleados WHERE banco_pago='BAC San José'");
+                         /*$nacional_nopago = mysqli_query($con, "SELECT * FROM empleados WHERE banco_pago='Nacional' AND estado_pago='Pendiente'");
+                              $nacional_nopago_row= mysqli_num_rows($nacional_nopago);  */    
+
+                        $san_jose = mysqli_query($con, "SELECT * FROM empleados WHERE banco_pago='BAC San José' AND estado_pago='Pagado'");
                               $san_jose_row= mysqli_num_rows($san_jose);
+
+                        /*$san_jose_nopago = mysqli_query($con, "SELECT * FROM empleados WHERE banco_pago='BAC San José' AND estado_pago='Pendiente'");
+                              $san_jose_nopago_row= mysqli_num_rows($san_jose_nopago); */
 
                               /*MES ACTUAL*/
 								$mesactual = date("m");
@@ -126,11 +135,31 @@ include('conexion.php');
 							/*MES ACTUAL*/
 							$total_clientes= $costa_rica_row+$nacional_row+$san_jose_row;
                             $porcentaje_costa_rica =($costa_rica_row/$total_clientes)*100;
+
                             $porcentaje_nacional =($nacional_row/$total_clientes)*100;
+
+
                             $porcentaje_san_jose =($san_jose_row/$total_clientes)*100;
                        
                       /*$total=  $bloque1_row+ $bloque2_row+ $bloque3_row+ $bloque4_row+ $bloque5_row+ $bloque6_row; */
-                    
+
+
+
+                    /*SQL PARA BUSCAR TODOS LOS CLIENTES*/
+                            $costa_rica_todo = mysqli_query($con, "SELECT * FROM empleados WHERE banco_pago='Costa Rica'");
+                              $costa_rica_todo_row= mysqli_num_rows($costa_rica_todo);
+
+                            $nacional_todo = mysqli_query($con, "SELECT * FROM empleados WHERE banco_pago='Nacional'");
+                              $nacional_todo_row= mysqli_num_rows($nacional_todo);
+
+                             $san_jose_todo = mysqli_query($con, "SELECT * FROM empleados WHERE banco_pago='BAC San José'");
+                              $san_jose_todo_row= mysqli_num_rows($san_jose_todo);  
+
+                            $total_clientes_todo= $costa_rica_todo_row+$nacional_todo_row+$san_jose_todo_row;
+                            $porcentaje_costa_rica_todo =($costa_rica_todo_row/$total_clientes_todo)*100;
+                            $porcentaje_nacional_todo =($nacional_todo_row/$total_clientes_todo)*100;
+                            $porcentaje_san_jose_todo =($san_jose_todo_row/$total_clientes_todo)*100;  
+                    /*SQL PARA BUSCAR TODOS LOS CLIENTES*/
                                    
                       ?>
                           <!--CONSULTAS SQL-->
@@ -149,17 +178,17 @@ include('conexion.php');
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-handshake-o" style="margin-right: 2px;"></i>Costa Rica</span>
-              <div class="count"><?php echo $costa_rica_row; ?></div>
+              <div class="count"><?php echo round($porcentaje_costa_rica_todo).'%'; ?></div>
               <span class="count_top">Clientes</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-handshake-o" style="margin-right: 2px;"></i>Nacional</span>
-              <div class="count"><?php echo $nacional_row; ?></div>
+              <div class="count"><?php echo round($porcentaje_nacional_todo).'%'; ?></div>
               <span class="count_top">Clientes</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-handshake-o" style="margin-right: 2px;"></i>BAC San Jos&eacute;</span>
-              <div class="count"><?php echo $san_jose_row; ?></div>
+              <div class="count"><?php echo round($porcentaje_san_jose_todo).'%'; ?></div>
               <span class="count_top">Clientes</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
@@ -171,9 +200,8 @@ include('conexion.php');
           <!-- /top tiles -->
 
           <!--INPUT OCULTOS-->
-                            <input type="hidden" value=" <?php echo $costa_rica_row; ?>" id="costa_rica"> 
-                            <input type="hidden" value="<?php echo $nacional_row; ?>" id="nacional"> 
-                            <input type="hidden" value="<?php echo $san_jose_row; ?>" id="san_jose">
+                            <input type="hidden" value=" <?php echo $pendiente_row; ?>" id="pendiente_row"> 
+                            <input type="hidden" value="<?php echo $pagado_row; ?>" id="pagado_row"> 
                             
 
           <!--INPUT OCULTOS CIERRO -->
@@ -183,7 +211,7 @@ include('conexion.php');
 
               <div class="x_panel tile fixed_height_320 overflow_hidden">
                 <div class="x_title">
-                  <h2>Porcentaje por Bloques</h2>
+                  <h2>Porcentaje por Bancos</h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>                    
@@ -199,7 +227,7 @@ include('conexion.php');
                       </th>
                       <th>
                         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-7">
-                          <p class="">Bloque</p>
+                          <p class="">Banco</p>
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-5" style="margin-left: -1.5em;">
                           <p class="">Porcentaje</p>
@@ -214,22 +242,26 @@ include('conexion.php');
                         <table class="tile_info">
                           <tr>
                             <td>
-                              <p><i class="fa fa-square aero"></i>Costa Rica</p>
+                              <p><i class="fa fa-square aero"></i>Pagado Costa Rica</p>
                             </td>
                             <td><?php echo round($porcentaje_costa_rica); ?>%</td>
                           </tr>
+                           
                           <tr>
                             <td>
-                              <p><i class="fa fa-square purple"></i>Nacional</p>
+                              <p><i class="fa fa-square purple"></i>Pagado Nacional</p>
                             </td>
                             <td><?php echo round($porcentaje_nacional); ?>%</td>
                           </tr>
+                         
+
                           <tr>
                             <td>
-                              <p><i class="fa fa-square red"></i>San Jos&eacute;</p>
+                              <p><i class="fa fa-square red"></i>Pagado San Jos&eacute;</p>
                             </td>
                             <td><?php echo round($porcentaje_san_jose); ?>%</td>
                           </tr>
+                           
                          
                         </table>
                       </td>

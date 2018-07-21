@@ -113,7 +113,9 @@ $user =mysqli_query($con,$sql);
                   <th>Nombre</th>
                   <th>Cédula</th>                  
                   <th>Email</th>
+                  <th>Inicio</th>
                   <th>Pago</th>
+                  <th>Fecha del Pago</th>                 
                   <th>Banco</th>
                   <th>#N Deposito</th>
                   <th>ClaveATV</th>
@@ -125,14 +127,30 @@ $user =mysqli_query($con,$sql);
                 <tbody>
                   <?php
         while($datos=mysqli_fetch_array($user)){ 
-                
+                $time = strtotime($datos['fecha_inicio']);
+                $myFormatForView = date("Y-m-d g:i A", $time);
         ?>
-                <tr>
+                <tr
+                  <?php 
+                    if ($datos['fecha_pago']=='No Pagado') {
+                   ?>
+                   style="background-color: #ffd9cc;"
+                    <?php 
+                      }else{
+                     ?>
+                        style="background-color: #ccffe6;"
+                     <?php 
+                        }
+                      ?>
+
+                >
                   <td ><?php  echo  $datos['numero_cliente'];?></td>
                   <td ><?php  echo  $datos['Nombre'];?></td>
                   <td ><?php  echo  $datos['Cedula'];?></td>                  
                   <td ><?php  echo  $datos['Email'];?></td>
-                  <td ><?php  echo  $datos['estado_pago'];?></td>
+                  <td ><?php  echo  $myFormatForView?></td>
+                  <td ><?php  echo  $datos['estado_pago'];?></td>                  
+                  <td ><?php  echo  $datos['fecha_pago'];?></td>                  
                   <td ><?php  echo  $datos['banco_pago'];?></td>
                   <td ><?php  echo  $datos['deposito'];?></td>
                   <td ><?php  echo  $datos['ClaveATV'];?></td>

@@ -132,7 +132,9 @@ $url = explode(".", $ce);
                   <th>Nombre</th>
                   <th>Cédula</th>                  
                   <th>Email</th>
+                  <th>Inicio</th>
                   <th>Pago</th>
+                  <th>Fecha del Pago</th>                 
                   <th>Banco</th>
                   <th>#N Deposito</th>
                   <th>ClaveATV</th>
@@ -144,14 +146,32 @@ $url = explode(".", $ce);
                 <tbody>
                   <?php
         while($datos=mysqli_fetch_array($user)){ 
-                
-        ?>
-                <tr>
+              
+                $time = strtotime($datos['fecha_inicio']);
+                $myFormatForView = date("Y-m-d g:i A", $time);
+            
+                      ?>
+                <tr
+                  <?php 
+                    if ($datos['fecha_pago']=='No Pagado') {
+                   ?>
+                   style="background-color: #ffd9cc;"
+                    <?php 
+                      }else{
+                     ?>
+                        style="background-color: #ccffe6;"
+                     <?php 
+                        }
+                      ?>
+
+                >
                   <td ><?php  echo  $datos['numero_cliente'];?></td>
                   <td ><?php  echo  $datos['Nombre'];?></td>
                   <td ><?php  echo  $datos['Cedula'];?></td>                  
                   <td ><?php  echo  $datos['Email'];?></td>
-                  <td ><?php  echo  $datos['estado_pago'];?></td>
+                  <td ><?php  echo  $myFormatForView?></td>
+                  <td ><?php  echo  $datos['estado_pago'];?></td>                  
+                  <td ><?php  echo  $datos['fecha_pago'];?></td>                  
                   <td ><?php  echo  $datos['banco_pago'];?></td>
                   <td ><?php  echo  $datos['deposito'];?></td>
                   <td ><?php  echo  $datos['ClaveATV'];?></td>
@@ -202,8 +222,8 @@ echo
               </div>
 
               <div class="col-md-4 col-md-offset-2 col-sm-4 col-sm-offset-2 col-xs-12">
-                  <a href="https://es-la.facebook.com/" target="_blank" type="button" class="btn btn-primary"><i class="fa fa-address-book pull-right" aria-hidden="true"></i>N1</a>
-                   <a href="https://www.google.co.ve" target="_blank" type="button" class="btn btn-primary"><i class="fa fa-address-card pull-right" ></i>N2</a>
+                  <a href="https://es-la.facebook.com/" target="_blank" type="button" class="btn btn-primary"><i class="fa fa-newspaper-o pull-right" aria-hidden="true"></i>N1</a>
+                   <a href="https://www.google.co.ve" target="_blank" type="button" class="btn btn-primary"><i class="fa fa-group pull-right" ></i>N2</a>
               </div>
             </div>
 		      	
@@ -242,7 +262,23 @@ echo
 
                 <div class="form-group">
                   <label for="exampleInputEmail1">Credenciales</label>
- 					<a href="img-credenciales/<?php echo $datos['img_emple']; ?>"><img id="" src="img-credenciales/<?php echo $datos['img_emple']; ?>" alt="Credenciales" style="width: 100%;" height="300"></a>
+
+
+
+ 					<?php 
+                            if (empty($datos['img_emple'])) {                       /////////////////////CONDICIONAL PARA LAS FOTOS 
+                         ?>
+
+                     <a href="img-credenciales/<?php echo $datos['img_emple']; ?>"><img id="" src="img-credenciales/atvpendiente.jpg" alt="Credenciales" style="width: 100%;" height="300"></a>
+
+                      <?php 
+                        }else{
+                       ?>
+                         <a href="img-credenciales/<?php echo $datos['img_emple']; ?>"><img id="" src="img-credenciales/<?php echo $datos['img_emple']; ?>" alt="Credenciales" style="width: 100%;" height="300"></a>
+
+                       <?php 
+                            }
+                        ?>
                 </div>
 
 

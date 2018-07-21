@@ -10,7 +10,7 @@ error_reporting(7); //esto debe ir en la primera linea
 include('class.ezpdf.php');
 
 
-  $sql=("SELECT * FROM empleados WHERE estado_pago='pagado' ORDER BY numero_cliente ASC");
+  $sql=("SELECT * FROM empleados WHERE estado_pago='pagado' OR estado_pago='pendiente' ORDER BY numero_cliente ASC");
  
 
 $pagos =mysqli_query($con,$sql);
@@ -34,9 +34,18 @@ while($row=mysqli_fetch_array($pagos)){
   $registro[$titulo[0]]= utf8_decode($row['id']);
   $registro[$titulo[1]]= utf8_decode($row['Cedula']);
   $registro[$titulo[2]]= utf8_decode($row['Nombre']);
-  $registro[$titulo[3]]= utf8_decode($row['fecha_inicio']);
-  $time = strtotime($row['fecha_pago']);
-  $myFormatForView = date("Y-m-d g:i A", $time);
+
+  $time_inicio = strtotime($row['fecha_inicio']);
+  $myFormatForView_inicio = date("Y-m-d g:i A", $time_inicio);
+  $registro[$titulo[3]]= $myFormatForView_inicio; 
+
+   if ($row['fecha_pago']=='No Pagado') {
+                 $myFormatForView ='No Pagado';
+
+              }elseif($$row['fecha_pago']!='No Pagado'){
+                $time = strtotime($row['fecha_pago']);
+                $myFormatForView = date("Y-m-d", $time);
+              }           
   $registro[$titulo[4]]= $myFormatForView;
   $registro[$titulo[5]]= utf8_decode($row['banco_pago']);
   $registro[$titulo[6]]= utf8_decode($row['deposito']);
@@ -78,12 +87,12 @@ $la=array('showHeadings'=>1, // Mostrar encabezados
 'maxHeight'=>900, // Ancho Máximo de la tabla
 'xOrientation'=>center, // Orientación de la tabla
 'cols'=>array('Id del Cliente'=>array('justification'=>'center','width'=>42),
-         utf8_decode('Cédula')=>array('justification'=>'center','width'=>70),
+         utf8_decode('Cédula')=>array('justification'=>'center','width'=>50),
          'Nombre del Cliente'=>array('justification'=>'center','width'=>70),
-         'Fecha de Inicio'=>array('justification'=>'center','width'=>70),
-         'Fecha del Pago'=>array('justification'=>'center','width'=>95),
-         'Banco'=>array('justification'=>'center','width'=>60),
-          utf8_decode('Número de Depósito')=>array('justification'=>'center','width'=>70)
+         'Fecha de Inicio'=>array('justification'=>'center','width'=>90),
+         'Fecha del Pago'=>array('justification'=>'center','width'=>70),
+         'Banco'=>array('justification'=>'center','width'=>80),
+          utf8_decode('Número de Depósito')=>array('justification'=>'center','width'=>65)
 
       )
       );

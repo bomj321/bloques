@@ -744,32 +744,29 @@ if (typeof NProgress != 'undefined') {
 		}
 
 		if ($('.canvasDoughnut_pago').length){
-		var costa_rica =  document.getElementById("costa_rica").value;
-		var nacional =  document.getElementById("nacional").value;
-		var san_jose =  document.getElementById("san_jose").value;		
+		var pendiente_row =  document.getElementById("pendiente_row").value;
+		var pagado_row =  document.getElementById("pagado_row").value;
+		
 		var chart_doughnut_settings = {
 
 				type: 'doughnut',
 				tooltipFillColor: "rgba(51, 51, 51, 0.55)",
 				data: {
 					labels: [
-						"Costa Rica",
-						"Nacional",
-						"San José",
+						"No Pagados",
+						"Pagados",						
 						
 					],
 					datasets: [{
-						data: [costa_rica, nacional, san_jose],
+						data: [pendiente_row, pagado_row],
 						backgroundColor: [
-							"#BDC3C7",
-							"#9B59B6",
-							"#E74C3C",
+							"#D84738",
+							"#3497D9",
 							
 						],
 						hoverBackgroundColor: [
-							"#BDC3C7",
-							"#9B59B6",
-							"#E74C3C",							
+							"#D84738",
+							"#3497D9",
 						]
 					}]
 				},
@@ -5188,15 +5185,15 @@ function estadopago(str) {
 
     if (str == "Pagado") {
         document.getElementById("respuesta_pago").innerHTML = '<div class="form-group" > '+
-                                  '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Inicio</label>'+
+                                  '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Fecha de Pago</label>'+
                                   '<div class="col-sm-10 col-md-10 col-xs-12">'+
-                                    '<input type="date" name="fecha_inicio" class="form-control" > '+
+                                    '<input required type="date" name="fecha_pago" class="form-control" > '+
                                  '</div> '+
                                    '</div>'+
                               '<div class="form-group">'+
                                   '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Banco</label>'+
                                   '<div class="col-sm-10 col-md-10 col-xs-12">'+
-                                    '<select name="banco_pago" class="form-control">'+
+                                    '<select required name="banco_pago" class="form-control">'+
                                        '<option value="">Seleccione</option>'+
                                        '<option value="Costa Rica">Costa Rica</option>'+
                                        '<option value="Nacional">Nacional</option>'+
@@ -5208,13 +5205,13 @@ function estadopago(str) {
                               '<div class="form-group">'+
                                   '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Deposito</label>'+
                                   '<div class="col-sm-10 col-md-10 col-xs-12">'+
-                                    '<input type="text" maxlength="10" required name="deposito" class="form-control" onKeyPress="return soloNumeros(event)" onKeyUp="pierdeFoco(this)" placeholder=" Ej:1548796795" >'+
+                                    '<input type="text" required maxlength="10" required name="deposito" class="form-control" onKeyPress="return soloNumeros(event)" onKeyUp="pierdeFoco(this)" placeholder=" Ej:1548796795" >'+
                                   '</div>'+
                               '</div>';
         return;
     } else { 
     	document.getElementById("respuesta_pago").innerHTML = '<div class="form-group" > '+
-                                  '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Inicio</label>'+
+                                  '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Fecha de Pago</label>'+
                                   '<div class="col-sm-10 col-md-10 col-xs-12">'+
                                     '<input type="date" class="form-control" disabled > '+
                                  '</div> '+
@@ -5245,21 +5242,21 @@ function estadopago(str) {
 
 
 function estadopago_edit(str) {
-  	var fecha_inicio_edit= document.getElementById('fecha_inicio_edit').value;
+  	var fecha_pago_edit= document.getElementById('fecha_pago_edit').value;
   	var deposito_edit= document.getElementById('deposito_edit').value;
   	var banco_pago_edit= document.getElementById('banco_pago_edit').value;
 
     if (str == "Pagado") {
         document.getElementById("respuesta_pago_edit").innerHTML = '<div class="form-group" > '+
-                                  '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Inicio</label>'+
+                                  '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Fecha de Pago</label>'+
                                   '<div class="col-sm-10 col-md-10 col-xs-12">'+
-                                    `<input type="date" name="fecha_inicio" class="form-control" value="${fecha_inicio_edit}"> `+
+                                    `<input type="date" required name="fecha_pago" class="form-control" value="${fecha_pago_edit}"> `+
                                  '</div> '+
                                    '</div>'+
                               '<div class="form-group">'+
                                   '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Banco</label>'+
                                   '<div class="col-sm-10 col-md-10 col-xs-12">'+
-                                    '<select name="banco_pago" class="form-control" >'+
+                                    '<select name="banco_pago" class="form-control" required>'+
                                              `<option value="${banco_pago_edit}" selected>${banco_pago_edit}</option>`+                                    	
                                     		 '<option value="Nacional">Nacional</option>'+
                                              '<option value="BAC SAN JOS&Eacute;">BAC SAN JOS&Eacute;</option>'+
@@ -5271,7 +5268,7 @@ function estadopago_edit(str) {
                               '<div class="form-group">'+
                                   '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Deposito</label>'+
                                   '<div class="col-sm-10 col-md-10 col-xs-12">'+
-                                    `<input  value="${deposito_edit}" type="text" maxlength="10" required name="deposito" class="form-control" onKeyPress="return soloNumeros(event)" onKeyUp="pierdeFoco(this)" placeholder=" Ej:1548796795" >`+
+                                    `<input required value="${deposito_edit}" type="text" maxlength="10" required name="deposito" class="form-control" onKeyPress="return soloNumeros(event)" onKeyUp="pierdeFoco(this)" placeholder=" Ej:1548796795" >`+
                                   '</div>'+
                               '</div>';
         return;
@@ -5320,3 +5317,35 @@ function soloNumeros(e) {
  /*VALIDAR NUMERO*/
 
 /************************************************CONTROL DE PAGOS************************************/
+
+
+/***************CLAVE PARA EDITAR******************/
+function desbloquear(){ 
+
+
+  var clave_desbloquear=document.getElementById('clave_desbloquear').value;
+
+      if (clave_desbloquear!='15963' )
+      {
+      $("#mensaje_desbloquear").addClass('alert alert-danger alert-dismissable text-center mensaje_alerta_importacion');
+      $('#mensaje_desbloquear').text('Clave Incorrecta');
+      document.getElementById('clave_desbloquear').focus();
+      return false;
+      }else{
+      $("#mensaje_desbloquear").removeClass('alert alert-danger alert-dismissable text-center mensaje_alerta_importacion');	
+      $("#mensaje_desbloquear").addClass('alert alert-success alert-dismissable text-center mensaje_alerta_importacion');
+      $('#mensaje_desbloquear').text('Área Desbloqueada');
+      document.getElementById("boton_desbloquear").style.display = "none";
+      document.getElementById("seccion_pagos").style.display = "block";
+      setTimeout(function () {
+            $('#desbloquear').modal('hide');
+          }, 1000);
+      
+      }
+
+  	
+
+}
+
+/****************CLAVE PARA EDITAR****************/
+

@@ -1,7 +1,7 @@
 <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Sistema FACTO!</span></a>
+              <a href="home.php" class="site_title"><i class="fa fa-paw"></i> <span>Sistema FACTO!</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -47,8 +47,8 @@
                     </ul>
                   </li>
 
-                   <li><a target="_blank" href="https://es-la.facebook.com/"><i class="fa fa-address-book" aria-hidden="true"></i>N1</a></li>
-                   <li><a target="_blank" href="https://www.google.co.ve"><i class="fa fa-address-card " ></i>N2</a></li> 
+                   <li><a target="_blank" href="https://es-la.facebook.com/"><i class="fa fa-newspaper-o" aria-hidden="true"></i>N1</a></li>
+                   <li><a target="_blank" href="https://www.google.co.ve"><i class="fa fa-group" ></i>N2</a></li> 
                 </ul>
               </div>              
             </div>

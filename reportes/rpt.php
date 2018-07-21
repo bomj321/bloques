@@ -30,7 +30,7 @@ $titulo[1]='Nombre';
 $titulo[2]='Email';
 $titulo[3]='ClaveATV';
 $titulo[4]='Bloque';
-
+$titulo[4]='Pago';
 $total=0;
 
 
@@ -41,7 +41,7 @@ while($row=mysqli_fetch_array($user)){
   $registro[$titulo[2]]= utf8_decode($row['Email']);
   $registro[$titulo[3]]= utf8_decode($row['ClaveATV']);
   $registro[$titulo[4]]= utf8_decode($row['Bloque']);
-
+  $registro[$titulo[4]]= utf8_decode($row['estado_pago']);
   $tabla[]=$registro;
 }
 
@@ -82,8 +82,8 @@ $la=array('showHeadings'=>1, // Mostrar encabezados
       'Nombre'=>array('justification'=>'center','width'=>150),
       'Email'=>array('justification'=>'left','width'=>150),
       'ClaveATV'=>array('justification'=>'center','width'=>70),
-      'Bloque'=>array('justification'=>'center','width'=>50)
-
+      'Bloque'=>array('justification'=>'center','width'=>50),
+      'Pago'=>array('justification'=>'center','width'=>50),
       )
       );
     
