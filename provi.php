@@ -15,7 +15,7 @@ $resul = mysqli_query($con,$sql);
 
 }
 ?>
-            <select name="Canton" class="form-control">
+            <select name="Canton" class="form-control" id="canton" onchange="distri(this.value)" required>
              <?php
         while($result=mysqli_fetch_array($resul)){ ?>
               <option value="<?php  echo  $result['nom_canto'];?>"><?php  echo  $result['nom_canto'];?></option>

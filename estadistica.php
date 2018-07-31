@@ -321,7 +321,7 @@ include('conexion.php');
   <?php
 }else{
 echo '<script language="javascript">alert("No tiene permisos para este modulo");
- window.location.href="index.php";</script>'; }
+ window.location.href="login.php";</script>'; }
 
 ?>
 </html>

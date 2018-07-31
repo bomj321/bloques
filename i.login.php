@@ -39,11 +39,11 @@ echo '<script language="javascript">
 }
 else{
 echo '<script language="javascript">alert("EL USUARIO NO TIENE PERMISO");
- window.location.href="index.php";</script>'; 
+ window.location.href="login.php";</script>'; 
 }
 } else{
 echo '<script language="javascript">alert("CLAVE INCORRECTA VERIFIQUE QUE LOS DATOS SEAN CORRECTOS");
- window.location.href="index.php";</script>'; 
+ window.location.href="login.php";</script>'; 
 
 exit();
 
@@ -51,7 +51,7 @@ exit();
 }
 }else{
 echo '<script language="javascript">alert("EL USUARIO NO ES VALIDO VERIFIQUE QUE LOS DATOS SEAN CORRECTOS");
- window.location.href="index.php";</script>'; 
+ window.location.href="login.php";</script>'; 
 
 
  exit();}

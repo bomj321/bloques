@@ -1,0 +1,7 @@
+- registrar_usuarios.php (CORREO)
+- registrar_pago.php (BOTON PAGO)
+
+# HACER CRUD
+- BOTON ACTIVAR
+- SECCION DE PAGOS IGUAL AL OTRO CRUD
+

@@ -63,6 +63,11 @@ if (isset($_POST['importar_clave']) AND !empty($_POST['importar_clave'])) {
 				$plan=$objPHPExcel->getActiveSheet()->getCell('I'.$i)->getCalculatedValue();
 				$claveATV=$objPHPExcel->getActiveSheet()->getCell('J'.$i)->getCalculatedValue();
 				$bloque=$objPHPExcel->getActiveSheet()->getCell('K'.$i)->getCalculatedValue();
+				$estado_pago=$objPHPExcel->getActiveSheet()->getCell('L'.$i)->getCalculatedValue();
+				$fecha_inicio=$objPHPExcel->getActiveSheet()->getCell('M'.$i)->getCalculatedValue();
+				$banco_pago=$objPHPExcel->getActiveSheet()->getCell('N'.$i)->getCalculatedValue();
+				$deposito=$objPHPExcel->getActiveSheet()->getCell('O'.$i)->getCalculatedValue();
+				$fecha_pago=$objPHPExcel->getActiveSheet()->getCell('P'.$i)->getCalculatedValue();
 
 
 
@@ -78,8 +83,8 @@ if (isset($_POST['importar_clave']) AND !empty($_POST['importar_clave'])) {
 
 
 				 
-				$insert = mysqli_query($con, "INSERT INTO empleados(Cedula,numero_cliente, Nombre, Telefono, Email, Provincia, Canton, Tiempo,Plan, ClaveATV,Bloque,img_emple)
-               VALUES('$cedula','$numero_cliente','$nombre', '$telefono', '$email', '$provincia', '$canton', '$tiempo' , '$plan','$claveATV' ,'$bloque','')") or die('Error: ' . mysqli_error($con));
+				$insert = mysqli_query($con, "INSERT INTO empleados(Cedula,numero_cliente, Nombre, Telefono, Email, Provincia, Canton, Tiempo,Plan, ClaveATV,Bloque,img_emple,estado_pago,fecha_inicio,banco_pago,deposito,fecha_pago)
+               VALUES('$cedula','$numero_cliente','$nombre', '$telefono', '$email', '$provincia', '$canton', '$tiempo' , '$plan','$claveATV' ,'$bloque','','$estado_pago','$fecha_inicio','$banco_pago','$deposito','$fecha_pago')") or die('Error: ' . mysqli_error($con));
 				if (!$insert) {
 					echo "ERROR </br>";
 					echo $c . '</br>';

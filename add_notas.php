@@ -109,8 +109,8 @@ $user =mysqli_query($con,$sql);
               
                 <thead>
                 <tr>
-                  <th>C#</th>
                   <th>Nombre</th>
+                  <th>C#</th>                  
                   <th>Cédula</th>                  
                   <th>Email</th>
                   <th>Inicio</th>
@@ -144,8 +144,8 @@ $user =mysqli_query($con,$sql);
                       ?>
 
                 >
-                  <td ><?php  echo  $datos['numero_cliente'];?></td>
                   <td ><?php  echo  $datos['Nombre'];?></td>
+                  <td ><?php  echo  $datos['numero_cliente'];?></td>                  
                   <td ><?php  echo  $datos['Cedula'];?></td>                  
                   <td ><?php  echo  $datos['Email'];?></td>
                   <td ><?php  echo  $myFormatForView?></td>
@@ -304,6 +304,13 @@ echo
     <script>
   $(function () {
    table = $("#example1").DataTable({
+     "paging": true,
+      "lengthChange": false,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": true,
+      "bSort": true,
      language: {
         "sProcessing":     "Procesando...",
         "sLengthMenu":     "Mostrar _MENU_ registros",
@@ -313,7 +320,7 @@ echo
         "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
         "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
         "sInfoPostFix":    "",
-        "sSearch":         "Buscar Cliente:",
+        "sSearch":         "Buscar:",
         "sUrl":            "",
         "sInfoThousands":  ",",
         "sLoadingRecords": "Cargando...",
@@ -353,6 +360,6 @@ echo
   <?php
 }else{
 echo '<script language="javascript">alert("No tiene permisos para este modulo");
- window.location.href="index.php";</script>'; }
+ window.location.href="login.php";</script>'; }
 ?>
 </html>

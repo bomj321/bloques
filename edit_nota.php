@@ -345,7 +345,7 @@ $datos=mysqli_fetch_array($user);
   <?php
 }else{
 echo '<script language="javascript">alert("No tiene permisos para este modulo");
- window.location.href="index.php";</script>'; }
+ window.location.href="login.php";</script>'; }
 }else{
 echo '<script language="javascript">alert("Debe proporcionar un dato valido");
  window.location.href="home.php";</script>'; }

@@ -48,6 +48,7 @@ function mostrart(){
 
 }
 
+
 function provi(str) {
 
     if (str == 0) {
@@ -61,7 +62,7 @@ function provi(str) {
 
 
     if (str == "") {
-        document.getElementById("provi").innerHTML = "";
+        document.getElementById("provi").innerHTML = "<input type='text' class='form-control' disabled >";
         return;
     } else { 
         if (window.XMLHttpRequest) {
@@ -79,6 +80,46 @@ function provi(str) {
         xmlhttp.open("GET","provi.php?q="+str+"&&"+"c="+ced,true);
         xmlhttp.send();
     }
+  
+}
+
+function distri(str) {
+    
+         if (str == 0) {
+
+        var str= document.getElementById("canton").value;
+        var ced= document.getElementById("id").value;
+}else{
+          var ced=0;
+
+}
+
+    if (str == "") {
+        document.getElementById("distri").innerHTML = '<input type="text" class="form-control" disabled >';
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("distri").innerHTML = xmlhttp.responseText;
+            }
+        };
+        xmlhttp.open("GET","distri.php?q="+str+"&"+"c="+ced,true);
+        xmlhttp.send();
+    }
+  
+}
+
+function start() {
+  var elejir = 0;
+   provi(elejir);
+   distri(elejir);
   
 }
 
@@ -116,7 +157,7 @@ $datos=mysqli_fetch_array($user);
     include("modal_desbloquear.php");
    ?>
 <!--MODAL CLOSE--> 
-  <body class="nav-md" onload="provi('0')">
+  <body class="nav-md" onload="start()">
     <div class="container body">
       <div class="main_container">
          <!--ASIDE-->
@@ -197,7 +238,7 @@ $datos=mysqli_fetch_array($user);
         $fecha_pago_edit  =    mysqli_real_escape_string($con,(strip_tags($_POST["fecha_pago"],ENT_QUOTES)));//Escanpando caracteres
         $banco_pago_edit  =    mysqli_real_escape_string($con,(strip_tags($_POST["banco_pago"],ENT_QUOTES)));//Escanpando caracteres
         $deposito_edit    =    mysqli_real_escape_string($con,(strip_tags($_POST["deposito"],ENT_QUOTES)));//Escanpando caracteres
-        
+        $Distrito      =    mysqli_real_escape_string($con,(strip_tags($_POST["Distrito"],ENT_QUOTES)));//Escanpando caracteres
 
 /*VERIFICANDO QUE EXISTAN LAS VARIABLES*/
         if($estado_pago=='Pagado'){
@@ -266,11 +307,11 @@ exit();
                   }*/
 
 
-                $insert = mysqli_query($con, "UPDATE empleados SET Cedula='$Cedula',numero_cliente='$Numero_Cliente', Nombre='$Nombre', Telefono='$Telefono',Email='$Email',Provincia='$Provincia',Canton='$Canton',Tiempo='$Tiempo',Bloque='$Bloque',Plan='$Plan',ClaveATV='$ClaveATV',img_emple='$image',estado_pago='$estado_pago',banco_pago='$banco_pago_edit',deposito='$deposito_edit',fecha_pago='$fecha_pago_edit' WHERE id='$Id_unico'
+                $insert = mysqli_query($con, "UPDATE empleados SET Cedula='$Cedula',numero_cliente='$Numero_Cliente', Nombre='$Nombre', Telefono='$Telefono',Email='$Email',Provincia='$Provincia',Canton='$Canton',Distrito='$Distrito',Tiempo='$Tiempo',Bloque='$Bloque',Plan='$Plan',ClaveATV='$ClaveATV',img_emple='$image',estado_pago='$estado_pago',banco_pago='$banco_pago_edit',deposito='$deposito_edit',fecha_pago='$fecha_pago_edit' WHERE id='$Id_unico'
                 ") or die(mysqli_error());
                 }
                 else{
-                         $insert = mysqli_query($con, "UPDATE empleados SET Cedula='$Cedula',numero_cliente='$Numero_Cliente', Nombre='$Nombre', Telefono='$Telefono',Email='$Email',Provincia='$Provincia',Canton='$Canton',Tiempo='$Tiempo',Bloque='$Bloque',Plan='$Plan',ClaveATV='$ClaveATV',estado_pago='$estado_pago',banco_pago='$banco_pago_edit',deposito='$deposito_edit',fecha_pago='$fecha_pago_edit' WHERE id='$Id_unico'
+                         $insert = mysqli_query($con, "UPDATE empleados SET Cedula='$Cedula',numero_cliente='$Numero_Cliente', Nombre='$Nombre', Telefono='$Telefono',Email='$Email',Provincia='$Provincia',Canton='$Canton',Distrito='$Distrito',Tiempo='$Tiempo',Bloque='$Bloque',Plan='$Plan',ClaveATV='$ClaveATV',estado_pago='$estado_pago',banco_pago='$banco_pago_edit',deposito='$deposito_edit',fecha_pago='$fecha_pago_edit' WHERE id='$Id_unico'
                 ") or die(mysqli_error());         
                 }
                             if($insert){
@@ -360,6 +401,15 @@ exit();
                                         <div class="col-sm-10 col-md-10 col-xs-12" id="provi">
 
 
+                                          </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputEmail7" class="col-sm-2 col-md-2 col-xs-12 control-label">Distrito</label>
+                                        <div class="col-sm-10 col-md-10 col-xs-12" id="distri">
+                                                 <select name="Distrito" class="form-control" required>
+                                                  <option value="<?php  echo  $datos['Distrito'];?>"><?php  echo  $datos['Distrito'];?></option>
+                                                </select>
                                           </div>
                                 </div>
 
@@ -696,7 +746,7 @@ exit();
   <?php
 }else{
 echo '<script language="javascript">alert("No tiene permisos para este modulo");
- window.location.href="index.php";</script>'; }
+ window.location.href="login.php";</script>'; }
 }else{
 echo '<script language="javascript">alert("Debe proporcionar un dato valido");
  window.location.href="home.php";</script>'; }

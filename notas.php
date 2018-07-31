@@ -133,26 +133,28 @@ $user =mysqli_query($con,$sql);
 
                    
                 <div class="row" style="margin-bottom: 1em;">
-					<h4>Rango de Fecha citas</h4>
-				<div class="form-inline">
-	                	 <div class="form-group">
-	                		<label for="min">Fecha M&iacute;nima</label>
-	                		<input type="date" class="form-control" id="min" name="min" type="text">
-	                	</div>	
-	                	 <div class="form-group">
-	                		<label for="max">Fecha M&aacute;xima</label>
-	                		<input type="date" class="form-control" id="max" name="max" type="text">
-	                	</div>	
-				</div>
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+              					<h4>Rango de Fecha citas</h4>
+              				<div class="form-inline">
+              	                	 <div class="form-group">
+              	                		<label for="min">Fecha M&iacute;nima</label>
+              	                		<input type="date" class="form-control" id="min" name="min" type="text">
+              	                	</div>	
+              	                	 <div class="form-group">
+              	                		<label for="max">Fecha M&aacute;xima</label>
+              	                		<input type="date" class="form-control" id="max" name="max" type="text">
+              	                	</div>	
+              				</div>
+                </div>
 
                 </div>
                     
                     <table id="example1" class="table table-bordered table-hover bulk_action dt-responsive nowrap" style="width: 100%;"> 
               
                 <thead>
-                <tr>
-                  <th>C#</th>
+                <tr>                  
                   <th>Nombre</th>
+                  <th>C#</th>
                   <th>Cédula</th>                  
                   <th>Fecha de Agendado</th>
                   <th>Fecha Cita</th>                  
@@ -163,9 +165,9 @@ $user =mysqli_query($con,$sql);
                   <?php
         while($datos=mysqli_fetch_array($user)){                 
         ?>
-                <tr>
-                  <td ><?php  echo  $datos['numero_cliente'];?></td>
+                <tr>                  
                   <td ><?php  echo  $datos['Nombre'];?></td>
+                  <td ><?php  echo  $datos['numero_cliente'];?></td>
                   <td ><?php  echo  $datos['Cedula'];?></td>                 
                   <td ><?php  echo  $datos['fecha_agregada'];?></td>
                   <td ><?php  echo  $datos['fecha_nota'];?></td>
@@ -292,6 +294,13 @@ echo
     <script>
   $(function () {
    table = $("#example1").DataTable({
+     "paging": true,
+      "lengthChange": false,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": true,
+      "bSort": true,
      language: {
         "sProcessing":     "Procesando...",
         "sLengthMenu":     "Mostrar _MENU_ registros",
@@ -301,7 +310,7 @@ echo
         "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
         "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
         "sInfoPostFix":    "",
-        "sSearch":         "Buscar Cliente:",
+        "sSearch":         "Buscar:",
         "sUrl":            "",
         "sInfoThousands":  ",",
         "sLoadingRecords": "Cargando...",
@@ -369,6 +378,6 @@ $(document).ready(function() {
   <?php
 }else{
 echo '<script language="javascript">alert("No tiene permisos para este modulo");
- window.location.href="index.php";</script>'; }
+ window.location.href="login.php";</script>'; }
 ?>
 </html>

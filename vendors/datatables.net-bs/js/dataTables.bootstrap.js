@@ -46,7 +46,7 @@ var DataTable = $.fn.dataTable;
 /* Set the defaults for DataTables initialisation */
 $.extend( true, DataTable.defaults, {
 	dom:
-		"<'row'<'col-sm-3 col-xs-11 col-md-2'l><' col-xs-2 col-sm-1 col-md-3'f>>" +
+		"<'row'<' col-xs-1 col-sm-7 col-md-7'f>>" +
 		"<'row'<'col-sm-12'tr>>" +
 		"<'row'<'col-sm-5'i><'col-sm-7'p>>",
 	renderer: 'bootstrap'
@@ -56,7 +56,7 @@ $.extend( true, DataTable.defaults, {
 /* Default class modification */
 $.extend( DataTable.ext.classes, {
 	sWrapper:      "dataTables_wrapper form-inline dt-bootstrap",
-	sFilterInput:  "form-control input-lg filtro_busqueda",
+	sFilterInput:  "form-control input-lg filtro_busqueda" ,
 	sLengthSelect: "form-control input-lg",
 	sProcessing:   "dataTables_processing panel panel-default"
 } );

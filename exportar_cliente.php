@@ -14,11 +14,11 @@
     $objPHPExcel  = new PHPExcel();
     
     //Propiedades de Documento
-    $objPHPExcel->getProperties()->setCreator("Marko robles")->setDescription("Reporte de Productos");
+    $objPHPExcel->getProperties()->setCreator("Marko robles")->setDescription("Reporte de Empleados");
     
     //Establecemos la pestaña activa y nombre a la pestaña
     $objPHPExcel->setActiveSheetIndex(0);
-    $objPHPExcel->getActiveSheet()->setTitle("Productos");
+    $objPHPExcel->getActiveSheet()->setTitle("Empleados");
     
         
     $estiloTituloReporte = array(
@@ -89,11 +89,11 @@
     )
     ));
     
-    $objPHPExcel->getActiveSheet()->getStyle('A1:K6')->applyFromArray($estiloTituloReporte);
-    $objPHPExcel->getActiveSheet()->getStyle('A6:K6')->applyFromArray($estiloTituloColumnas);
+    $objPHPExcel->getActiveSheet()->getStyle('A1:P6')->applyFromArray($estiloTituloReporte);
+    $objPHPExcel->getActiveSheet()->getStyle('A6:P6')->applyFromArray($estiloTituloColumnas);
     
     $objPHPExcel->getActiveSheet()->setCellValue('D3', 'REPORTE DE CLIENTES');
-    $objPHPExcel->getActiveSheet()->mergeCells('D3:F3');
+    $objPHPExcel->getActiveSheet()->mergeCells('D3:J3');
     
     $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(30);
     $objPHPExcel->getActiveSheet()->setCellValue('A6', 'Numero del Cliente');
@@ -117,6 +117,17 @@
     $objPHPExcel->getActiveSheet()->setCellValue('J6', 'ClaveATV');
     $objPHPExcel->getActiveSheet()->getColumnDimension('K')->setWidth(20);
     $objPHPExcel->getActiveSheet()->setCellValue('K6', 'Bloque');
+
+    $objPHPExcel->getActiveSheet()->getColumnDimension('L')->setWidth(30);
+    $objPHPExcel->getActiveSheet()->setCellValue('L6', 'Estado del Pago');
+    $objPHPExcel->getActiveSheet()->getColumnDimension('M')->setWidth(30);
+    $objPHPExcel->getActiveSheet()->setCellValue('M6', 'Fecha de Inicio');
+    $objPHPExcel->getActiveSheet()->getColumnDimension('N')->setWidth(30);
+    $objPHPExcel->getActiveSheet()->setCellValue('N6', 'Banco');
+    $objPHPExcel->getActiveSheet()->getColumnDimension('O')->setWidth(30);
+    $objPHPExcel->getActiveSheet()->setCellValue('O6', '#N de Deposito');
+    $objPHPExcel->getActiveSheet()->getColumnDimension('P')->setWidth(30);
+    $objPHPExcel->getActiveSheet()->setCellValue('P6', 'Fecha del Pago');
     
    
     
@@ -134,13 +145,18 @@
         $objPHPExcel->getActiveSheet()->setCellValue('H'.$fila, $rows['Tiempo']);
         $objPHPExcel->getActiveSheet()->setCellValue('I'.$fila, $rows['Plan']);
         $objPHPExcel->getActiveSheet()->setCellValue('J'.$fila, $rows['ClaveATV']);
-        $objPHPExcel->getActiveSheet()->setCellValue('K'.$fila, $rows['Bloque']);        
+        $objPHPExcel->getActiveSheet()->setCellValue('K'.$fila, $rows['Bloque']);
+        $objPHPExcel->getActiveSheet()->setCellValue('L'.$fila, $rows['estado_pago']);
+        $objPHPExcel->getActiveSheet()->setCellValue('M'.$fila, $rows['fecha_inicio']);
+        $objPHPExcel->getActiveSheet()->setCellValue('N'.$fila, $rows['banco_pago']);
+        $objPHPExcel->getActiveSheet()->setCellValue('O'.$fila, $rows['deposito']);
+        $objPHPExcel->getActiveSheet()->setCellValue('P'.$fila, $rows['fecha_pago']);        
         $fila++; //Sumamos 1 para pasar a la siguiente fila
     }
     
     $fila = $fila-1;
     
-    $objPHPExcel->getActiveSheet()->setSharedStyle($estiloInformacion, "A7:K".$fila);
+    $objPHPExcel->getActiveSheet()->setSharedStyle($estiloInformacion, "A7:P".$fila);
     
     $filaGrafica = $fila+2;
     

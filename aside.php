@@ -28,6 +28,7 @@
                   <li><a><i class="fa fa-users" aria-hidden="true"></i>Clientes<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="home.php">Lista de Clientes</a></li>
+                      <li><a href="pre_registro.php">Lista de Pre-Registrados</a></li>
                       <li><a href="add.php">Agregar Clientes</a></li>
                     </ul>
                   </li>
