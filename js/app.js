@@ -103,7 +103,7 @@ function enviodatos(str) {
 
 
             '<span class="input-group-btn">' +
-            '<button type="submit" class="btn btn-primary btn-form display-4">PRE-REGISTRAR</button>' +
+            '<button type="submit" class="btn btn-primary btn-form display-4">REGISTRAR</button>' +
             '</span>';
         return;
     } else if (str == "JURIDICO") {
@@ -208,7 +208,7 @@ function enviodatos(str) {
 
 
             '<span class="input-group-btn">' +
-            '<button type="submit" class="btn btn-primary btn-form display-4">PRE-REGISTRAR</button>' +
+            '<button type="submit" class="btn btn-primary btn-form display-4">REGISTRAR</button>' +
             '</span>';
         return;
 
@@ -361,3 +361,71 @@ function LimpiarVentaDeServicios() {
 
 
 /************************************************CONTROL DE EVENTOS DEL FORMULARIO************************************/
+
+/*****************SOLO NUMEROS**********************/
+function solonumeros(e){
+  key = e.keyCode || e.which;
+  teclado= String.fromCharCode(key);
+  var texto = "Verifique su Numero de Deposito";
+  var texto2 = "";
+  numeros ="0,1,2,3,4,5,6,7,8,9";
+  especiales =[8,37,39,46]; // array
+  teclado_especial = false;
+
+
+  for (var i in especiales){
+    if(key==especiales[i] || key ==numeros){
+      teclado_especial = true;
+
+    }
+  }
+
+  if(numeros.indexOf(teclado)==-1 && !teclado_especial){
+    $("#input_pago").addClass('is-invalid');
+      input_pago
+      document.getElementById('mensaje_costo').innerHTML= texto;
+      return false;
+
+  }else{
+        $("#input_pago").removeClass('is-invalid'); 
+          document.getElementById('mensaje_costo').innerHTML= texto2;
+
+  }
+}
+  /*****************SOLO NUMEROS**********************/
+
+
+
+  /************************************************CONTROL DEL FORMULARIO METODO DE PAGO************************************/
+
+function pago(str) {
+    if (str == "Deposito") {
+        document.getElementById("metodo_pago_registro").innerHTML =
+                                        '<div class="multi-horizontal" data-for="name">'+
+                                              '<div class="form-group">'+
+                                                    '<label class="form-control-label mbr-fonts-style display-7" for="nombre_banco">Nombre del Banco</label>'+
+                                                '<select class="form-control" name ="nombre_banco" id="nombre_banco" placeholder="Ingrese Nombre del Banco" required>'+
+                                                    '<option value="Costa Rica">Costa Rica</option>'+
+                                                    '<option value="Nacional">Nacional</option>'+
+                                                    '<option value="BAC SAN JOS&Eacute;">BAC SAN JOS&Eacute;</option>'+    
+                                                '</select>'+
+                                            '</div>'+
+                                        '</div>';
+        return;
+    } else if (str == "Efectivo") {
+        document.getElementById("metodo_pago_registro").innerHTML =
+                                        '<div class="multi-horizontal" data-for="name">'+
+                                              '<div class="form-group">'+
+                                                    '<label class="form-control-label mbr-fonts-style display-7" for="nombre_banco">Nombre del Banco</label>'+
+                                                '<select class="form-control" name ="nombre_banco" id="nombre_banco" placeholder="Ingrese Zona de Comercio" required>'+
+                                                    '<option value="Camara de Comercio San Ram&oacute;n">Camara de Comercio San Ram&oacute;n</option>'+
+                                                    '<option value="Camara de Comercio Zona Norte">Camara de Comercio Zona Norte</option>'+
+                                                '</select>'+
+                                            '</div>'+
+                                        '</div>';
+        return;
+    } 
+
+
+}
+/************************************************CONTROL DEL FORMULARIO METODO DE PAGO************************************/

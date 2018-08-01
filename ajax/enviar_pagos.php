@@ -15,19 +15,19 @@ $cabeceras .= "Organization: Ecommerce Orybu\r\n";
 $cabeceras .= "X-Priority: 3\r\n";
 $cabeceras .= "X-Mailer: PHP" . phpversion(7.1) . "\r\n";
 $cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-$cabeceras .= 'Cc: <ronaldrojascastro@gmail.com>' . "\r\n";
-$cabeceras .= 'Bcc: <ronaldrojascastro@gmail.com>' . "\r\n";
+$cabeceras .= 'Cc: <registro@factoconsulting.com>' . "\r\n";
+$cabeceras .= 'Bcc: <registro@factoconsulting.com>' . "\r\n";
 // Cabeceras adicionales
-$cabeceras .= 'From: Sistemas FACTO <ronaldrojascastro@gmail.com>' . "\r\n";
-$cabeceras .= "Reply-To: <ronaldrojascastro@gmail.com>\r\n";
-$cabeceras .= "Return-Path: <ronaldrojascastro@gmail.com>\r\n";
+$cabeceras .= 'From: Sistemas FACTO <registro@factoconsulting.com>' . "\r\n";
+$cabeceras .= "Reply-To: <registro@factoconsulting.com>\r\n";
+$cabeceras .= "Return-Path: <registro@factoconsulting.com>\r\n";
 
 $message =
     "
     
     <html>
             <head>
-              <title>Pre-Registro desde FACTO</title>
+              <title>Pago desde FACTO</title>
               
             </head>
             <body>
@@ -41,4 +41,4 @@ $message =
       
     ";
 
-mail($email, "Pre-Registro desde FACTO", $message, $cabeceras);
+mail($email, "Pago desde FACTO", $message, $cabeceras);
