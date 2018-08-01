@@ -366,7 +366,7 @@ function LimpiarVentaDeServicios() {
 function solonumeros(e){
   key = e.keyCode || e.which;
   teclado= String.fromCharCode(key);
-  var texto = "Verifique su Numero de Deposito";
+  var texto = "Verifique su N&uacute;mero de Deposito";
   var texto2 = "";
   numeros ="0,1,2,3,4,5,6,7,8,9";
   especiales =[8,37,39,46]; // array

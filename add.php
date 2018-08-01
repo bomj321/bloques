@@ -31,7 +31,6 @@ session_start();
 
     <!-- Custom Theme Style -->
     <link href="build/css/custom.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/estilos.css">
     <script>
 
 function provi(str) {

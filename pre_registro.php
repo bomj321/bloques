@@ -29,7 +29,6 @@ session_start();
 
     <!-- Custom Theme Style -->
     <link href="build/css/custom.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/estilos.css">
 
   </head>
 <?php 
@@ -132,6 +131,7 @@ $url = explode(".", $ce);
                   <th>C&eacute;dula</th> 
                   <th>Celular</th>
                   <th>Email</th>
+                  <th>Metodo de Pago</th>
                   <th>Fecha Inicio</th>
                   <th>Pago</th>
                   <th>Fecha del Pago</th>                 
@@ -177,6 +177,7 @@ $url = explode(".", $ce);
                   <td ><?php  echo  $datos['cedula'];?></td> 
                   <td ><?php  echo  $datos['celular'];?></td>
                   <td ><?php  echo  $datos['email'];?></td>
+                  <td ><?php  echo  $datos['metodo_pago'];?></td>
                   <td ><?php  echo  $myFormatForView?></td>
                   <td ><?php  echo  $datos['estado_pago'];?></td>                  
                   <td ><?php  echo  $datos['fecha_pago'];?></td>                  
@@ -225,7 +226,9 @@ if($datos['activado']=='0'){
               </td>';
           }else{
 echo 
-                '<a  title="Activado" class="btn btn-primary btn-sm">ACTIVADO</a>
+                '<a href="edit_pre_registro.php?nik='.base64_encode($v).'" title="Editar datos" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+
+                <a  title="Activado" class="btn btn-primary btn-sm">ACTIVADO</a>
 
                 <button  data-toggle="modal" data-target="#'.$datos['id_pre_registro'].'" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></button>
               </td>';
@@ -242,7 +245,7 @@ echo
     <div class="modal-content">
       		 <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="exampleModalLabel">Datos del Cliente</h4>
+		        <h4 class="modal-title" id="exampleModalLabel">Datos del Cliente Pre-registrado</h4>
 		      </div>
 
 		      <div class="modal-body">
@@ -260,13 +263,13 @@ echo
 		        <form>
 
 		          <div class="form-group">
-                  <label for="exampleInputEmail1">Tipo de Registro</label>
-                  <input type="text" disabled class="form-control" id="exampleInputEmail1" value="<?php  echo  $datos['tipo_registro'];?>" >
+                  <label for="exampleInputEmail1">Email</label>
+                  <input type="text" disabled class="form-control" id="exampleInputEmail1" value="<?php  echo  $datos['email'];?>" >
                 </div>
 
               <div class="form-group">
-                  <label for="provincia">C&eacute;dula</label>
-                  <input type="text" disabled class="form-control" id="provincia" value="<?php  echo  $datos['cedula'];?>" >
+                  <label for="provincia">Provincia</label>
+                  <input type="text" disabled class="form-control" id="provincia" value="<?php  echo  $datos['provincia'];?>" >
                 </div>  
 
 

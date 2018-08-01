@@ -48,6 +48,84 @@ function mostrart(){
 }
 
 
+//FUNCIONES AJAX
+function provi(str) {
+
+    if (str == 0) {
+
+        var str= document.getElementById("proviv").value;
+        var ced= document.getElementById("id").value;
+}else{
+          var ced=0;
+
+}
+
+
+    if (str == "") {
+        document.getElementById("provi").innerHTML = "<input type='text' class='form-control' disabled >";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("provi").innerHTML = xmlhttp.responseText;
+            }
+        };
+        xmlhttp.open("GET","provi.php?q="+str+"&&"+"c="+ced,true);
+        xmlhttp.send();
+    }
+  
+}
+
+function distri(str) {
+    
+         if (str == 0) {
+
+        var str= document.getElementById("canton").value;
+        var ced= document.getElementById("id").value;
+}else{
+          var ced=0;
+
+}
+
+    if (str == "") {
+        document.getElementById("distri").innerHTML = '<input type="text" class="form-control" disabled >';
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("distri").innerHTML = xmlhttp.responseText;
+            }
+        };
+        xmlhttp.open("GET","distri.php?q="+str+"&"+"c="+ced,true);
+        xmlhttp.send();
+    }
+  
+}
+
+function start() {
+  var elejir = 0;
+   provi(elejir);
+   distri(elejir);
+  
+}
+
+//FUNCIONAES AJAX
+
+
 </script> 
   </head>
   
@@ -65,6 +143,10 @@ include('conexion.php');
 ");
 $user =mysqli_query($con,$sql);
 
+$sql1=("SELECT * FROM provincias ORDER BY nom_provi ASC
+");
+$provi =mysqli_query($con,$sql1);
+
 $sql2=("SELECT * FROM planes ORDER BY nom_plan ASC
 ");
 $plane =mysqli_query($con,$sql2);
@@ -77,7 +159,7 @@ $datos=mysqli_fetch_array($user);
     include("modal_desbloquear.php");
    ?>
 <!--MODAL CLOSE--> 
-  <body class="nav-md">
+  <body class="nav-md" onload="start()">
     <div class="container body">
       <div class="main_container">
          <!--ASIDE-->
@@ -116,7 +198,7 @@ $datos=mysqli_fetch_array($user);
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Activaci&oacute;n de Clientes<!--<small>Todos los clientes</small>--></h3>
+                <h3>Edici&oacute; de Datos de los Clientes<!--<small>Todos los clientes</small>--></h3>
               </div>             
             </div>
 
@@ -127,7 +209,7 @@ $datos=mysqli_fetch_array($user);
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Activar Cliente</h2>
+                    <h2>Editar Cliente</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>                      
@@ -310,30 +392,39 @@ exit();
                                        </div>
                                 </div>
 
-
+<!--CAMPOS DE AJAX-->
                                  <div class="form-group">
-                                    <label for="inputEmail5" class="col-sm-2 col-md-2 col-xs-12 control-label">Provincia</label>
+                                    <label for="proviv" class="col-sm-2 col-md-2 col-xs-12 control-label">Provincia</label>
                                         <div class="col-sm-10 col-md-10 col-xs-12">
-                                             <input disabled value="<?php  echo  $datos['provincia'];?>" type="text" class="form-control" id="inputEmail5" >
+                                                <select name="Provincia" class="form-control" id="proviv" onchange="provi(this.value)" required>
+                                                <option value="<?php  echo  $datos['provincia'];?>"><?php  echo  $datos['provincia'];?></option>
+                                                 <?php
+                                            while($datos1=mysqli_fetch_array($provi)){ ?>
+                                                  <option value="<?php  echo  $datos1['nom_provi'];?>"><?php  echo $datos1['nom_provi'];?></option>
+                                                  <?php } ?>
+                                                </select>
                                        </div>
                                 </div>
 
 
                                 <div class="form-group">
-                                    <label for="inputEmail5" class="col-sm-2 col-md-2 col-xs-12 control-label">Cant&oacute;n</label>
-                                        <div class="col-sm-10 col-md-10 col-xs-12">
-                                             <input disabled value="<?php  echo  $datos['canton'];?>" type="text" class="form-control" id="inputEmail5">
-                                       </div>
+                                    <label for="inputEmail7" class="col-sm-2 col-md-2 col-xs-12 control-label">Cant&oacute;n</label>
+                                        <div class="col-sm-10 col-md-10 col-xs-12" id="provi">
+
+
+                                          </div>
                                 </div>
 
-
-                                  <div class="form-group">
-                                    <label for="inputEmail5" class="col-sm-2 col-md-2 col-xs-12 control-label">Distrito</label>
-                                        <div class="col-sm-10 col-md-10 col-xs-12">
-                                             <input disabled value="<?php  echo  $datos['distrito'];?>" type="text" class="form-control" id="inputEmail5">
-                                       </div>
+                                <div class="form-group">
+                                    <label for="inputEmail7" class="col-sm-2 col-md-2 col-xs-12 control-label">Distrito</label>
+                                        <div class="col-sm-10 col-md-10 col-xs-12" id="distri">
+                                                 <select name="Distrito" class="form-control" required>
+                                                  <option value="<?php  echo  $datos['distrito'];?>"><?php  echo  $datos['distrito'];?></option>
+                                                </select>
+                                          </div>
                                 </div>
 
+<!--CAMPOS DE AJAX-->
 
                                  <div class="form-group">
                                     <label for="inputEmail5" class="col-sm-2 col-md-2 col-xs-12 control-label">Direcci&oacute;n</label>
@@ -381,48 +472,48 @@ exit();
             id="seccion_pagos"><!--SEGUNDO COL-MD-6-->
                         <center><h4>Control de Pagos e Informaci&oacute;n Adicional</h4></center>
 
-				<div class="form-group">
-             					 <label class="col-sm-2 col-md-2 col-xs-12 control-label">Tiempo</label>
-    						          <div class="col-sm-10 col-md-10 col-xs-12">
-    						            <select name="tiempo" class="form-control" required>    									           
-    						              <option value="Mensual">Mensual</option>
-    						              <option value="Anual">Anual</option>
-    						            </select>
-    						          </div>  
+        <div class="form-group">
+                       <label class="col-sm-2 col-md-2 col-xs-12 control-label">Tiempo</label>
+                          <div class="col-sm-10 col-md-10 col-xs-12">
+                            <select name="tiempo" class="form-control" required>                                 
+                              <option value="Mensual">Mensual</option>
+                              <option value="Anual">Anual</option>
+                            </select>
+                          </div>  
                </div>
 
                 <div class="form-group">
-    				          <label class="col-sm-2 col-md-2 col-xs-12 control-label">Bloque</label>
-    				          <div class="col-sm-10 col-md-10 col-xs-12">
-    				            <select name="bloque" class="form-control" required>				            						                          
-    				               <option value="1">Bloque1</option>
-    				               <option value="2">Bloque2</option>
-    				               <option value="3">Bloque3</option>
-    				               <option value="4">Bloque4</option>
-    				               <option value="Pendiente">Pendiente</option>
-    				               <option value="Cancelado">Cancelado</option>
-    				               </select>
-    				          </div>
+                      <label class="col-sm-2 col-md-2 col-xs-12 control-label">Bloque</label>
+                      <div class="col-sm-10 col-md-10 col-xs-12">
+                        <select name="bloque" class="form-control" required>                                                          
+                           <option value="1">Bloque1</option>
+                           <option value="2">Bloque2</option>
+                           <option value="3">Bloque3</option>
+                           <option value="4">Bloque4</option>
+                           <option value="Pendiente">Pendiente</option>
+                           <option value="Cancelado">Cancelado</option>
+                           </select>
+                      </div>
                 </div>
 
                 <div class="form-group">
-    			                <label class="col-sm-2 col-md-2 col-xs-12 control-label">Plan</label>
-    				           <div class="col-sm-10 col-md-10 col-xs-12">
-    					            <select name="plan" class="form-control" id="proviv" required>
-    					             <?php
-    					              while($datos2=mysqli_fetch_array($plane)){ ?>
-    					              <option value="<?php  echo  $datos2['nom_plan'];?>"><?php  echo $datos2['nom_plan'];?></option>
-    					              <?php } ?>
-    					            </select>
-    			         	 </div>
+                          <label class="col-sm-2 col-md-2 col-xs-12 control-label">Plan</label>
+                       <div class="col-sm-10 col-md-10 col-xs-12">
+                          <select name="plan" class="form-control" id="proviv" required>
+                           <?php
+                            while($datos2=mysqli_fetch_array($plane)){ ?>
+                            <option value="<?php  echo  $datos2['nom_plan'];?>"><?php  echo $datos2['nom_plan'];?></option>
+                            <?php } ?>
+                          </select>
+                     </div>
                 </div>
 
                 <div class="form-group">
-    				<label class="col-sm-2 col-md-2 col-xs-12 control-label">CLAVE ATV</label>
-    					<div class="col-sm-10 col-md-10 col-xs-12">
-    					       <input type="text" name="claveATV" class="form-control" placeholder="ClaveATV" required>
-    					</div>
-           		</div>
+            <label class="col-sm-2 col-md-2 col-xs-12 control-label">CLAVE ATV</label>
+              <div class="col-sm-10 col-md-10 col-xs-12">
+                     <input type="text" name="claveATV" class="form-control" placeholder="ClaveATV" required>
+              </div>
+              </div>
                          
 
                 <div class="form-group">
@@ -437,11 +528,11 @@ exit();
                 <div class="form-group">
                                <?php 
                                      if($datos['fecha_inicio']==''){
-			        					$myFormatForView= 'No Pagado';
-							        }else{
-							        	    $time = strtotime($datos['fecha_inicio']);
-							                $myFormatForView = date("Y-m-d g:i A", $time);
-							        }
+                        $myFormatForView= 'No Pagado';
+                      }else{
+                            $time = strtotime($datos['fecha_inicio']);
+                              $myFormatForView = date("Y-m-d g:i A", $time);
+                      }
                                  ?>
                             <label class="col-sm-2 col-md-2 col-xs-12 control-label">Fecha de Inicio</label>
                                <div class="col-sm-10 col-md-10 col-xs-12">
@@ -497,10 +588,7 @@ exit();
                
 </div><!--ROW PRIMERO-->       
 
-                    
-
-
-
+  
              <div class="row"><!--ROW TERCERO--> 
 
                       <div class="col-md-12  col-sm-12  col-xs-12">
@@ -511,35 +599,28 @@ exit();
                     </div>
            </div><!--ROW TERCERO--> 
 
-          
-
-
             <div class="row"><!--ROW SEGUNDO-->
                       <div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 2em;">
-                      	<?php 
-                      		if (empty($datos['img_emple'])) {                      	/////////////////////CONDICIONAL PARA LAS FOTOS	
-                      	 ?>
+                        <?php 
+                          if (empty($datos['img_emple'])) {                       /////////////////////CONDICIONAL PARA LAS FOTOS 
+                         ?>
 
                       <center>
                            <a href="img-credenciales/<?php echo $datos['img_emple']; ?>"><img id="" src="img-credenciales/atvpendiente.jpg" alt="Credenciales " style="width: 70%;" height="300"></a>
                       </center>
 
                       <?php 
-                      	}else{
+                        }else{
                        ?>
-						 <center>
+             <center>
                            <a href="img-credenciales/<?php echo $datos['img_emple']; ?>"><img id="" src="img-credenciales/<?php echo $datos['img_emple']; ?>" alt="Credenciales " style="width: 70%;" height="300"></a>
                       </center>
 
                        <?php 
-                       		}
+                          }
                         ?>
                         </div>
-           </div><!--ROW SEGUNDO--> 
-     
-               
-         
-
+           </div><!--ROW SEGUNDO-->
 
         </form>
                     

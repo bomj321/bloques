@@ -5309,6 +5309,53 @@ function estadopago_pre_registro(str) {
                                     `<input type="date" required name="fecha_pago" class="form-control"> `+
                                  '</div> '+
                                    '</div>'+
+
+
+                               
+                                        '<div class="form-group">'+
+                                             '<label  class="col-sm-2 col-md-2 col-xs-12 control-label" for="metodo_pago">Metodo de Pago</label>'+
+                                             '<div class="col-sm-10 col-md-10 col-xs-12">'+
+                                                '<select onchange="pago_pre_registro(this.value)" class="form-control" name ="metodo_pago" id="metodo_pago" placeholder="Ingrese Metodo de Pago" required>'+
+                                                    '<option value="Deposito">Deposito</option>'+
+                                                    '<option value="Efectivo">Efectivo</option>'+
+                                                 '</select>'+
+                                               '</div>'+   
+                                       '</div>';
+
+        document.getElementById('respuesta_pago_pre_registro_deposito').innerHTML =  '<div class="form-group">'+
+                                  '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Banco</label>'+
+                                  '<div class="col-sm-10 col-md-10 col-xs-12">'+
+                                    '<select name="banco_pago" class="form-control" required>'+
+                                     		 '<option value="Costa Rica">Costa Rica</option>'+  
+                                    		 '<option value="Nacional">Nacional</option>'+
+                                             '<option value="BAC SAN JOS&Eacute;">BAC SAN JOS&Eacute;</option>'+                                                                
+                                    '</select>'+
+                                  '</div>'+
+                              '</div>'+
+
+                              
+
+                              '<div class="form-group">'+
+                                  '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Deposito</label>'+
+                                  '<div class="col-sm-10 col-md-10 col-xs-12">'+
+                                    `<input required type="text" maxlength="10" required name="deposito" class="form-control" onKeyPress="return soloNumeros(event)" onKeyUp="pierdeFoco(this)" placeholder=" Ej:1548796795" >`+
+                                  '</div>'+
+                              '</div>';                              
+        return;
+    } else { 
+    	document.getElementById("respuesta_pago_pre_registro").innerHTML ='';
+    	document.getElementById("respuesta_pago_pre_registro_deposito").innerHTML ='';
+        return;
+        
+    }
+  
+}
+
+/*****************EVENTO DEL FORMULARIO***************/
+function pago_pre_registro(str) { 	
+
+    if (str == "Deposito") {
+        document.getElementById("respuesta_pago_pre_registro_deposito").innerHTML = 
                               '<div class="form-group">'+
                                   '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Banco</label>'+
                                   '<div class="col-sm-10 col-md-10 col-xs-12">'+
@@ -5327,20 +5374,14 @@ function estadopago_pre_registro(str) {
                                   '</div>'+
                               '</div>';
         return;
-    } else { 
-    	document.getElementById("respuesta_pago_pre_registro").innerHTML = '<div class="form-group" > '+
-                                  '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Fecha de Pago</label>'+
-                                  '<div class="col-sm-10 col-md-10 col-xs-12">'+
-                                    '<input type="date" class="form-control" disabled > '+
-                                 '</div> '+
-                                   '</div>'+
+    } else if('Efectivo') { 
+    	document.getElementById("respuesta_pago_pre_registro_deposito").innerHTML =
                               '<div class="form-group">'+
                                   '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Banco</label>'+
                                   '<div class="col-sm-10 col-md-10 col-xs-12">'+
-                                    '<select  class="form-control" disabled >'+
-                                       '<option value="Costa Rica">Costa Rica</option>'+
-                                       '<option value="Nacional">Nacional</option>'+
-                                       '<option value="BAC SAN JOS&Eacute;">BAC SAN JOS&Eacute;</option>'+                                     
+                                    '<select name="banco_pago" class="form-control" required>'+
+                                     		 '<option value="Camara de Comercio San Ram&oacute;n">Camara de Comercio San Ram&oacute;n</option>'+
+                                             '<option value="Camara de Comercio Zona Norte">Camara de Comercio Zona Norte</option>'+                                                                
                                     '</select>'+
                                   '</div>'+
                               '</div>'+
@@ -5348,7 +5389,7 @@ function estadopago_pre_registro(str) {
                               '<div class="form-group">'+
                                   '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Deposito</label>'+
                                   '<div class="col-sm-10 col-md-10 col-xs-12">'+
-                                    '<input type="text" class="form-control" disabled placeholder=" Ej:1548796795">'+
+                                    `<input required type="text" maxlength="10" required name="deposito" class="form-control" onKeyPress="return soloNumeros(event)" onKeyUp="pierdeFoco(this)" placeholder=" Ej:1548796795" >`+
                                   '</div>'+
                               '</div>';
         return;
@@ -5356,6 +5397,14 @@ function estadopago_pre_registro(str) {
     }
   
 }
+
+
+
+
+
+
+/*****************EVENTO DEL FORMULARIO***************/
+
 
 /*VALIDAR NUMERO*/
 function soloNumeros(e) {

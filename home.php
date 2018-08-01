@@ -29,7 +29,6 @@ session_start();
 
     <!-- Custom Theme Style -->
     <link href="build/css/custom.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/estilos.css">
 
   </head>
 <?php 
@@ -351,7 +350,6 @@ echo
 
     <!-- Custom Theme Scripts -->
     <script src="build/js/custom.min.js"></script>
-    <script src="js/alertify.js"></script>
     <script>
   $(function () {
    table = $("#example1").DataTable({
