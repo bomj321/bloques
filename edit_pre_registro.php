@@ -49,7 +49,7 @@ function mostrart(){
 
 
 //FUNCIONES AJAX
-function provi(str) {
+function provir(str) {
 
     if (str == 0) {
 
@@ -77,13 +77,13 @@ function provi(str) {
                 document.getElementById("provi").innerHTML = xmlhttp.responseText;
             }
         };
-        xmlhttp.open("GET","provi.php?q="+str+"&&"+"c="+ced,true);
+        xmlhttp.open("GET","provi_pre_registro.php?q="+str+"&&"+"c="+ced,true);
         xmlhttp.send();
     }
   
 }
 
-function distri(str) {
+function distrir(str) {
     
          if (str == 0) {
 
@@ -110,7 +110,7 @@ function distri(str) {
                 document.getElementById("distri").innerHTML = xmlhttp.responseText;
             }
         };
-        xmlhttp.open("GET","distri.php?q="+str+"&"+"c="+ced,true);
+        xmlhttp.open("GET","distri_pre_registro.php?q="+str+"&"+"c="+ced,true);
         xmlhttp.send();
     }
   
@@ -118,8 +118,8 @@ function distri(str) {
 
 function start() {
   var elejir = 0;
-   provi(elejir);
-   distri(elejir);
+   provir(elejir);
+   distrir(elejir);
   
 }
 
@@ -340,17 +340,21 @@ exit();
                                 </div> 
 
                                  <div class="form-group">
-                                    <label for="inputEmail2" class="col-sm-2 col-md-2 col-xs-12 control-label">Tipo de Registro</label>
-                                        <div class="col-sm-10 col-md-10 col-xs-12">
-                                             <input type="text" disabled class="form-control" id="inputEmail2" value="<?php  echo  $datos['tipo_registro'];?>" >
-                                       </div>
+                                    <label for="inputEmail7" class="col-sm-2 col-md-2 col-xs-12 control-label">Tipo de Registro</label>
+                                        <div class="col-sm-10 col-md-10 col-xs-12" >
+                                                 <select name="tipo_registro" class="form-control" required>
+                                                  <option class="alert alert-danger" value="<?php  echo  $datos['tipo_registro'];?>"><?php  echo  $datos['tipo_registro'];?></option>
+                                                  <option value="FISICO">FISICO</option>
+                                                  <option value="JURIDICO">JUR&Iacute;DICO</option>
+                                                </select>
+                                          </div>
                                 </div>       
 
 
                               <div class="form-group">
                                     <label for="inputEmail2" class="col-sm-2 col-md-2 col-xs-12 control-label">C&eacute;dula</label>
                                         <div class="col-sm-10 col-md-10 col-xs-12">
-                                             <input type="text" disabled class="form-control" id="inputEmail2" value="<?php  echo  $datos['cedula'];?>" >
+                                             <input type="text" name="cedula" class="form-control" id="inputEmail2" value="<?php  echo  $datos['cedula'];?>" >
                                        </div>
                                 </div>  
 
@@ -358,21 +362,21 @@ exit();
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 col-md-2 col-xs-12 control-label">Nombre Completo</label>
                                         <div class="col-sm-10 col-md-10 col-xs-12">
-                                             <input  type="text" disabled value="<?php  echo $datos['nombre'];?>" type="text" class="form-control" id="inputEmail3" >
+                                             <input  type="text" name="nombre_completo" value="<?php  echo $datos['nombre'];?>" type="text" class="form-control" id="inputEmail3" >
                                        </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 col-md-2 col-xs-12 control-label">Nombre del Comercio</label>
                                         <div class="col-sm-10 col-md-10 col-xs-12">
-                                             <input type="text"  disabled value="<?php  echo $datos['nombre_comercio'];?>" type="text" class="form-control" id="inputEmail3" >
+                                             <input type="text" name="nombre_comercio" value="<?php  echo $datos['nombre_comercio'];?>" type="text" class="form-control" id="inputEmail3" >
                                        </div>
                                 </div>  
 
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 col-md-2 col-xs-12 control-label">Actividad</label>
                                         <div class="col-sm-10 col-md-10 col-xs-12">
-                                             <input type="text" disabled value="<?php  echo $datos['actividad'];?>" type="text" class="form-control" id="inputEmail3" >
+                                             <input type="text" name="actividad" value="<?php  echo $datos['actividad'];?>" type="text" class="form-control" id="inputEmail3" >
                                        </div>
                                 </div>    
 
@@ -380,7 +384,7 @@ exit();
                                 <div class="form-group">
                                     <label for="inputEmail4" class="col-sm-2 col-md-2 col-xs-12 control-label">T&eacute;lefono</label>
                                         <div class="col-sm-10 col-md-10 col-xs-12">
-                                             <input disabled value="<?php  echo  $datos['celular'];?>" type="emtextail" class="form-control" id="inputEmail4">
+                                             <input name="telefono" value="<?php  echo  $datos['celular'];?>" type="emtextail" class="form-control" id="inputEmail4">
                                        </div>
                                 </div>  
 
@@ -388,7 +392,7 @@ exit();
                                 <div class="form-group">
                                     <label for="inputEmail5" class="col-sm-2 col-md-2 col-xs-12 control-label">Email</label>
                                         <div class="col-sm-10 col-md-10 col-xs-12">
-                                             <input  disabled value="<?php  echo  $datos['email'];?>" type="text" class="form-control" id="inputEmail5" >
+                                             <input  name="email" value="<?php  echo  $datos['email'];?>" type="text" class="form-control" id="inputEmail5" >
                                        </div>
                                 </div>
 
@@ -396,8 +400,8 @@ exit();
                                  <div class="form-group">
                                     <label for="proviv" class="col-sm-2 col-md-2 col-xs-12 control-label">Provincia</label>
                                         <div class="col-sm-10 col-md-10 col-xs-12">
-                                                <select name="Provincia" class="form-control" id="proviv" onchange="provi(this.value)" required>
-                                                <option value="<?php  echo  $datos['provincia'];?>"><?php  echo  $datos['provincia'];?></option>
+                                                <select name="Provincia" class="form-control" id="proviv" onchange="provir(this.value)" required>
+                                                <option class="alert alert-danger" value="<?php  echo  $datos['provincia'];?>"><?php  echo  $datos['provincia'];?></option>
                                                  <?php
                                             while($datos1=mysqli_fetch_array($provi)){ ?>
                                                   <option value="<?php  echo  $datos1['nom_provi'];?>"><?php  echo $datos1['nom_provi'];?></option>
@@ -429,53 +433,31 @@ exit();
                                  <div class="form-group">
                                     <label for="inputEmail5" class="col-sm-2 col-md-2 col-xs-12 control-label">Direcci&oacute;n</label>
                                         <div class="col-sm-10 col-md-10 col-xs-12">
-                                             <input disabled value="<?php  echo  $datos['direccion'];?>" type="text" class="form-control" id="inputEmail5">
+                                             <input name="direccion" value="<?php  echo  $datos['direccion'];?>" type="text" class="form-control" id="inputEmail5">
                                        </div>
                                 </div>
-
-
-                               <div class="form-group">
-                                    <label for="inputEmail5" class="col-sm-2 col-md-2 col-xs-12 control-label">Direcci&oacute;n</label>
-                                        <div class="col-sm-10 col-md-10 col-xs-12">
-                                             <input disabled value="<?php  echo  $datos['direccion'];?>" type="text" class="form-control" id="inputEmail5">
-                                       </div>
-                                </div>
-
 
                                  <div class="form-group">
-                                        <label class="col-sm-2 col-md-2 col-xs-12 control-label">Facturas Mensual</label>
+                                        <label class="col-sm-2 col-md-2 col-xs-12 control-label">Facturas Mensuales</label>
                                       <div class="col-sm-10 col-md-10 col-xs-12">
-                                        <input type="text" disabled name="ClaveATV" value="<?php  echo  $datos['facturas_mensual'];?>" class="form-control" placeholder="ClaveATV" required>
+                                        <input type="text"  name="facturas_mensuales" value="<?php  echo  $datos['facturas_mensual'];?>" class="form-control">
                                       </div>
                                  </div>
-            </div><!--PRIMER COL-MD-6-->
-            <?php
-              if ($datos['estado_pago']=='Pagado') {                         
+            </div><!--PRIMER COL-MD-6-->           
+         
+          <div class="col-md-6 col-sm-6 col-xs-12"> <!--DIV QUE ENCIERRA EL SEGUNDO--> 
+                <div class="form-group">
+                      <label class="col-sm-2 col-md-2 col-xs-12 control-label">Facturas Mensuales</label>
+                        <div class="col-sm-10 col-md-10 col-xs-12">
+                            <input type="text"  name="facturas_mensuales" value="<?php  echo  $datos['facturas_mensual'];?>" class="form-control">
+                        </div>
+                </div>
 
-              ?>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-              <center><a id="boton_desbloquear" type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#desbloquear">Autorizaci&oacute;n</a></center>
-            </div>
-
-            <?php 
-              }
-             ?>
-            
-            <div class="col-md-6 col-sm-6 col-xs-12" 
-              <?php
-              if ($datos['estado_pago']=='Pagado') {
-              ?>
-            style="display: none;" 
-               <?php 
-              }
-             ?>
-            id="seccion_pagos"><!--SEGUNDO COL-MD-6-->
-                        <center><h4>Control de Pagos e Informaci&oacute;n Adicional</h4></center>
-
-        <div class="form-group">
+                 <div class="form-group">
                        <label class="col-sm-2 col-md-2 col-xs-12 control-label">Tiempo</label>
                           <div class="col-sm-10 col-md-10 col-xs-12">
-                            <select name="tiempo" class="form-control" required>                                 
+                            <select name="tiempo" class="form-control" required>
+                            <option class="alert alert-danger" class="alert alert-danger" value="<?php  echo  $datos['Tiempo'];?>"><?php  echo  $datos['Tiempo'];?></option>
                               <option value="Mensual">Mensual</option>
                               <option value="Anual">Anual</option>
                             </select>
@@ -485,7 +467,8 @@ exit();
                 <div class="form-group">
                       <label class="col-sm-2 col-md-2 col-xs-12 control-label">Bloque</label>
                       <div class="col-sm-10 col-md-10 col-xs-12">
-                        <select name="bloque" class="form-control" required>                                                          
+                        <select name="bloque" class="form-control" required>
+                          <option class="alert alert-danger" class="alert alert-danger" value="<?php  echo  $datos['Bloque'];?>"><?php  echo  $datos['Bloque'];?></option>
                            <option value="1">Bloque1</option>
                            <option value="2">Bloque2</option>
                            <option value="3">Bloque3</option>
@@ -496,35 +479,61 @@ exit();
                       </div>
                 </div>
 
+              <div class="form-group">
+                <label class="col-sm-2 col-md-2 col-xs-12 control-label">CLAVE ATV</label>
+                  <div class="col-sm-10 col-md-10 col-xs-12">
+                         <input type="text" name="claveATV" class="form-control" placeholder="ClaveATV" value="<?php  echo  $datos['ClaveATV'];?>">
+                  </div>
+              </div>
+            
                 <div class="form-group">
                           <label class="col-sm-2 col-md-2 col-xs-12 control-label">Plan</label>
                        <div class="col-sm-10 col-md-10 col-xs-12">
                           <select name="plan" class="form-control" id="proviv" required>
+                           <option class="alert alert-danger" class="alert alert-danger" value="<?php  echo  $datos['Plan'];?>"><?php  echo  $datos['Plan'];?></option> 
                            <?php
                             while($datos2=mysqli_fetch_array($plane)){ ?>
                             <option value="<?php  echo  $datos2['nom_plan'];?>"><?php  echo $datos2['nom_plan'];?></option>
                             <?php } ?>
                           </select>
                      </div>
-                </div>
+                </div> 
 
                 <div class="form-group">
-            <label class="col-sm-2 col-md-2 col-xs-12 control-label">CLAVE ATV</label>
-              <div class="col-sm-10 col-md-10 col-xs-12">
-                     <input type="text" name="claveATV" class="form-control" placeholder="ClaveATV" required>
-              </div>
-              </div>
-                         
-
-                <div class="form-group">
-                    <label class="col-sm-2 col-md-2 col-xs-12 control-label">Credenciales</label>
-                     <p style="margin-left: 1em;" class="btn btn-sm btn-danger col-xs-12 col-md-5 col-sm-5" id="b-credi" onclick="mostrar()">Agregar Credenciales</p>
+                      <label class="col-sm-2 col-md-2 col-xs-12 control-label">Credenciales</label>
+                      <p style="margin-left: 1em;" class="btn btn-sm btn-danger col-xs-12 col-md-5 col-sm-5" id="b-credi" onclick="mostrar()">Agregar Credenciales</p>
                       <label class="btn btn-sm btn-danger" style="display: none;" id="btcredi" onclick="mostrart()">X</label>
                        <div class="col-sm-9 col-md-9 col-xs-10" style="display: none;" id="credi">
                               <input type="file" name="img_emple" class="form-control" >
-                           </div>
-                 </div>  
+                       </div>
+                 </div>   
 
+
+             <?php
+              if ($datos['estado_pago']=='Pagado') {                         
+
+              ?>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <center><a id="boton_desbloquear" type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#desbloquear">Autorizaci&oacute;n</a></center>
+            </div>
+
+            <?php 
+              }
+             ?>    
+
+            <div  
+              <?php
+              if ($datos['estado_pago']=='Pagado') {
+              ?>
+            style="display: none;" 
+               <?php 
+              }
+             ?>
+            id="seccion_pagos"><!--SEGUNDO COL-MD-6-->
+
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                        <center><h4>Control de Pagos e Informaci&oacute;n Adicional</h4></center>
+                  </div> 
                 <div class="form-group">
                                <?php 
                                      if($datos['fecha_inicio']==''){
@@ -585,7 +594,7 @@ exit();
                             </div>  <!--CAMPOS A LLENAR DEPOSITO-->          
 
             </div> <!--SEGUNDO COL-MD-6-->  
-               
+        </div> <!--DIV QUE ENCIERRA EL SEGUNDO-->       
 </div><!--ROW PRIMERO-->       
 
   

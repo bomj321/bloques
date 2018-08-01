@@ -5255,7 +5255,7 @@ function estadopago_edit(str) {
                                   '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Banco</label>'+
                                   '<div class="col-sm-10 col-md-10 col-xs-12">'+
                                     '<select name="banco_pago" class="form-control" required>'+
-                                             `<option value="${banco_pago_edit}" selected>${banco_pago_edit}</option>`+                                    	
+                                             `<option value="${banco_pago_edit}">${banco_pago_edit}</option>`+                                    	
                                     		 '<option value="Nacional">Nacional</option>'+
                                              '<option value="BAC SAN JOS&Eacute;">BAC SAN JOS&Eacute;</option>'+
                                              '<option value="Costa Rica">Costa Rica</option>'+                      
@@ -5452,3 +5452,8 @@ function desbloquear(){
 
 /****************CLAVE PARA EDITAR****************/
 
+/********************FORMULARIO DE EDICION DE LOS USUARIOS PRE-REGISTRADOS***********************/
+
+
+
+/********************FORMULARIO DE EDICION DE LOS USUARIOS PRE-REGISTRADOS***********************/

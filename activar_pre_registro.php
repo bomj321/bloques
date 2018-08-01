@@ -334,15 +334,6 @@ exit();
                                        </div>
                                 </div>
 
-
-                                 <div class="form-group">
-                                    <label for="inputEmail5" class="col-sm-2 col-md-2 col-xs-12 control-label">Direcci&oacute;n</label>
-                                        <div class="col-sm-10 col-md-10 col-xs-12">
-                                             <input disabled value="<?php  echo  $datos['direccion'];?>" type="text" class="form-control" id="inputEmail5">
-                                       </div>
-                                </div>
-
-
                                <div class="form-group">
                                     <label for="inputEmail5" class="col-sm-2 col-md-2 col-xs-12 control-label">Direcci&oacute;n</label>
                                         <div class="col-sm-10 col-md-10 col-xs-12">
@@ -352,33 +343,15 @@ exit();
 
 
                                  <div class="form-group">
-                                        <label class="col-sm-2 col-md-2 col-xs-12 control-label">Facturas Mensual</label>
+                                        <label class="col-sm-2 col-md-2 col-xs-12 control-label">Facturas Mensuales</label>
                                       <div class="col-sm-10 col-md-10 col-xs-12">
-                                        <input type="text" disabled name="ClaveATV" value="<?php  echo  $datos['facturas_mensual'];?>" class="form-control" placeholder="ClaveATV" required>
+                                        <input type="text" disabled value="<?php  echo  $datos['facturas_mensual'];?>" class="form-control" >
                                       </div>
                                  </div>
             </div><!--PRIMER COL-MD-6-->
-            <?php
-              if ($datos['estado_pago']=='Pagado') {                         
-
-              ?>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-              <center><a id="boton_desbloquear" type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#desbloquear">Autorizaci&oacute;n</a></center>
-            </div>
-
-            <?php 
-              }
-             ?>
+           
             
-            <div class="col-md-6 col-sm-6 col-xs-12" 
-              <?php
-              if ($datos['estado_pago']=='Pagado') {
-              ?>
-            style="display: none;" 
-               <?php 
-              }
-             ?>
-            id="seccion_pagos"><!--SEGUNDO COL-MD-6-->
+            <div class="col-md-6 col-sm-6 col-xs-12" id="seccion_pagos"><!--SEGUNDO COL-MD-6-->
                         <center><h4>Control de Pagos e Informaci&oacute;n Adicional</h4></center>
 
 				<div class="form-group">
