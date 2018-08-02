@@ -297,12 +297,12 @@ function registrarNuevoUsuario() {
         processData: false,
         beforesend: function () {
             toastr.options.progressBar = true;
-            toastr.warning('Registrando cliente Espere...');
+            toastr.warning('Registrando Data Espere...');
         },
         success: function (data) {
             toastr.options.progressBar = false;
             setTimeout(function () {
-                toastr.success('Data Pre-Registrada Gracias!!!');
+                toastr.success('Data Registrada Gracias!!!');
             }, 1000);
             /*$("#collapseTwo").removeClass('show');*/
             setTimeout(function () {

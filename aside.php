@@ -36,6 +36,7 @@
                     <ul class="nav child_menu">
                       <li><a href="estadistica.php">Por Bloques</a></li>
                       <li><a href="estadistica_pagos.php">Por Pagos</a></li>
+                      <li><a href="estadistica_pagos_pre.php">Pre-Registrados</a></li>
                     </ul>
                   </li>
                   <li><a href="reportes_clientes.php"><i class="fa fa-edit"></i>Reportes</a>

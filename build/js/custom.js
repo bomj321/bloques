@@ -783,7 +783,50 @@ if (typeof NProgress != 'undefined') {
 				
 			});			
 		
-		}    
+		}
+
+
+		if ($('.canvasDoughnut_pago_pre').length){
+		var pendiente_row =  document.getElementById("pendiente_row").value;
+		var pagado_row =  document.getElementById("pagado_row").value;
+		
+		var chart_doughnut_settings = {
+
+				type: 'doughnut',
+				tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+				data: {
+					labels: [
+						"No Pagados",
+						"Pagados",						
+						
+					],
+					datasets: [{
+						data: [pendiente_row, pagado_row],
+						backgroundColor: [
+							"#D84738",
+							"#3497D9",
+							
+						],
+						hoverBackgroundColor: [
+							"#D84738",
+							"#3497D9",
+						]
+					}]
+				},
+				options: { 
+					legend: false, 
+					responsive: false 
+				}
+			}
+		
+			$('.canvasDoughnut_pago_pre').each(function(){
+				
+				var chart_element = $(this);
+				var chart_doughnut = new Chart( chart_element, chart_doughnut_settings);
+				
+			});			
+		
+		}     
 	   
 	}
 	   
