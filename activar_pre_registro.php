@@ -409,7 +409,7 @@ exit();
 
                 <div class="form-group">
                                <?php 
-                                     if($datos['fecha_inicio']==''){
+                                     if($datos['fecha_inicio']=='No Pagado'){
 			        					$myFormatForView= 'No Pagado';
 							        }else{
 							        	    $time = strtotime($datos['fecha_inicio']);
@@ -458,7 +458,7 @@ exit();
                             </div>
 
 
-                            <div id="respuesta_pago_pre_registro"><!--CAMPOS A LLENAR--> 
+                            <div id="respuesta_pago_pre_registro"><!--CAMPOS A LLENAR-->                            
                                  
                             </div>  <!--CAMPOS A LLENAR-->
 

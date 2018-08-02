@@ -155,7 +155,7 @@ $url = explode(".", $ce);
                 <tbody>
                   <?php
 			        while($datos=mysqli_fetch_array($user)){
-			        if($datos['fecha_inicio']==''){
+			        if($datos['fecha_inicio']=='No Pagado'){
 			        		$myFormatForView= 'No Pagado';
 			        }else{
 			        	    $time = strtotime($datos['fecha_inicio']);

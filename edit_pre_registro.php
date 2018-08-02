@@ -222,35 +222,67 @@ $datos=mysqli_fetch_array($user);
                         <!--SCRIPT-->
                      <?php
       if(isset($_POST['add'])){
-        $Id_unico         =    mysqli_real_escape_string($con,(strip_tags($_POST["id"],ENT_QUOTES)));//Escanpando caracteres
+        $Id_unico           =  mysqli_real_escape_string($con,(strip_tags($_POST["id"],ENT_QUOTES)));//Escanpando caracteres
+
+        $tipo_registro      =  mysqli_real_escape_string($con,(strip_tags($_POST["tipo_registro"],ENT_QUOTES)));//Escanpando caracteres 
+        $cedula             =  mysqli_real_escape_string($con,(strip_tags($_POST["cedula"],ENT_QUOTES)));//Escanpando caracteres 
+        $nombre_completo    =  mysqli_real_escape_string($con,(strip_tags($_POST["nombre_completo"],ENT_QUOTES)));//Escanpando caracteres
+        $nombre_comercio    =  mysqli_real_escape_string($con,(strip_tags($_POST["nombre_comercio"],ENT_QUOTES)));//Escanpando caracteres
+        $actividad          =  mysqli_real_escape_string($con,(strip_tags($_POST["actividad"],ENT_QUOTES)));//Escanpando caracteres
+        $telefono           =  mysqli_real_escape_string($con,(strip_tags($_POST["telefono"],ENT_QUOTES)));//Escanpando caracteres
+        $email              =  mysqli_real_escape_string($con,(strip_tags($_POST["email"],ENT_QUOTES)));//Escanpando caracteres
+        $Provincia          =  mysqli_real_escape_string($con,(strip_tags($_POST["Provincia"],ENT_QUOTES)));//Escanpando caracteres
+        $Canton             =  mysqli_real_escape_string($con,(strip_tags($_POST["Canton"],ENT_QUOTES)));//Escanpando caracteres
+        $Distrito           =  mysqli_real_escape_string($con,(strip_tags($_POST["Distrito"],ENT_QUOTES)));//Escanpando caracteres
+        $direccion          =  mysqli_real_escape_string($con,(strip_tags($_POST["direccion"],ENT_QUOTES)));//Escanpando caracteres
+        $facturas_mensuales =  mysqli_real_escape_string($con,(strip_tags($_POST["facturas_mensuales"],ENT_QUOTES)));//Escanpando caracteres
+
         $Tiempo           =    mysqli_real_escape_string($con,(strip_tags($_POST["tiempo"],ENT_QUOTES)));//Escanpando caracteres 
-        $Bloque           =    mysqli_real_escape_string($con,(strip_tags($_POST["bloque"],ENT_QUOTES)));//Escanpando caracteres 
+        $Bloque           =    mysqli_real_escape_string($con,(strip_tags($_POST["bloque"],ENT_QUOTES)));//Escanpando caracteres
+        $ClaveATV         =    mysqli_real_escape_string($con,(strip_tags($_POST["claveATV"],ENT_QUOTES)));//Escanpando caracteres 
         $Plan             =    mysqli_real_escape_string($con,(strip_tags($_POST["plan"],ENT_QUOTES)));//Escanpando caracteres 
-        $ClaveATV         =    mysqli_real_escape_string($con,(strip_tags($_POST["claveATV"],ENT_QUOTES)));//Escanpando caracteres
+        
+         /*CAMPOS AGREGADOS*/
         $estado_pago      =    mysqli_real_escape_string($con,(strip_tags($_POST["estado_pago"],ENT_QUOTES)));//Escanpando caracteres
         $fecha_pago_edit  =    mysqli_real_escape_string($con,(strip_tags($_POST["fecha_pago"],ENT_QUOTES)));//Escanpando caracteres
+        $metodo_pago_edit =    mysqli_real_escape_string($con,(strip_tags($_POST["metodo_pago"],ENT_QUOTES)));//Escanpando caracteres
         $banco_pago_edit  =    mysqli_real_escape_string($con,(strip_tags($_POST["banco_pago"],ENT_QUOTES)));//Escanpando caracteres
         $deposito_edit    =    mysqli_real_escape_string($con,(strip_tags($_POST["deposito"],ENT_QUOTES)));//Escanpando caracteres
-        $metodo_pago    =    mysqli_real_escape_string($con,(strip_tags($_POST["metodo_pago"],ENT_QUOTES)));//Escanpando caracteres
+        /*CAMPOS AGREGADOS*/
+
+
+
 
 /*VERIFICANDO QUE EXISTAN LAS VARIABLES*/
         if($estado_pago=='Pagado'){
-                $activado=1;
-                $fecha_inicio     =    date("Y-m-d H:i:s");
                 $fecha_pago_edit  =    mysqli_real_escape_string($con,(strip_tags($_POST["fecha_pago"],ENT_QUOTES)));//Escanpando caracteres
                 
 
             
         }elseif($estado_pago=='Pendiente'){
-          $metodo_pago='No Pagado';
+            $deposito_edit='No Pagado';
+            $imagen='No Pagado';
+            $Tiempo='No Pagado';
+            $Bloque='Pendiente';
+            $ClaveATV='No Designado';
+            $Plan='No Designado';
+            $activado=0;
+            $fecha_inicio='No Pagado'; 
+            $metodo_pago_edit='No Pagado';
             $activado=0;
             $fecha_pago_edit   = 'No Pagado';            
         }elseif($fecha_pago_edit=='No Pagado' AND $estado_pago='Pagado'){
+            $imagen=$_FILES['img_emple']['name'];
+            $activado=1;
+            $fecha_inicio    =    mysqli_real_escape_string($con,(strip_tags($_POST["fecha_inicio"],ENT_QUOTES)));//Escanpando caracteres
             $fecha_pago_edit  =    mysqli_real_escape_string($con,(strip_tags($_POST["fecha_pago"],ENT_QUOTES)));//Escanpando caracteres
-             $metodo_pago    =    mysqli_real_escape_string($con,(strip_tags($_POST["metodo_pago"],ENT_QUOTES)));//Escanpando caracteres
+            $metodo_pago_edit    =    mysqli_real_escape_string($con,(strip_tags($_POST["metodo_pago"],ENT_QUOTES)));//Escanpando caracteres
         }elseif(!empty($fecha_pago_edit) AND $estado_pago=='Pagado'){
+            $imagen=$_FILES['img_emple']['name'];
+            $activado=1;
+            $fecha_inicio    =    mysqli_real_escape_string($con,(strip_tags($_POST["fecha_inicio"],ENT_QUOTES)));//Escanpando caracteres
             $fecha_pago_edit  =    mysqli_real_escape_string($con,(strip_tags($_POST["fecha_pago"],ENT_QUOTES)));//Escanpando caracteres
-             $metodo_pago    =    mysqli_real_escape_string($con,(strip_tags($_POST["metodo_pago"],ENT_QUOTES)));//Escanpando caracteres
+            $metodo_pago_edit    =    mysqli_real_escape_string($con,(strip_tags($_POST["metodo_pago"],ENT_QUOTES)));//Escanpando caracteres
         }
 
        
@@ -261,22 +293,15 @@ $datos=mysqli_fetch_array($user);
         $banco_pago_edit       =    mysqli_real_escape_string($con,(strip_tags($_POST["banco_pago"],ENT_QUOTES)));//Escanpando caracteres
         }
 
-
-        if (empty($deposito_edit)) {
-            $deposito_edit= "No Pagado";
-        }else{
-        $deposito_edit         =    mysqli_real_escape_string($con,(strip_tags($_POST["deposito"],ENT_QUOTES)));//Escanpando caracteres
-        }
 /*VERIFICANDO QUE EXISTAN LAS VARIABLES*/
 
 
         
 ///imagen destacada//
- $imagen=$_FILES['img_emple']['name'];         
          $numero_pago = mysqli_query($con, "SELECT * FROM pre_registro WHERE deposito='$deposito' AND id_pre_registro!='$Id_unico' AND deposito!='' AND deposito!='No Pagado'");
         if(mysqli_num_rows($numero_pago)==0){
 
- if ($imagen!='') {
+ if ($imagen!='' AND $imagen!='No Pagado') {
  $tipo=$_FILES['img_emple']['type'];
  $tmp=$_FILES['img_emple']['tmp_name'];
 $carpeta="img-credenciales";
@@ -296,17 +321,25 @@ exit();
 
 }
               mysqli_set_charset($con, "utf8");
-              $sql_pre_registro="UPDATE pre_registro SET activado=?, img_emple=?, Bloque= ?, ClaveATV= ?, Tiempo= ?, Plan= ?, estado_pago= ?, fecha_inicio= ?, banco_pago= ?, deposito= ?, fecha_pago= ?, metodo_pago=?  WHERE id_pre_registro= ?";
+              $sql_pre_registro="UPDATE pre_registro SET activado=?,tipo_registro=?,cedula=?,nombre=?,nombre_comercio=?,actividad=?,celular=?,email=?,provincia=?,distrito=?,canton=?,direccion=?,facturas_mensual=?,img_emple=?, Bloque= ?, ClaveATV= ?, Tiempo= ?, Plan= ?, estado_pago= ?,fecha_inicio=?, banco_pago= ?, deposito= ?, fecha_pago= ?, metodo_pago=?  WHERE id_pre_registro= ?";
               $pre_registro=mysqli_prepare($con, $sql_pre_registro);
-              mysqli_stmt_bind_param($pre_registro, "ssssssssssssi", $activado,$imagen,$Bloque, $ClaveATV, $Tiempo,$Plan,$estado_pago,$fecha_inicio,$banco_pago_edit,$deposito_edit,$fecha_pago_edit,$metodo_pago,$Id_unico);
+              mysqli_stmt_bind_param($pre_registro, "sssssssssssssssssssssssssi",$activado,$tipo_registro,$cedula,$nombre_completo,$nombre_comercio,$actividad,$telefono,$email,$Provincia,$Distrito,$Canton,$direccion,$facturas_mensuales,$imagen,$Bloque, $ClaveATV, $Tiempo,$Plan,$estado_pago,$fecha_inicio,$banco_pago_edit,$deposito_edit,$fecha_pago_edit,$metodo_pago_edit,$Id_unico);
               $ok=mysqli_stmt_execute($pre_registro);
               mysqli_stmt_close($pre_registro);
-                }
-                else{
+                }elseif($imagen=='No Pagado'){
+                    $imagen='';
                   mysqli_set_charset($con, "utf8");
-                  $sql_pre_registro="UPDATE pre_registro SET activado=?,Bloque= ?, ClaveATV= ?, Tiempo= ?, Plan= ?, estado_pago= ?, fecha_inicio= ?, banco_pago= ?, deposito= ?, fecha_pago= ?, metodo_pago=?  WHERE id_pre_registro= ?";
+              $sql_pre_registro="UPDATE pre_registro SET activado=?,tipo_registro=?,cedula=?,nombre=?,nombre_comercio=?,actividad=?,celular=?,email=?,provincia=?,distrito=?,canton=?,direccion=?,facturas_mensual=?,img_emple=?, Bloque= ?, ClaveATV= ?, Tiempo= ?, Plan= ?, estado_pago= ?,fecha_inicio=?, banco_pago= ?, deposito= ?, fecha_pago= ?, metodo_pago=?  WHERE id_pre_registro= ?";
+              $pre_registro=mysqli_prepare($con, $sql_pre_registro);
+              mysqli_stmt_bind_param($pre_registro, "ssssssssssssssssssssssssi",$activado,$tipo_registro,$cedula,$nombre_completo,$nombre_comercio,$actividad,$telefono,$email,$Provincia,$Distrito,$Canton,$direccion,$facturas_mensuales,$imagen,$Bloque, $ClaveATV, $Tiempo,$Plan,$estado_pago,$fecha_inicio,$banco_pago_edit,$deposito_edit,$fecha_pago_edit,$metodo_pago_edit,$Id_unico);
+              $ok=mysqli_stmt_execute($pre_registro);
+              mysqli_stmt_close($pre_registro);
+
+                }else{
+                  mysqli_set_charset($con, "utf8");
+                  $sql_pre_registro="UPDATE pre_registro SET activado=?,tipo_registro=?,cedula=?,nombre=?,nombre_comercio=?,actividad=?,celular=?,email=?,provincia=?,distrito=?,canton=?,direccion=?,facturas_mensual=?, Bloque= ?, ClaveATV= ?, Tiempo= ?, Plan= ?, estado_pago= ?, banco_pago= ?,fecha_inicio=?, deposito= ?, fecha_pago= ?, metodo_pago=?  WHERE id_pre_registro= ?";
                   $pre_registro=mysqli_prepare($con, $sql_pre_registro);
-                  mysqli_stmt_bind_param($pre_registro, "sssssssssssi",$activado, $Bloque, $ClaveATV, $Tiempo,$Plan,$estado_pago,$fecha_inicio,$banco_pago_edit,$deposito_edit,$fecha_pago_edit,$metodo_pago,$Id_unico);
+                  mysqli_stmt_bind_param($pre_registro, "sssssssssssssssssssssssi",$activado,$tipo_registro,$cedula,$nombre_completo,$nombre_comercio,$actividad,$telefono,$email,$Provincia,$Distrito,$Canton,$direccion,$facturas_mensuales,$Bloque, $ClaveATV, $Tiempo,$Plan,$estado_pago,$fecha_inicio,$banco_pago_edit,$deposito_edit,$fecha_pago_edit,$metodo_pago_edit,$Id_unico);
                   $ok=mysqli_stmt_execute($pre_registro);
                   mysqli_stmt_close($pre_registro);        
                 }
@@ -332,6 +365,7 @@ exit();
         <div class="col-md-6 col-sm-6 col-xs-12"><!--PRIMER COL-MD-6-->
                           <center><h4>Informaci&oacute;n Personal</h4></center>
                                 <input type="hidden" value="<?php  echo  $datos['id_pre_registro'];?>" name="id" id="id" class="form-control">
+                                <input type="hidden" value="<?php  echo  $datos['fecha_inicio'];?>" name="fecha_inicio" id="id" class="form-control">
                                 <div class="form-group">
                                     <label for="inputEmail1" class="col-sm-2 col-md-2 col-xs-12 control-label">N&uacute;mero de Cliente</label>
                                         <div class="col-sm-10 col-md-10 col-xs-12">
@@ -445,13 +479,7 @@ exit();
                                  </div>
             </div><!--PRIMER COL-MD-6-->           
          
-          <div class="col-md-6 col-sm-6 col-xs-12"> <!--DIV QUE ENCIERRA EL SEGUNDO--> 
-                <div class="form-group">
-                      <label class="col-sm-2 col-md-2 col-xs-12 control-label">Facturas Mensuales</label>
-                        <div class="col-sm-10 col-md-10 col-xs-12">
-                            <input type="text"  name="facturas_mensuales" value="<?php  echo  $datos['facturas_mensual'];?>" class="form-control">
-                        </div>
-                </div>
+          <div class="col-md-6 col-sm-6 col-xs-12"> <!--DIV QUE ENCIERRA EL SEGUNDO-->               
 
                  <div class="form-group">
                        <label class="col-sm-2 col-md-2 col-xs-12 control-label">Tiempo</label>
@@ -501,7 +529,7 @@ exit();
 
                 <div class="form-group">
                       <label class="col-sm-2 col-md-2 col-xs-12 control-label">Credenciales</label>
-                      <p style="margin-left: 1em;" class="btn btn-sm btn-danger col-xs-12 col-md-5 col-sm-5" id="b-credi" onclick="mostrar()">Agregar Credenciales</p>
+                      <p style="margin-left: 1em;" class="btn btn-sm btn-danger col-xs-12 col-md-5 col-sm-5" id="b-credi" onclick="mostrar()">Editar Credenciales</p>
                       <label class="btn btn-sm btn-danger" style="display: none;" id="btcredi" onclick="mostrart()">X</label>
                        <div class="col-sm-9 col-md-9 col-xs-10" style="display: none;" id="credi">
                               <input type="file" name="img_emple" class="form-control" >
@@ -536,7 +564,7 @@ exit();
                   </div> 
                 <div class="form-group">
                                <?php 
-                                     if($datos['fecha_inicio']==''){
+                                     if($datos['fecha_inicio']=='No Pagado'){
                         $myFormatForView= 'No Pagado';
                       }else{
                             $time = strtotime($datos['fecha_inicio']);
@@ -549,16 +577,17 @@ exit();
                                 </div>
                  </div>
 
-              <div class="form-group">
+               <div class="form-group">
 
                                 <label class="col-sm-2 col-md-2 col-xs-12 control-label">Pago</label>                                
                                   <div  class="col-sm-10 col-md-10 col-xs-12">
                                     <!--INPUT ESCONDIDOS PARA EL JAVASCRIPT-->
-                                       <input type="hidden" id="fecha_pago_edit" name="fecha_pago_edit" value="<?php  echo  $datos['fecha_pago'];?>">
-                                       <input type="hidden" id="banco_pago_edit" value="<?php  echo  $datos['banco_pago'];?>">
-                                       <input type="hidden" id="deposito_edit" value="<?php  echo  $datos['deposito'];?>">
+                                       <input type="hidden" id="fecha_pago_edit_pre" value="<?php  echo  $datos['fecha_pago'];?>">
+                                       <input type="hidden" id="tipo_de_pago_edit_pre" value="<?php  echo  $datos['metodo_pago'];?>">
+                                       <input type="hidden" id="banco_pago_edit_pre" value="<?php  echo  $datos['banco_pago'];?>">
+                                       <input type="hidden" id="deposito_edit_pre" value="<?php  echo  $datos['deposito'];?>">
                                     <!--INPUT ESCONDIDOS PARA EL JAVASCRIPT-->
-                                    <select name="estado_pago" id="estado_pago" class="form-control" onchange="estadopago_pre_registro(this.value)" required>
+                                    <select name="estado_pago" id="estado_pago" class="form-control" onchange="estadopago_pre_registro_e(this.value)" required>
                                       
                                        <?php 
                                             if ($datos['estado_pago']=='Pagado') {                                                
@@ -586,11 +615,69 @@ exit();
 
 
                             <div id="respuesta_pago_pre_registro"><!--CAMPOS A LLENAR--> 
-                                 
+                                  <div class="form-group" > 
+                                        <label class="col-sm-2 col-md-2 col-xs-12 control-label">Fecha de Pago</label>
+                                        <div class="col-sm-10 col-md-10 col-xs-12">
+                                          <input type="date" required value="<?php  echo  $datos['fecha_pago'];?>" name="fecha_pago" class="form-control"> 
+                                       </div> 
+                                </div>
+
+
+                                   
+                                <div class="form-group">
+                                      <label  class="col-sm-2 col-md-2 col-xs-12 control-label" for="metodo_pago">Metodo de Pago</label>
+                                            <div class="col-sm-10 col-md-10 col-xs-12">
+                                                <select onchange="pago_pre_registro_e(this.value)" class="form-control" name ="metodo_pago" id="metodo_pago" placeholder="Ingrese Metodo de Pago" required>
+                                                  <option class="alert alert-danger" class="alert alert-danger" value="<?php  echo  $datos['metodo_pago'];?>"><?php  echo  $datos['metodo_pago'];?></option>
+                                                  <option value="Deposito">Deposito</option>
+                                                  <option value="Efectivo">Efectivo</option>
+                                                </select>
+                                              </div> 
+                                </div>
                             </div>  <!--CAMPOS A LLENAR-->
 
-                             <div id="respuesta_pago_pre_registro_deposito"><!--CAMPOS A LLENAR DEPOSITO--> 
-                                 
+                            <?php 
+                              if ($datos['metodo_pago']=='Deposito') {
+                             ?>
+
+                             <div id="respuesta_pago_pre_registro_deposito_edit"><!--CAMPOS A LLENAR DEPOSITO--> 
+                                  <div class="form-group">
+                                    <label class="col-sm-2 col-md-2 col-xs-12 control-label">Banco</label>
+                                    <div class="col-sm-10 col-md-10 col-xs-12">
+                                      <select name="banco_pago" class="form-control" required>
+                                              <option class="alert alert-danger" class="alert alert-danger" value="<?php  echo  $datos['banco_pago'];?>"><?php  echo  $datos['banco_pago'];?></option>
+                                               <option value="Costa Rica">Costa Rica</option> 
+                                               <option value="Nacional">Nacional</option>
+                                               <option value="BAC SAN JOS&Eacute;">BAC SAN JOS&Eacute;</option>  
+                                      </select>
+                                    </div>
+                                </div>
+
+                              <?php 
+                               }else{
+                               ?> 
+                                  <div id="respuesta_pago_pre_registro_deposito_edit"><!--CAMPOS A LLENAR DEPOSITO--> 
+
+                                   <div class="form-group">
+                                  <label class="col-sm-2 col-md-2 col-xs-12 control-label">Banco</label>
+                                  <div class="col-sm-10 col-md-10 col-xs-12">
+                                    <select name="banco_pago" class="form-control" required>
+                                            <option class="alert alert-danger" class="alert alert-danger" value="<?php  echo  $datos['banco_pago'];?>"><?php  echo  $datos['banco_pago'];?></option>
+                                             <option value="Camara de Comercio San Ram&oacute;n">Camara de Comercio San Ram&oacute;n</option>
+                                             <option value="Camara de Comercio Zona Norte">Camara de Comercio Zona Norte</option>
+                                    </select>
+                                  </div>
+                              </div>
+                              <?php 
+                              }
+                              ?>  
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 col-md-2 col-xs-12 control-label">Deposito</label>
+                                    <div class="col-sm-10 col-md-10 col-xs-12">
+                                      <input required type="text" maxlength="10" required name="deposito" class="form-control" onKeyPress="return soloNumeros(event)" onKeyUp="pierdeFoco(this)" value="<?php  echo  $datos['deposito'];?>" placeholder=" Ej:1548796795">
+                                    </div>
+                                </div>
                             </div>  <!--CAMPOS A LLENAR DEPOSITO-->          
 
             </div> <!--SEGUNDO COL-MD-6-->  

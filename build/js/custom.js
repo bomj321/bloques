@@ -5303,11 +5303,12 @@ function estadopago_edit(str) {
 function estadopago_pre_registro(str) { 	
 
     if (str == "Pagado") {
-        document.getElementById("respuesta_pago_pre_registro").innerHTML = '<div class="form-group" > '+
-                                  '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Fecha de Pago</label>'+
-                                  '<div class="col-sm-10 col-md-10 col-xs-12">'+
-                                    `<input type="date" required name="fecha_pago" class="form-control"> `+
-                                 '</div> '+
+        document.getElementById("respuesta_pago_pre_registro").innerHTML =
+                                   '<div class="form-group" > '+
+	                                  '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Fecha de Pago</label>'+
+	                                  '<div class="col-sm-10 col-md-10 col-xs-12">'+
+	                                    `<input type="date" required name="fecha_pago" class="form-control"> `+
+	                                 '</div> '+
                                    '</div>'+
 
 
@@ -5322,7 +5323,8 @@ function estadopago_pre_registro(str) {
                                                '</div>'+   
                                        '</div>';
 
-        document.getElementById('respuesta_pago_pre_registro_deposito').innerHTML =  '<div class="form-group">'+
+        document.getElementById('respuesta_pago_pre_registro_deposito').innerHTML =  
+        						'<div class="form-group">'+
                                   '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Banco</label>'+
                                   '<div class="col-sm-10 col-md-10 col-xs-12">'+
                                     '<select name="banco_pago" class="form-control" required>'+
@@ -5350,8 +5352,154 @@ function estadopago_pre_registro(str) {
     }
   
 }
+/************************************************************SECCION EDICION*************************************/
+
+function estadopago_pre_registro_e(str) { 
+    var fecha_pago_edit_pre= document.getElementById('fecha_pago_edit_pre').value;
+  	var deposito_edit_pre= document.getElementById('deposito_edit_pre').value;
+  	var banco_pago_edit_pre= document.getElementById('banco_pago_edit_pre').value;
+  	var tipo_de_pago_edit_pre= document.getElementById('tipo_de_pago_edit_pre').value;	
+
+    if (str == "Pagado") {
+         document.getElementById("respuesta_pago_pre_registro").innerHTML =
+                                   '<div class="form-group" > '+
+	                                  '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Fecha de Pago</label>'+
+	                                  '<div class="col-sm-10 col-md-10 col-xs-12">'+
+	                                    `<input type="date" value="${fecha_pago_edit_pre}" required name="fecha_pago" class="form-control"> `+
+	                                 '</div> '+
+                                   '</div>'+
+
+
+                               
+                                        '<div class="form-group">'+
+                                             '<label  class="col-sm-2 col-md-2 col-xs-12 control-label" for="metodo_pago">Metodo de Pago</label>'+
+                                             '<div class="col-sm-10 col-md-10 col-xs-12">'+
+                                                '<select onchange="pago_pre_registro_e(this.value)" class="form-control" name ="metodo_pago" id="metodo_pago" placeholder="Ingrese Metodo de Pago" required>'+
+                                                	`<option class="alert alert-danger" value="${tipo_de_pago_edit_pre}">${tipo_de_pago_edit_pre}</option>`+ 
+                                                    '<option value="Deposito">Deposito</option>'+
+                                                    '<option value="Efectivo">Efectivo</option>'+
+                                                 '</select>'+
+                                               '</div>'+   
+                                       '</div>';
+
+
+        if (tipo_de_pago_edit_pre == "Deposito") {                                  
+
+        document.getElementById('respuesta_pago_pre_registro_deposito_edit').innerHTML =  
+        						'<div class="form-group">'+
+                                  '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Banco</label>'+
+                                  '<div class="col-sm-10 col-md-10 col-xs-12">'+
+                                    '<select name="banco_pago" class="form-control" required>'+
+                                             `<option class="alert alert-danger" value="${banco_pago_edit_pre}">${banco_pago_edit_pre}</option>`+
+                                     		 '<option value="Costa Rica">Costa Rica</option>'+  
+                                    		 '<option value="Nacional">Nacional</option>'+
+                                             '<option value="BAC SAN JOS&Eacute;">BAC SAN JOS&Eacute;</option>'+                                                                
+                                    '</select>'+
+                                  '</div>'+
+                              '</div>'+
+
+                               '<div class="form-group">'+
+                                  '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Deposito</label>'+
+                                  '<div class="col-sm-10 col-md-10 col-xs-12">'+
+                                    `<input required type="text" value="${deposito_edit_pre}" maxlength="10" required name="deposito" class="form-control" onKeyPress="return soloNumeros(event)" onKeyUp="pierdeFoco(this)" placeholder=" Ej:1548796795" >`+
+                                  '</div>'+
+                              '</div>'; 
+
+
+} else if(tipo_de_pago_edit_pre =='Efectivo') { 
+		document.getElementById('respuesta_pago_pre_registro_deposito_edit').innerHTML = 
+							'<div class="form-group">'+
+					                                  '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Banco</label>'+
+					                                  '<div class="col-sm-10 col-md-10 col-xs-12">'+
+					                                    '<select name="banco_pago" class="form-control" required>'+
+					                                    		 `<option class="alert alert-danger" value="${banco_pago_edit_pre}">${banco_pago_edit_pre}</option>`+
+					                                     		 '<option value="Camara de Comercio San Ram&oacute;n">Camara de Comercio San Ram&oacute;n</option>'+
+					                                             '<option value="Camara de Comercio Zona Norte">Camara de Comercio Zona Norte</option>'+                                                                
+					                                    '</select>'+
+					                                  '</div>'+
+					                              '</div>'+
+
+					                               '<div class="form-group">'+
+                                  '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Deposito</label>'+
+                                  '<div class="col-sm-10 col-md-10 col-xs-12">'+
+                                    `<input required type="text" value="${deposito_edit_pre}" maxlength="10" required name="deposito" class="form-control" onKeyPress="return soloNumeros(event)" onKeyUp="pierdeFoco(this)" placeholder=" Ej:1548796795" >`+
+                                  '</div>'+
+                              '</div>'; 
+
+}
+                                                        
+        return;
+    } else { 
+    	document.getElementById("respuesta_pago_pre_registro").innerHTML ='';
+    	document.getElementById("respuesta_pago_pre_registro_deposito_edit").innerHTML ='';
+        return;
+        
+    }
+  
+}
+/***********************************************************SECCION EDICION*************************************/
 
 /*****************EVENTO DEL FORMULARIO***************/
+
+
+
+/********************************************SECCION EDICION*************************************/
+function pago_pre_registro_e(str) { 	
+  	var deposito_edit_pre= document.getElementById('deposito_edit_pre').value;
+  	var banco_pago_edit_pre= document.getElementById('banco_pago_edit_pre').value;
+
+    if (str == "Deposito") {    	
+        document.getElementById("respuesta_pago_pre_registro_deposito_edit").innerHTML = 
+                              '<div class="form-group">'+
+                                  '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Banco</label>'+
+                                  '<div class="col-sm-10 col-md-10 col-xs-12">'+
+                                    '<select name="banco_pago" class="form-control" required>'+
+                                    		/*`<option class="alert alert-danger" value="${banco_pago_edit_pre}">${banco_pago_edit_pre}</option>`+*/
+                                     		 '<option value="Costa Rica">Costa Rica</option>'+  
+                                    		 '<option value="Nacional">Nacional</option>'+
+                                             '<option value="BAC SAN JOS&Eacute;">BAC SAN JOS&Eacute;</option>'+                                                                
+                                    '</select>'+
+                                  '</div>'+
+                              '</div>'+
+
+                              '<div class="form-group">'+
+                                  '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Deposito</label>'+
+                                  '<div class="col-sm-10 col-md-10 col-xs-12">'+
+                                    `<input required type="text"  value="${deposito_edit_pre}" maxlength="10" required name="deposito" class="form-control" onKeyPress="return soloNumeros(event)" onKeyUp="pierdeFoco(this)" placeholder=" Ej:1548796795" >`+
+                                  '</div>'+
+                              '</div>';
+        return;
+    } else if('Efectivo') { 
+    	document.getElementById("respuesta_pago_pre_registro_deposito_edit").innerHTML =
+                              '<div class="form-group">'+
+                                  '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Banco</label>'+
+                                  '<div class="col-sm-10 col-md-10 col-xs-12">'+
+                                    '<select name="banco_pago" class="form-control" required>'+
+                                    		 /*`<option class="alert alert-danger" value="${banco_pago_edit_pre}">${banco_pago_edit_pre}</option>`+*/
+                                     		 '<option value="Camara de Comercio San Ram&oacute;n">Camara de Comercio San Ram&oacute;n</option>'+
+                                             '<option value="Camara de Comercio Zona Norte">Camara de Comercio Zona Norte</option>'+                                                                
+                                    '</select>'+
+                                  '</div>'+
+                              '</div>'+
+
+                              '<div class="form-group">'+
+                                  '<label class="col-sm-2 col-md-2 col-xs-12 control-label">Deposito</label>'+
+                                  '<div class="col-sm-10 col-md-10 col-xs-12">'+
+                                    `<input required type="text"  value="${deposito_edit_pre}" maxlength="10" required name="deposito" class="form-control" onKeyPress="return soloNumeros(event)" onKeyUp="pierdeFoco(this)" placeholder=" Ej:1548796795" >`+
+                                  '</div>'+
+                              '</div>';
+        return;
+        
+    }
+  
+}
+/********************************************SECCION EDICION*************************************/
+
+
+
+
+
+
 function pago_pre_registro(str) { 	
 
     if (str == "Deposito") {

@@ -22,14 +22,15 @@ $banco_pago='No Pagado';
 $deposito='No Pagado';
 $fecha_pago='No Pagado';
 $metodo_pago='No Pagado';
+$fecha_inicio='No Pagado';
 $activado='0';
 // CORREO DESTINO
 $email_correo= 'ronaldrojascastro@gmail.com';
 
 mysqli_set_charset($con, "utf8");
-$sql_registro = "INSERT INTO pre_registro (activado,tipo_registro,cedula,nombre,nombre_comercio,actividad,celular,email,provincia,canton,distrito,direccion,facturas_mensual,Bloque,ClaveATV,Tiempo,Plan,estado_pago,banco_pago,deposito,fecha_pago,metodo_pago) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+$sql_registro = "INSERT INTO pre_registro (activado,tipo_registro,cedula,nombre,nombre_comercio,actividad,celular,email,provincia,canton,distrito,direccion,facturas_mensual,Bloque,ClaveATV,Tiempo,Plan,estado_pago,fecha_inicio,banco_pago,deposito,fecha_pago,metodo_pago) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 $resultado_registro = mysqli_prepare($con, $sql_registro);
-mysqli_stmt_bind_param($resultado_registro, "ssssssssssssssssssssss",$activado,$tipo_comercio, $cedula_fisica, $nombre_legal, $nombre_comercio, $actividad, $celular, $email, $provincia, $canton, $distrito, $direccion, $calculo_factura,$bloque,$claveATV,$tiempo,$plan,$estado_pago,$banco_pago,$deposito,$fecha_pago,$metodo_pago);
+mysqli_stmt_bind_param($resultado_registro, "sssssssssssssssssssssss",$activado,$tipo_comercio, $cedula_fisica, $nombre_legal, $nombre_comercio, $actividad, $celular, $email, $provincia, $canton, $distrito, $direccion, $calculo_factura,$bloque,$claveATV,$tiempo,$plan,$estado_pago,$banco_pago,$deposito,$fecha_pago,$metodo_pago,$fecha_inicio);
 $ok = mysqli_stmt_execute($resultado_registro);
 mysqli_stmt_close($resultado_registro);
 
