@@ -154,10 +154,10 @@ include('conexion.php');
                              $san_jose_todo = mysqli_query($con, "SELECT * FROM empleados WHERE banco_pago='BAC San José'");
                               $san_jose_todo_row= mysqli_num_rows($san_jose_todo);  
 
-                            $total_clientes_todo= $costa_rica_todo_row+$nacional_todo_row+$san_jose_todo_row;
+                           /* $total_clientes_todo= $costa_rica_todo_row+$nacional_todo_row+$san_jose_todo_row;
                             $porcentaje_costa_rica_todo =($costa_rica_todo_row/$total_clientes_todo)*100;
                             $porcentaje_nacional_todo =($nacional_todo_row/$total_clientes_todo)*100;
-                            $porcentaje_san_jose_todo =($san_jose_todo_row/$total_clientes_todo)*100;  
+                            $porcentaje_san_jose_todo =($san_jose_todo_row/$total_clientes_todo)*100;  */
                     /*SQL PARA BUSCAR TODOS LOS CLIENTES*/
                                    
                       ?>
@@ -177,17 +177,17 @@ include('conexion.php');
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-handshake-o" style="margin-right: 2px;"></i>Costa Rica</span>
-              <div class="count"><?php echo round($porcentaje_costa_rica_todo).'%'; ?></div>
+              <div class="count"><?php echo round($costa_rica_todo_row); ?></div>
               <span class="count_top">Clientes</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-handshake-o" style="margin-right: 2px;"></i>Nacional</span>
-              <div class="count"><?php echo round($porcentaje_nacional_todo).'%'; ?></div>
+              <div class="count"><?php echo round($nacional_todo_row); ?></div>
               <span class="count_top">Clientes</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-handshake-o" style="margin-right: 2px;"></i>BAC San Jos&eacute;</span>
-              <div class="count"><?php echo round($porcentaje_san_jose_todo).'%'; ?></div>
+              <div class="count"><?php echo round($san_jose_todo_row); ?></div>
               <span class="count_top">Clientes</span>
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">

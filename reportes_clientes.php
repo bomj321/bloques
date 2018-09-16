@@ -29,13 +29,13 @@ session_start();
 
     <!-- Custom Theme Style -->
     <link href="build/css/custom.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/estilos.css"> 
 
   </head>
  <!--MODAL-->           
 <?php 
     include("modal_imprimir.php");
     include("modal_exportar.php");
+    include("modal_reporte_pre.php");
    ?>
 <!--MODAL CLOSE--> 
 <?php
@@ -114,6 +114,11 @@ include('conexion.php');
                       <a href="reportes/rpt_pagos.php" class="btn btn-lg btn-primary" type="button" target="_blank">Imprimir</a>
                     </center>
                  </div>
+
+                 <div class="row div_botones">
+                    <center><h3>Reportes de Clientes Pre-Registrados</h3></center>
+                    <center><button class="btn btn-lg btn-primary" data-toggle="modal" data-target="#reporte_pre" >Descargar Reporte</button></center>
+                  </div>
 
 
 				          <div class="row div_botones">

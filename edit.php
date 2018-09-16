@@ -243,6 +243,9 @@ $datos=mysqli_fetch_array($user);
 /*VERIFICANDO QUE EXISTAN LAS VARIABLES*/
         if($estado_pago=='Pagado'){
                 $fecha_pago_edit  =    mysqli_real_escape_string($con,(strip_tags($_POST["fecha_pago"],ENT_QUOTES)));//Escanpando caracteres
+                 /*ENVIO DEL CORREO*/
+          include('envio_del_correo_normal.php');
+          /*ENVIO DEL CORREO*/
                 
 
             

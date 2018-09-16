@@ -167,12 +167,12 @@ include('conexion.php');
                              $zona_norte_todo = mysqli_query($con, "SELECT * FROM pre_registro WHERE banco_pago='Camara de Comercio Zona Norte'");
                               $zona_norte_todo_row= mysqli_num_rows($zona_norte_todo);   
 
-                            $total_clientes_todo= $costa_rica_todo_row+$nacional_todo_row+$san_jose_todo_row+$san_ramon_row+$zona_norte_row;
+                            /*$total_clientes_todo= $costa_rica_todo_row+$nacional_todo_row+$san_jose_todo_row+$san_ramon_row+$zona_norte_row;
                             $porcentaje_costa_rica_todo =($costa_rica_todo_row/$total_clientes_todo)*100;
                             $porcentaje_nacional_todo =($nacional_todo_row/$total_clientes_todo)*100;
                             $porcentaje_san_jose_todo =($san_jose_todo_row/$total_clientes_todo)*100; 
                             $porcentaje_san_ramon_todo=($san_ramon_todo_row/$total_clientes_todo)*100;
-                            $porcentaje_zona_norte_todo=($zona_norte_todo_row/$total_clientes_todo)*100;
+                            $porcentaje_zona_norte_todo=($zona_norte_todo_row/$total_clientes_todo)*100;*/
 
                     /*SQL PARA BUSCAR TODOS LOS CLIENTES*/
                                    
@@ -197,35 +197,35 @@ include('conexion.php');
 
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-handshake-o" style="margin-right: 2px;"></i>Costa Rica</span>
-              <div class="count"><?php echo round($porcentaje_costa_rica_todo).'%'; ?></div>
+              <div class="count"><?php echo round($costa_rica_todo_row); ?></div>
               <span class="count_top">Clientes</span>
             </div>
 
 
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-handshake-o" style="margin-right: 2px;"></i>Nacional</span>
-              <div class="count"><?php echo round($porcentaje_nacional_todo).'%'; ?></div>
+              <div class="count"><?php echo round($nacional_todo_row); ?></div>
               <span class="count_top">Clientes</span>
             </div>
 
 
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-handshake-o" style="margin-right: 2px;"></i>BAC San Jos&eacute;</span>
-              <div class="count"><?php echo round($porcentaje_san_jose_todo).'%'; ?></div>
+              <div class="count"><?php echo round($san_jose_todo_row); ?></div>
               <span class="count_top">Clientes</span>
             </div>
 
 
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-handshake-o" style="margin-right: 2px;"></i>Comercio San Ram&oacute;n</span>
-              <div class="count"><?php echo round($porcentaje_san_ramon_todo).'%'; ?></div>
+              <div class="count"><?php echo round($san_ramon_todo_row); ?></div>
               <span class="count_top">Clientes</span>
             </div>
 
 
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-handshake-o" style="margin-right: 2px;"></i>Comercio Zona Norte</span>
-              <div class="count"><?php echo round($porcentaje_zona_norte_todo).'%'; ?></div>
+              <div class="count"><?php echo round($zona_norte_todo_row); ?></div>
               <span class="count_top">Clientes</span>
             </div>
 
@@ -302,14 +302,14 @@ include('conexion.php');
 
                           <tr>
                             <td>
-                              <p><i class="fa fa-square red"></i>Pagado Comercio San Ram&oacute;n</p>
+                              <p><i class="fa fa-square green"></i>Pagado Comercio San Ram&oacute;n</p>
                             </td>
                             <td><?php echo round($porcentaje_san_ramon); ?>%</td>
                           </tr>
 
                           <tr>
                             <td>
-                              <p><i class="fa fa-square red"></i>Pagado Comercio Zona Norte</p>
+                              <p><i class="fa fa-square blue"></i>Pagado Comercio Zona Norte</p>
                             </td>
                             <td><?php echo round($porcentaje_zona_norte); ?>%</td>
                           </tr>

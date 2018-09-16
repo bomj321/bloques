@@ -188,6 +188,7 @@ $provi =mysqli_query($con,$sql1);
         $fecha_inicio   =    date("Y-m-d H:i:s");
 
 
+
          if (empty( mysqli_real_escape_string($con,(strip_tags($_POST["banco_pago"],ENT_QUOTES))))) {
             $banco_pago= "No Pagado";
         }else{
@@ -208,6 +209,8 @@ $provi =mysqli_query($con,$sql1);
         }else{
             $fecha_pago  =    mysqli_real_escape_string($con,(strip_tags($_POST["fecha_pago"],ENT_QUOTES)));//Escanpando caracteres
         }
+
+        
        
         
 ///imagen destacada//
@@ -240,6 +243,7 @@ exit();
         $numero_pago = mysqli_query($con, "SELECT * FROM empleados WHERE deposito='$deposito' AND deposito!='' AND deposito!='No Pagado'");
 
         if(mysqli_num_rows($cek) == 0 AND mysqli_num_rows($numero_pago)==0 ){
+            include('envio_del_correo_normal_add.php');
             $insert = mysqli_query($con, "INSERT INTO empleados(Cedula,numero_cliente, Nombre, Telefono, Email, Provincia, Canton,Distrito, Tiempo, Bloque,Plan, ClaveATV,img_emple,estado_pago,fecha_inicio,banco_pago,deposito,fecha_pago)
                VALUES('$Cedula','$Numero_Cliente', '$Nombre', '$Telefono', '$Email', '$Provincia', '$Canton','$Distrito', '$Tiempo', '$Bloque','$Plan' ,'$ClaveATV','$image','$estado_pago','$fecha_inicio','$banco_pago','$deposito','$fecha_pago')") or die(mysqli_error());
             if($insert){

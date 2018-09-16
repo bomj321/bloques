@@ -339,7 +339,7 @@ function enviarpago() {
         success: function (data) {
             toastr.options.progressBar = false;
             setTimeout(function () {
-                toastr.success('Pago Enviando, Muchas Gracias!!!');
+                toastr.success('Pago Enviado, Muchas Gracias!!!');
             }, 1000);
             /*$("#collapseTwo").removeClass('show');*/
             setTimeout(function () {

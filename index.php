@@ -200,8 +200,8 @@
           <div class="card">
             <div class="card-header" id="headingOne">
               <h5 class="mb-0">
-                <button class="btn btn-info collapsed"  style="width:100%; height: 100%; font-size: 30px; font-weight: bold; margin-left: 0rem;" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  <i class="fas fa-video"></i> &nbsp; Paso #1: Video Introductorio
+                <button class="btn collapsed"  style="color: white; background-color:#28A8F1; width:100%; height: 100%; font-size: 30px; font-weight: bold; margin-left: 0rem;" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  <i class="fas fa-video"></i><h2 style="font-weight: bold;"> &nbsp; Paso #1</h2>
                 </button>
               </h5>
             </div>
@@ -215,8 +215,8 @@
           <div class="card">
             <div class="card-header" id="headingTwo">
               <h5 class="mb-0">
-                <button class="btn btn-success collapsed"  style="width:100%; height: 100%; font-size: 30px; font-weight: bold; margin-left: 0rem;"  type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                  <i class="fas fa-paperclip"></i> &nbsp; Paso #2: Formulario de Registro
+               <button class="btn collapsed"  style="color: white; background-color:#E4355C; width:100%; height: 100%; font-size: 30px; font-weight: bold; margin-left: 0rem;"  type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  <i class="fas fa-user"></i><h2 style="font-weight: bold;"> &nbsp; Paso #2</h2>
                 </button>
               </h5>
             </div>
@@ -247,10 +247,10 @@
             </div>
           </div>
           <div class="card">
-            <div class="card-header" id="headingThree" >
+            <div class="card-header" id="headingThree">
               <h5 class="mb-0">
-                <button class="btn btn-danger"  style="width:100%; height: 100%; font-size: 30px; font-weight: bold; margin-left: 0rem;" collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                  <i class="fas fa-money-bill-wave"></i> &nbsp; Paso #3: Confirmar Pago
+               <button class="btn"  style="color: white; background-color:#88C43F; width:100%; height: 100%; font-size: 30px; font-weight: bold; margin-left: 0rem; collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  <i class="fas fa-money-bill-wave"></i><h2 style="font-weight: bold;"> &nbsp; Paso #3</h2>
                 </button>
               </h5>
             </div>
@@ -269,31 +269,28 @@
                                     <div class="multi-horizontal" data-for="name">
                                             <div class="form-group">
                                                 <label class="form-control-label mbr-fonts-style display-7" for="metodo_pago">Metodo de Pago</label>
-                                                    <select onchange="pago(this.value)" class="form-control" name ="metodo_pago" id="metodo_pago" placeholder="Ingrese Metodo de Pago" required>
+                                                    <select class="form-control" name ="metodo_pago" id="metodo_pago" placeholder="Ingrese Metodo de Pago" required>
                                                         <option value="Deposito">Deposito</option>
                                                         <option value="Efectivo">Efectivo</option>
                                                     </select>
                                             </div>
                                     </div>
 
-                                  <div id="metodo_pago_registro">
-                                      <div class="multi-horizontal" data-for="name">
-                                              <div class="form-group">
-                                                  <label class="form-control-label mbr-fonts-style display-7" for="nombre_banco">Nombre del Banco</label>
-                                                      <select class="form-control" name ="nombre_banco" id="nombre_banco" placeholder="Ingrese Nombre del Banco" required>
-                                                          <option value="Costa Rica">Costa Rica</option>
-                                                          <option value="Nacional">Nacional</option>
-                                                          <option value="BAC SAN JOS&Eacute;">BAC SAN JOS&Eacute;</option>    
-                                                      </select>
-                                              </div>
-                                      </div>
-                                  </div>  
+                                    <div class="multi-horizontal" data-for="name">
+                                            <div class="form-group">
+                                                <label class="form-control-label mbr-fonts-style display-7" for="nombre_banco">Nombre del Banco</label>
+                                                    <select class="form-control" name ="nombre_banco" id="nombre_banco" placeholder="Ingrese Nombre del Banco" required>
+                                                        <option value="Costa Rica">Costa Rica</option>
+                                                        <option value="Nacional">Nacional</option>
+                                                        <option value="BAC SAN JOS&Eacute;">BAC SAN JOS&Eacute;</option>    
+                                                    </select>
+                                            </div>
+                                    </div>
                                     
                                     <div class="multi-horizontal" data-for="numero_deposito">
-                                        <div class="form-group">                                          
-                                            <label class="form-control-label mbr-fonts-style display-7" for="numero_deposito">Ingrese N&uacute;mero de Deposito</label>                                            
-                                            <input id="input_pago" onkeypress="return solonumeros(event)" onpaste="false" required type="text" class="form-control" name="numero_deposito" placeholder=" Ej:1548796795">
-                                            <p style="color: red; text-align:left; font-size: 1.5rem; margin-bottom: -1rem;" id="mensaje_costo"></p><!--VALIDACION-->
+                                        <div class="form-group">
+                                            <label class="form-control-label mbr-fonts-style display-7" for="numero_deposito">Ingrese N&uacute;mero de Deposito</label>
+                                            <input required type="text" class="form-control" name="numero_deposito" placeholder=" Ej:1548796795">
                                          </div> 
                                     </div>
                             </div>        

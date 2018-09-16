@@ -16,13 +16,13 @@
                     <form class="form-horizontal" enctype="multipart/form-data" onsubmit="exportar(); return false" id="exportar_data" action="">
                             
 
-                             <div class="form-group col-md-12">
+                             <div class="form-group col-md-12 col-sm-12 col-xs-12">
 		                              <label class="control-label">Ingrese Clave</label>
 		                                <input class="form-control" type="text" placeholder="Clave" id="clave_exportar" required="true" name="exportar_clave">
 
                              </div>
 							
-							<div class="form-group col-md-12">
+							<div class="form-group col-md-12 col-sm-12 col-xs-12">
                              <button type="submit" class="btn btn-lg btn-primary">Exportar</button> 
                              </div>
                     </form>

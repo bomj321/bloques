@@ -88,13 +88,12 @@
     'vertical'  => PHPExcel_Style_Alignment::VERTICAL_CENTER
     )
     ));
-    
-    $objPHPExcel->getActiveSheet()->getStyle('A1:P6')->applyFromArray($estiloTituloReporte);
-    $objPHPExcel->getActiveSheet()->getStyle('A6:P6')->applyFromArray($estiloTituloColumnas);
+   
+    $objPHPExcel->getActiveSheet()->getStyle('A1:Q6')->applyFromArray($estiloTituloReporte);
+    $objPHPExcel->getActiveSheet()->getStyle('A6:Q6')->applyFromArray($estiloTituloColumnas);
     
     $objPHPExcel->getActiveSheet()->setCellValue('D3', 'REPORTE DE CLIENTES');
     $objPHPExcel->getActiveSheet()->mergeCells('D3:J3');
-    
     $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(30);
     $objPHPExcel->getActiveSheet()->setCellValue('A6', 'Numero del Cliente');
     $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(30);
@@ -109,25 +108,28 @@
     $objPHPExcel->getActiveSheet()->setCellValue('F6', 'Provincia');
     $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(20);
     $objPHPExcel->getActiveSheet()->setCellValue('G6', 'Canton');
-    $objPHPExcel->getActiveSheet()->getColumnDimension('H')->setWidth(20);
-    $objPHPExcel->getActiveSheet()->setCellValue('H6', 'Tiempo');
-    $objPHPExcel->getActiveSheet()->getColumnDimension('I')->setWidth(20);
-    $objPHPExcel->getActiveSheet()->setCellValue('I6', 'Plan');
-    $objPHPExcel->getActiveSheet()->getColumnDimension('J')->setWidth(20);
-    $objPHPExcel->getActiveSheet()->setCellValue('J6', 'ClaveATV');
-    $objPHPExcel->getActiveSheet()->getColumnDimension('K')->setWidth(20);
-    $objPHPExcel->getActiveSheet()->setCellValue('K6', 'Bloque');
+     $objPHPExcel->getActiveSheet()->getColumnDimension('H')->setWidth(20);
+    $objPHPExcel->getActiveSheet()->setCellValue('H6', 'Distrito');
 
-    $objPHPExcel->getActiveSheet()->getColumnDimension('L')->setWidth(30);
-    $objPHPExcel->getActiveSheet()->setCellValue('L6', 'Estado del Pago');
-    $objPHPExcel->getActiveSheet()->getColumnDimension('M')->setWidth(30);
-    $objPHPExcel->getActiveSheet()->setCellValue('M6', 'Fecha de Inicio');
-    $objPHPExcel->getActiveSheet()->getColumnDimension('N')->setWidth(30);
-    $objPHPExcel->getActiveSheet()->setCellValue('N6', 'Banco');
-    $objPHPExcel->getActiveSheet()->getColumnDimension('O')->setWidth(30);
-    $objPHPExcel->getActiveSheet()->setCellValue('O6', '#N de Deposito');
-    $objPHPExcel->getActiveSheet()->getColumnDimension('P')->setWidth(30);
-    $objPHPExcel->getActiveSheet()->setCellValue('P6', 'Fecha del Pago');
+
+    $objPHPExcel->getActiveSheet()->getColumnDimension('I')->setWidth(20);
+    $objPHPExcel->getActiveSheet()->setCellValue('I6', 'Tiempo');
+    $objPHPExcel->getActiveSheet()->getColumnDimension('J')->setWidth(20);
+    $objPHPExcel->getActiveSheet()->setCellValue('J6', 'Plan');
+    $objPHPExcel->getActiveSheet()->getColumnDimension('K')->setWidth(20);
+    $objPHPExcel->getActiveSheet()->setCellValue('K6', 'ClaveATV');
+    $objPHPExcel->getActiveSheet()->getColumnDimension('L')->setWidth(20);
+    $objPHPExcel->getActiveSheet()->setCellValue('L6', 'Bloque');
+    $objPHPExcel->getActiveSheet()->getColumnDimension('M')->setWidth(20);
+    $objPHPExcel->getActiveSheet()->setCellValue('M6', 'Estado del Pago');
+    $objPHPExcel->getActiveSheet()->getColumnDimension('N')->setWidth(20);
+    $objPHPExcel->getActiveSheet()->setCellValue('N6', 'Fecha de Inicio');
+    $objPHPExcel->getActiveSheet()->getColumnDimension('O')->setWidth(20);
+    $objPHPExcel->getActiveSheet()->setCellValue('O6', 'Banco');
+    $objPHPExcel->getActiveSheet()->getColumnDimension('P')->setWidth(20);
+    $objPHPExcel->getActiveSheet()->setCellValue('P6', '#N de Deposito');
+    $objPHPExcel->getActiveSheet()->getColumnDimension('Q')->setWidth(20);
+    $objPHPExcel->getActiveSheet()->setCellValue('Q6', 'Fecha del Pago');
     
    
     
@@ -142,21 +144,23 @@
         $objPHPExcel->getActiveSheet()->setCellValue('E'.$fila, $rows['Email']);
         $objPHPExcel->getActiveSheet()->setCellValue('F'.$fila, $rows['Provincia']);
         $objPHPExcel->getActiveSheet()->setCellValue('G'.$fila, $rows['Canton']);
-        $objPHPExcel->getActiveSheet()->setCellValue('H'.$fila, $rows['Tiempo']);
-        $objPHPExcel->getActiveSheet()->setCellValue('I'.$fila, $rows['Plan']);
-        $objPHPExcel->getActiveSheet()->setCellValue('J'.$fila, $rows['ClaveATV']);
-        $objPHPExcel->getActiveSheet()->setCellValue('K'.$fila, $rows['Bloque']);
-        $objPHPExcel->getActiveSheet()->setCellValue('L'.$fila, $rows['estado_pago']);
-        $objPHPExcel->getActiveSheet()->setCellValue('M'.$fila, $rows['fecha_inicio']);
-        $objPHPExcel->getActiveSheet()->setCellValue('N'.$fila, $rows['banco_pago']);
-        $objPHPExcel->getActiveSheet()->setCellValue('O'.$fila, $rows['deposito']);
-        $objPHPExcel->getActiveSheet()->setCellValue('P'.$fila, $rows['fecha_pago']);        
+        $objPHPExcel->getActiveSheet()->setCellValue('H'.$fila, $rows['Distrito']);
+
+        $objPHPExcel->getActiveSheet()->setCellValue('I'.$fila, $rows['Tiempo']);
+        $objPHPExcel->getActiveSheet()->setCellValue('J'.$fila, $rows['Plan']);
+        $objPHPExcel->getActiveSheet()->setCellValue('K'.$fila, $rows['ClaveATV']);
+        $objPHPExcel->getActiveSheet()->setCellValue('L'.$fila, $rows['Bloque']);
+        $objPHPExcel->getActiveSheet()->setCellValue('M'.$fila, $rows['estado_pago']);
+        $objPHPExcel->getActiveSheet()->setCellValue('N'.$fila, $rows['fecha_inicio']);
+        $objPHPExcel->getActiveSheet()->setCellValue('O'.$fila, $rows['banco_pago']);
+        $objPHPExcel->getActiveSheet()->setCellValue('P'.$fila, $rows['deposito']);
+        $objPHPExcel->getActiveSheet()->setCellValue('Q'.$fila, $rows['fecha_pago']);        
         $fila++; //Sumamos 1 para pasar a la siguiente fila
     }
     
     $fila = $fila-1;
     
-    $objPHPExcel->getActiveSheet()->setSharedStyle($estiloInformacion, "A7:P".$fila);
+    $objPHPExcel->getActiveSheet()->setSharedStyle($estiloInformacion, "A7:Q".$fila);
     
     $filaGrafica = $fila+2;
     

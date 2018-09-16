@@ -5221,6 +5221,33 @@ function exportar(){
 
 /************************************************FORMULARIO******************************************/
 
+/************************************************FORMULARIO******************************************/
+function reportepre(){ 
+
+
+  var clave_imprimir=document.getElementById('reporte_pre_clave').value;
+
+      if (clave_imprimir!='a777' )
+      {
+      $("#mensaje_imprimir").addClass('alert alert-danger alert-dismissable text-center mensaje_alerta_importacion');
+      $('#mensaje_imprimir').text('Clave Incorrecta');
+      document.getElementById('reporte_pre_clave').focus();
+      return false;
+      }else{
+      $("#mensaje_imprimir").removeClass('alert alert-danger alert-dismissable text-center mensaje_alerta_importacion');	
+      $("#mensaje_imprimir").addClass('alert alert-success alert-dismissable text-center mensaje_alerta_importacion');
+      $('#mensaje_imprimir').text('Reporte Descargado');
+      window.open('././reportes/reporte_cliente_pre.php','_blank');
+
+      }
+
+  	
+
+}
+
+
+/************************************************FORMULARIO******************************************/
+
 /************************************************CONTROL DE PAGOS************************************/
 
 function estadopago(str) {
@@ -5648,3 +5675,55 @@ function desbloquear(){
 
 
 /********************FORMULARIO DE EDICION DE LOS USUARIOS PRE-REGISTRADOS***********************/
+
+
+/*************************ENVIO DEL PDF***********************/
+function enviar_correo(id)
+    {
+            
+      $.ajax({
+        type: "GET",
+        url: "./ajax/enviar_correo.php",
+        data: "id_usuario="+id,
+
+         beforeSend: function(data) {
+       			toastr.options.progressBar = false;
+               toastr.warning('Enviando Correo Espere...');
+   			 },         
+          success: function(data){ 
+          	toastr.options.progressBar = false;          
+            toastr.success('Correo Enviado!!!');
+        
+          },error: function (data) {
+          	toastr.options.progressBar = false;
+            toastr.error('Ha Ocurrido un Error.!!!');
+
+      }       
+      });
+  }
+
+  function enviar_correo_normal(id)
+    {
+            
+      $.ajax({
+        type: "GET",
+        url: "./ajax/enviar_correo_normal.php",
+        data: "id_usuario="+id,
+
+         beforeSend: function(data) {
+       			toastr.options.progressBar = false;
+               toastr.warning('Enviando Correo Espere...');
+   			 },         
+          success: function(data){ 
+          	toastr.options.progressBar = false;          
+            toastr.success('Correo Enviado!!!');
+        
+          },error: function (data) {
+          	toastr.options.progressBar = false;
+            toastr.error('Ha Ocurrido un Error.!!!');
+
+      }       
+      });
+  }
+
+/*************************ENVIO DEL PDF***********************/

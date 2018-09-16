@@ -26,6 +26,8 @@ session_start();
     <link href="vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.css" rel="stylesheet">
     <link href="vendors/datatables.net-responsive-bs/css/responsive.bootstrap.css" rel="stylesheet">
     <link href="vendors/datatables.net-scroller-bs/css/scroller.bootstrap.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
 
     <!-- Custom Theme Style -->
     <link href="build/css/custom.min.css" rel="stylesheet">
@@ -194,28 +196,35 @@ $url = explode(".", $ce);
               ?></td>
 <td>
 <?php 
+$id_unico=$datos['id'];
 $v=$datos['id'].'.'.$codic;
 
 echo 
-                '<a href="edit.php?nik='.base64_encode($v).'" title="Editar datos" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                '<a href="edit.php?nik='.base64_encode($v).'" title="Editar datos" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>                
+
+                 <a  onclick="enviar_correo_normal('.$id_unico.')" title="Enviar Correo" class="btn btn-warning btn-sm">B</a>
+
+                 <a  target="_blank" href="ajax/descargar_correo_pre_normal.php?id_usuario='.$id_unico.'" title="Descargar Bienvenida" class="btn btn-danger btn-sm">BIENVENIDA</a>
 
                 <a href="home.php?aksi=delete&nik='.base64_encode($v).'" title="Eliminar" onclick=" return confirm(\'¿Estas se seguro de querer eliminarlo?\');" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
 
                 <button  data-toggle="modal" data-target="#'.$datos['id'].'" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></button>
               </td>'
               ?>
- </td>             
+ </td> 
+ <!-- <a  title="Activado" class="btn btn-primary btn-sm">ACTIVADO</a>
+    <a  onclick="enviar_correo_normal('.$id_unico.')" title="Enviar Correo" class="btn btn-warning btn-sm">B</a>-->                    
                 </tr>
 
                 <div class="modal fade" id="<?php echo $datos['id']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      		 <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="exampleModalLabel">Datos del Cliente</h4>
-		      </div>
+           <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="exampleModalLabel">Datos del Cliente</h4>
+          </div>
 
-		      <div class="modal-body">
+          <div class="modal-body">
             <div class="row">
               <div class="col-md-6 col-sm-6 col-xs-12">
                   <h4 ><?php  echo  $datos['Nombre'];?></h4>
@@ -226,10 +235,10 @@ echo
                    <a href="https://www.google.co.ve" target="_blank" type="button" class="btn btn-primary"><i class="fa fa-group pull-right" ></i>N2</a>
               </div>
             </div>
-		      	
-		        <form>
+            
+            <form>
 
-		          <div class="form-group">
+              <div class="form-group">
                   <label for="exampleInputEmail1">Email</label>
                   <input type="text" disabled class="form-control" id="exampleInputEmail1" value="<?php  echo  $datos['Email'];?>" >
                 </div>
@@ -240,9 +249,9 @@ echo
                 </div>  
 
 
-		          <div class="form-group">
-	                  <label for="exampleInputEmail1">ClaveATV</label>
-	                  <input type="text" disabled class="form-control" id="exampleInputEmail1" value="<?php  echo  $datos['ClaveATV'];?>" >
+              <div class="form-group">
+                    <label for="exampleInputEmail1">ClaveATV</label>
+                    <input type="text" disabled class="form-control" id="exampleInputEmail1" value="<?php  echo  $datos['ClaveATV'];?>" >
                 </div>
 
                  <div class="form-group">
@@ -265,7 +274,7 @@ echo
 
 
 
- 					<?php 
+          <?php 
                             if (empty($datos['img_emple'])) {                       /////////////////////CONDICIONAL PARA LAS FOTOS 
                          ?>
 
@@ -282,14 +291,14 @@ echo
                 </div>
 
 
-		        </form>
-		      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-			      </div>
-		    </div>
-		  </div>
-		</div>
+            </form>
+          </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+      </div>
+    </div>
  <?php
 }
                 ?>
@@ -347,9 +356,10 @@ echo
     <script src="vendors/jszip/dist/jszip.min.js"></script>
     <script src="vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="vendors/pdfmake/build/vfs_fonts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <!-- Custom Theme Scripts -->
-    <script src="build/js/custom.min.js"></script>
+    <script src="build/js/custom.js"></script>
     <script>
   $(function () {
    table = $("#example1").DataTable({

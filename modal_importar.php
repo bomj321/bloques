@@ -14,13 +14,13 @@
           </style>
                    <div id="mensaje"></div>        
                     <form class="form-horizontal" enctype="multipart/form-data" onsubmit="importar(); return false" id="importar_data" action="">
-                            <div class="form-group col-md-12">
+                            <div class="form-group col-md-12 col-sm-12 col-xs-12">
 		                              <label class="control-label">Seleccione Archivo</label>
 		                                <input class="form-control" required="true" type="file" name="importar_archivo" id="input_file">
 
                              </div>
 
-                             <div class="form-group col-md-12">
+                             <div class="form-group col-md-12 col-sm-12 col-xs-12">
 		                              <label class="control-label">Ingrese Clave</label>
 		                                <input class="form-control" type="text" placeholder="Clave" id="clave_importar" required="true" name="importar_clave">
 

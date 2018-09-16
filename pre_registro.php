@@ -26,6 +26,7 @@ session_start();
     <link href="vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.css" rel="stylesheet">
     <link href="vendors/datatables.net-responsive-bs/css/responsive.bootstrap.css" rel="stylesheet">
     <link href="vendors/datatables.net-scroller-bs/css/scroller.bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <!-- Custom Theme Style -->
     <link href="build/css/custom.min.css" rel="stylesheet">
@@ -149,18 +150,18 @@ $url = explode(".", $ce);
                   <th>ClaveATV</th>
                   <th>Direcci&oacute;n</th>
                   <th>#N de Facturas</th>
-				  <th>Acciones</th>
+          <th>Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
                   <?php
-			        while($datos=mysqli_fetch_array($user)){
-			        if($datos['fecha_inicio']=='No Pagado'){
-			        		$myFormatForView= 'No Pagado';
-			        }else{
-			        	    $time = strtotime($datos['fecha_inicio']);
-			                $myFormatForView = date("Y-m-d g:i A", $time);
-			        }
+              while($datos=mysqli_fetch_array($user)){
+              if($datos['fecha_inicio']=='No Pagado'){
+                  $myFormatForView= 'No Pagado';
+              }else{
+                    $time = strtotime($datos['fecha_inicio']);
+                      $myFormatForView = date("Y-m-d g:i A", $time);
+              }
                       ?>
                 <tr <?php 
                     if ($datos['fecha_pago']=='No Pagado') {
@@ -182,7 +183,7 @@ $url = explode(".", $ce);
                   <td ><?php  echo  $datos['estado_pago'];?></td>                  
                   <td ><?php  echo  $datos['fecha_pago'];?></td>                  
                   <td ><?php  echo  $datos['banco_pago'];?></td>
-                  <td ><?php  echo  $datos['deposito'];?></td>  	
+                  <td ><?php  echo  $datos['deposito'];?></td>    
                   <td ><?php  echo  $datos['tipo_registro'];?></td>                 
                   <td ><?php  echo  $datos['nombre_comercio'];?></td>
                   <td ><?php  echo  $datos['actividad'];?></td> 
@@ -216,10 +217,11 @@ $url = explode(".", $ce);
 <td>
 <?php 
 $codic = rand(10000000,20000000);
+$id_unico=$datos['id_pre_registro'];
 $v=$datos['id_pre_registro'].'.'.$codic;
 
 if($datos['activado']=='0'){
-	echo 
+  echo 
                 '<a href="activar_pre_registro.php?nik='.base64_encode($v).'" title="Activar Cuenta" class="btn btn-primary btn-sm">ACTIVAR</a>
 
                 <button  data-toggle="modal" data-target="#'.$datos['id_pre_registro'].'" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></button>
@@ -229,6 +231,9 @@ echo
                 '<a href="edit_pre_registro.php?nik='.base64_encode($v).'" title="Editar datos" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
 
                 <a  title="Activado" class="btn btn-primary btn-sm">ACTIVADO</a>
+                <a  onclick="enviar_correo('.$id_unico.')" title="Enviar Correo" class="btn btn-warning btn-sm">B</a>
+
+                <a  target="_blank" href="ajax/descargar_correo_pre.php?id_usuario='.$id_unico.'" title="Descargar Bienvenida" class="btn btn-danger btn-sm">BIENVENIDA</a>
 
                 <button  data-toggle="modal" data-target="#'.$datos['id_pre_registro'].'" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></button>
               </td>';
@@ -237,18 +242,19 @@ echo
 
 
               ?>
-</td>              
+</td>
+
                 </tr>
 
                 <div class="modal fade" id="<?php echo $datos['id_pre_registro']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      		 <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="exampleModalLabel">Datos del Cliente Pre-registrado</h4>
-		      </div>
+           <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="exampleModalLabel">Datos del Cliente Pre-registrado</h4>
+          </div>
 
-		      <div class="modal-body">
+          <div class="modal-body">
             <div class="row">
               <div class="col-md-6 col-sm-6 col-xs-12">
                   <h4 ><?php  echo  $datos['nombre'];?></h4>
@@ -259,10 +265,10 @@ echo
                    <a href="https://www.google.co.ve" target="_blank" type="button" class="btn btn-primary"><i class="fa fa-group pull-right" ></i>N2</a>
               </div>
             </div>
-		      	
-		        <form>
+            
+            <form>
 
-		          <div class="form-group">
+              <div class="form-group">
                   <label for="exampleInputEmail1">Email</label>
                   <input type="text" disabled class="form-control" id="exampleInputEmail1" value="<?php  echo  $datos['email'];?>" >
                 </div>
@@ -273,9 +279,9 @@ echo
                 </div>  
 
 
-		          <div class="form-group">
-	                  <label for="exampleInputEmail1">ClaveATV</label>
-	                  <input type="text" disabled class="form-control" id="exampleInputEmail1" value="<?php  echo  $datos['ClaveATV'];?>" >
+              <div class="form-group">
+                    <label for="exampleInputEmail1">ClaveATV</label>
+                    <input type="text" disabled class="form-control" id="exampleInputEmail1" value="<?php  echo  $datos['ClaveATV'];?>" >
                 </div>
 
                  <div class="form-group">
@@ -304,7 +310,7 @@ echo
 
 
 
- 					<?php 
+          <?php 
                             if (empty($datos['img_emple'])) {                       /////////////////////CONDICIONAL PARA LAS FOTOS 
                          ?>
 
@@ -321,14 +327,14 @@ echo
                 </div>
 
 
-		        </form>
-		      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-			      </div>
-		    </div>
-		  </div>
-		</div>
+            </form>
+          </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+      </div>
+    </div>
  <?php
 }
                 ?>
@@ -386,10 +392,10 @@ echo
     <script src="vendors/jszip/dist/jszip.min.js"></script>
     <script src="vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="vendors/pdfmake/build/vfs_fonts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <!-- Custom Theme Scripts -->
-    <script src="build/js/custom.min.js"></script>
-    <script src="js/alertify.js"></script>
+    <script src="build/js/custom.js"></script>
     <script>
   $(function () {
    table = $("#example1").DataTable({

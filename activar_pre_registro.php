@@ -140,7 +140,12 @@ $datos=mysqli_fetch_array($user);
                         <!--SCRIPT-->
                      <?php
       if(isset($_POST['add'])){
+/*INPUTS ESCONDIDOS*/
         $Id_unico         =    mysqli_real_escape_string($con,(strip_tags($_POST["id"],ENT_QUOTES)));//Escanpando caracteres
+        $nombre_pago_bbdd =    mysqli_real_escape_string($con,(strip_tags($_POST["nombre_pago_bbdd"],ENT_QUOTES)));//Escanpando caracteres
+        $cedula_pago_bbdd =    mysqli_real_escape_string($con,(strip_tags($_POST["cedula_pago_bbdd"],ENT_QUOTES)));//Escanpando caracteres
+/*INPUTS ESCONDIDOS*/
+
         $Tiempo           =    mysqli_real_escape_string($con,(strip_tags($_POST["tiempo"],ENT_QUOTES)));//Escanpando caracteres 
         $Bloque           =    mysqli_real_escape_string($con,(strip_tags($_POST["bloque"],ENT_QUOTES)));//Escanpando caracteres 
         $Plan             =    mysqli_real_escape_string($con,(strip_tags($_POST["plan"],ENT_QUOTES)));//Escanpando caracteres 
@@ -149,13 +154,19 @@ $datos=mysqli_fetch_array($user);
         $fecha_pago_edit  =    mysqli_real_escape_string($con,(strip_tags($_POST["fecha_pago"],ENT_QUOTES)));//Escanpando caracteres
         $banco_pago_edit  =    mysqli_real_escape_string($con,(strip_tags($_POST["banco_pago"],ENT_QUOTES)));//Escanpando caracteres
         $deposito_edit    =    mysqli_real_escape_string($con,(strip_tags($_POST["deposito"],ENT_QUOTES)));//Escanpando caracteres
-        $metodo_pago    =    mysqli_real_escape_string($con,(strip_tags($_POST["metodo_pago"],ENT_QUOTES)));//Escanpando caracteres
+        $metodo_pago      =    mysqli_real_escape_string($con,(strip_tags($_POST["metodo_pago"],ENT_QUOTES)));//Escanpando caracteres
 
 /*VERIFICANDO QUE EXISTAN LAS VARIABLES*/
         if($estado_pago=='Pagado'){
+               
+
                 $activado=1;
                 $fecha_inicio     =    date("Y-m-d H:i:s");
                 $fecha_pago_edit  =    mysqli_real_escape_string($con,(strip_tags($_POST["fecha_pago"],ENT_QUOTES)));//Escanpando caracteres
+
+                 /*ENVIO DEL CORREO*/
+          include('envio_del_correo.php');
+          /*ENVIO DEL CORREO*/
                 
 
             
@@ -166,9 +177,15 @@ $datos=mysqli_fetch_array($user);
         }elseif($fecha_pago_edit=='No Pagado' AND $estado_pago='Pagado'){
             $fecha_pago_edit  =    mysqli_real_escape_string($con,(strip_tags($_POST["fecha_pago"],ENT_QUOTES)));//Escanpando caracteres
              $metodo_pago    =    mysqli_real_escape_string($con,(strip_tags($_POST["metodo_pago"],ENT_QUOTES)));//Escanpando caracteres
+               /*ENVIO DEL CORREO*/
+          include('envio_del_correo.php');
+          /*ENVIO DEL CORREO*/
         }elseif(!empty($fecha_pago_edit) AND $estado_pago=='Pagado'){
             $fecha_pago_edit  =    mysqli_real_escape_string($con,(strip_tags($_POST["fecha_pago"],ENT_QUOTES)));//Escanpando caracteres
              $metodo_pago    =    mysqli_real_escape_string($con,(strip_tags($_POST["metodo_pago"],ENT_QUOTES)));//Escanpando caracteres
+               /*ENVIO DEL CORREO*/
+          include('envio_del_correo.php');
+          /*ENVIO DEL CORREO*/
         }
 
        
@@ -250,6 +267,10 @@ exit();
         <div class="col-md-6 col-sm-6 col-xs-12"><!--PRIMER COL-MD-6-->
                           <center><h4>Informaci&oacute;n Personal</h4></center>
                                 <input type="hidden" value="<?php  echo  $datos['id_pre_registro'];?>" name="id" id="id" class="form-control">
+                                <input type="hidden" value="<?php  echo  $datos['nombre'];?>" name="nombre_pago_bbdd" id="id" class="form-control">
+                                <input type="hidden" value="<?php  echo  $datos['cedula'];?>" name="cedula_pago_bbdd" id="id" class="form-control">
+                                <input type="hidden" value="<?php  echo  $datos['metodo_pago'];?>" name="metodo_pago_bbdd" id="id" class="form-control">
+
                                 <div class="form-group">
                                     <label for="inputEmail1" class="col-sm-2 col-md-2 col-xs-12 control-label">N&uacute;mero de Cliente</label>
                                         <div class="col-sm-10 col-md-10 col-xs-12">

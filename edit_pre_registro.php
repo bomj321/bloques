@@ -256,7 +256,7 @@ $datos=mysqli_fetch_array($user);
 /*VERIFICANDO QUE EXISTAN LAS VARIABLES*/
         if($estado_pago=='Pagado'){
                 $fecha_pago_edit  =    mysqli_real_escape_string($con,(strip_tags($_POST["fecha_pago"],ENT_QUOTES)));//Escanpando caracteres
-                
+                 $imagen=$_FILES['img_emple']['name'];
 
             
         }elseif($estado_pago=='Pendiente'){
@@ -323,7 +323,7 @@ exit();
               mysqli_set_charset($con, "utf8");
               $sql_pre_registro="UPDATE pre_registro SET activado=?,tipo_registro=?,cedula=?,nombre=?,nombre_comercio=?,actividad=?,celular=?,email=?,provincia=?,distrito=?,canton=?,direccion=?,facturas_mensual=?,img_emple=?, Bloque= ?, ClaveATV= ?, Tiempo= ?, Plan= ?, estado_pago= ?,fecha_inicio=?, banco_pago= ?, deposito= ?, fecha_pago= ?, metodo_pago=?  WHERE id_pre_registro= ?";
               $pre_registro=mysqli_prepare($con, $sql_pre_registro);
-              mysqli_stmt_bind_param($pre_registro, "sssssssssssssssssssssssssi",$activado,$tipo_registro,$cedula,$nombre_completo,$nombre_comercio,$actividad,$telefono,$email,$Provincia,$Distrito,$Canton,$direccion,$facturas_mensuales,$imagen,$Bloque, $ClaveATV, $Tiempo,$Plan,$estado_pago,$fecha_inicio,$banco_pago_edit,$deposito_edit,$fecha_pago_edit,$metodo_pago_edit,$Id_unico);
+              mysqli_stmt_bind_param($pre_registro, "ssssssssssssssssssssssssi",$activado,$tipo_registro,$cedula,$nombre_completo,$nombre_comercio,$actividad,$telefono,$email,$Provincia,$Distrito,$Canton,$direccion,$facturas_mensuales,$imagen,$Bloque, $ClaveATV, $Tiempo,$Plan,$estado_pago,$fecha_inicio,$banco_pago_edit,$deposito_edit,$fecha_pago_edit,$metodo_pago_edit,$Id_unico);
               $ok=mysqli_stmt_execute($pre_registro);
               mysqli_stmt_close($pre_registro);
                 }elseif($imagen=='No Pagado'){
@@ -337,7 +337,7 @@ exit();
 
                 }else{
                   mysqli_set_charset($con, "utf8");
-                  $sql_pre_registro="UPDATE pre_registro SET activado=?,tipo_registro=?,cedula=?,nombre=?,nombre_comercio=?,actividad=?,celular=?,email=?,provincia=?,distrito=?,canton=?,direccion=?,facturas_mensual=?, Bloque= ?, ClaveATV= ?, Tiempo= ?, Plan= ?, estado_pago= ?, banco_pago= ?,fecha_inicio=?, deposito= ?, fecha_pago= ?, metodo_pago=?  WHERE id_pre_registro= ?";
+                  $sql_pre_registro="UPDATE pre_registro SET activado=?,tipo_registro=?,cedula=?,nombre=?,nombre_comercio=?,actividad=?,celular=?,email=?,provincia=?,distrito=?,canton=?,direccion=?,facturas_mensual=?, Bloque= ?, ClaveATV= ?, Tiempo= ?, Plan= ?, estado_pago= ?,fecha_inicio=?,banco_pago= ?, deposito= ?, fecha_pago= ?, metodo_pago=?  WHERE id_pre_registro= ?";
                   $pre_registro=mysqli_prepare($con, $sql_pre_registro);
                   mysqli_stmt_bind_param($pre_registro, "sssssssssssssssssssssssi",$activado,$tipo_registro,$cedula,$nombre_completo,$nombre_comercio,$actividad,$telefono,$email,$Provincia,$Distrito,$Canton,$direccion,$facturas_mensuales,$Bloque, $ClaveATV, $Tiempo,$Plan,$estado_pago,$fecha_inicio,$banco_pago_edit,$deposito_edit,$fecha_pago_edit,$metodo_pago_edit,$Id_unico);
                   $ok=mysqli_stmt_execute($pre_registro);
